@@ -14,25 +14,22 @@
     </parent>
 
     <artifactId>mcquad-web</artifactId>
-    <packaging>pom</packaging>
+    <packaging>war</packaging>
 
-    <description>McQuad Web</description>
+    <name>McQuad Web Module</name>
+    <description>Generates the mapping web page</description>
 
     <dependencies>
-<!--
         <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
+            <groupId>com.meowster</groupId>
+            <artifactId>mcquad-core</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
--->
     </dependencies>
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-bundle-plugin</artifactId>
-            </plugin>
+            <!-- TODO: what plugins? -->
         </plugins>
     </build>
 
