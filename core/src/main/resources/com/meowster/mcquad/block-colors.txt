@@ -1,0 +1,455 @@
+# This file defines colors for blocks.
+# Blank lines and lines starting with # are ignored.
+#
+# The format is:
+#   block-id[:data-value] color [biome-influence] # comment
+#
+# For block IDs with no data value defined here, the data value in the block
+# being processed is ignored. E.g. Data values for water show whether the
+# water is flowing, and how much water is in the block. We just care about it
+# being water, and what its color is.
+#
+# The 'default' record is used for block IDs that are not mapped explicitly.
+#
+
+default     0xffff00ff
+
+0x0000      0x00000000                  # air
+0x0001      0xff7d7d7d                  # stone
+0x0002      0xff939393  biome_grass     # grass block
+0x0003:0x0  0xff866043                  # dirt
+0x0003:0x1  0xff866043                  # grassless dirt
+0x0003:0x2  0xff47381b                  # podzol
+0x0004      0xff7a7a7a                  # cobblestone
+0x0005:0x0  0xff9c7f4e                  # oak wood planks
+0x0005:0x1  0xff674d2e                  # spruce wood planks
+0x0005:0x2  0xffc3b37b                  # birch wood planks
+0x0005:0x3  0xff9a6e4d                  # jungle wood planks
+0x0005:0x4  0xffad5d32                  # acacia wood planks
+0x0005:0x5  0xff3e2912                  # dark oak wood planks
+0x0006:0x0  0x6b476625                  # oak sapling
+0x0006:0x1  0x53333a21                  # spruce sapling
+0x0006:0x2  0x6b769654                  # birch sapling
+0x0006:0x3  0x55305612                  # jungle sapling
+0x0006:0x4  0x55768e1d                  # acacia sapling
+0x0006:0x5  0x55105210                  # dark oak sapling
+0x0006:0x6  0x6b476625                  # unknown sapling id
+0x0006:0x7  0x53333a21                  # unknown sapling id
+0x0006:0x8  0x6b769654                  # unknown sapling id
+0x0006:0x9  0x55305612                  # unknown sapling id
+0x0006:0xa  0x55768e1d                  # unknown sapling id
+0x0006:0xb  0x55105210                  # unknown sapling id
+0x0006:0xc  0x55105210                  # unknown sapling id
+0x0007      0xff535353                  # bedrock
+0x0008      0xb22e43f4  biome_water     # water
+0x0009      0xb22e43f4  biome_water     # stationary water
+0x000a      0xffd45a12                  # lava
+0x000b      0xffd45a12                  # stationary lava
+0x000c:0x0  0xffdbd3a0                  # sand
+0x000c:0x1  0xffac5b22                  # red sand
+0x000d      0xff7e7c7a                  # gravel
+0x000e      0xff8f8b7c                  # gold ore
+0x000f      0xff87827e                  # iron ore
+0x0010      0xff737373                  # coal ore
+0x0011:0x0  0xff9a7d4d                  # oak wood
+0x0011:0x1  0xff9a7d4d                  # spruce wood
+0x0011:0x2  0xff9a7d4d                  # birch wood
+0x0011:0x3  0xff9a7d4d                  # jungle wood
+0x0011:0x4  0xff665131                  # oak wood
+0x0011:0x5  0xff2d1c0c                  # spruce wood
+0x0011:0x6  0xffcecec9                  # birch wood
+0x0011:0x7  0xff57431a                  # jungle wood
+0x0011:0x8  0xff665131                  # oak wood
+0x0011:0x9  0xff2d1c0c                  # spruce wood
+0x0011:0xa  0xffcecec9                  # birch wood
+0x0011:0xb  0xff57431a                  # jungle wood
+0x0011:0xc  0xff665131                  # oak wood
+0x0011:0xd  0xff2d1c0c                  # spruce wood
+0x0011:0xe  0xffcecec9                  # birch wood
+0x0011:0xf  0xff57431a                  # jungle wood
+0x0012:0x0  0x9a878787  biome_foliage   # oak leaves
+0x0012:0x1  0xa5132613                  # spruce leaves
+0x0012:0x2  0x9a283816                  # birch leaves
+0x0012:0x3  0xc9918e86  biome_foliage   # jungle leaves
+0x0012:0x4  0x9a878787  biome_foliage   # oak leaves
+0x0012:0x5  0xa5132613                  # spruce leaves
+0x0012:0x6  0x9a283816                  # birch leaves
+0x0012:0x7  0xc9918e86  biome_foliage   # jungle leaves
+0x0012:0x8  0x9a878787  biome_foliage   # oak leaves
+0x0012:0x9  0xa5132613                  # spruce leaves
+0x0012:0xa  0x9a283816                  # birch leaves
+0x0012:0xb  0xc9918e86  biome_foliage   # jungle leaves
+0x0012:0xc  0x9a878787  biome_foliage   # oak leaves
+0x0012:0xd  0xa5132613                  # spruce leaves
+0x0012:0xe  0x9a283816                  # birch leaves
+0x0012:0xf  0xc9918e86  biome_foliage   # jungle leaves
+0x0013      0xffb6b639                  # sponge
+0x0014      0x46daf0f4                  # glass
+0x0015      0xff667086                  # lapis lazuli ore
+0x0016      0xff1d47a5                  # lapis lazuli block
+0x0017      0xff606060                  # dispenser
+0x0018      0xffdad29e                  # sandstone
+0x0019      0xff644332                  # note block
+0x001a      0xff8e1616                  # bed
+0x001b      0xab9a6846                  # powered rail
+0x001c      0x9b786559                  # detector rail
+0x001d      0xff8d9263                  # sticky piston
+0x001e      0x68dcdcdc                  # cobweb
+0x001f:0x0  0x517b4f19                  # shrub
+0x001f:0x1  0xa2747474  biome_grass     # grass
+0x001f:0x2  0x4e787878  biome_grass     # fern
+0x0020      0x517b4f19                  # dead bush
+0x0021      0xff998159                  # piston
+0x0022      0xff998159                  # piston
+0x0023:0x0  0xffdddddd                  # white wool
+0x0023:0x1  0xffdb7d3e                  # orange wool
+0x0023:0x2  0xffb350bc                  # magenta wool
+0x0023:0x3  0xff6a8ac9                  # light blue wool
+0x0023:0x4  0xffb1a627                  # yellow wool
+0x0023:0x5  0xff41ae38                  # lime wool
+0x0023:0x6  0xffd08499                  # pink wool
+0x0023:0x7  0xff404040                  # gray wool
+0x0023:0x8  0xff9aa1a1                  # light gray wool
+0x0023:0x9  0xff2e6e89                  # cyan wool
+0x0023:0xa  0xff7e3db5                  # purple wool
+0x0023:0xb  0xff2e388d                  # blue wool
+0x0023:0xc  0xff4f321f                  # brown wool
+0x0023:0xd  0xff35461b                  # green wool
+0x0023:0xe  0xff963430                  # red wool
+0x0023:0xf  0xff191616                  # black wool
+0x0025      0x1e6ca200                  # dandelion
+0x0026:0x0  0x1d8a2b0d                  # poppy
+0x0026:0x1  0x1d29bffd                  # blue orchid
+0x0026:0x2  0x1db865fb                  # allium
+0x0026:0x3  0x1de4eaf2                  # azure bluet
+0x0026:0x4  0x1dc02907                  # red tulip
+0x0026:0x5  0x1d41ae38                  # orange tulip
+0x0026:0x6  0x1de7e7e7                  # white tulip
+0x0026:0x7  0x1df3d4f3                  # pink tulip
+0x0026:0x8  0x1deae6ad                  # oxeye tulip
+0x0027      0x198a6953                  # brown mushroom
+0x0028      0x21c33538                  # red mushroom
+0x0029      0xfff9ec4e                  # block of gold
+0x002a      0xffdbdbdb                  # block of iron
+0x002b:0x0  0xff9f9f9f                  # stone double slab
+0x002b:0x1  0xffdad29e                  # sandstone double slab
+0x002b:0x2  0xff9c7f4e                  # wooden double slab
+0x002b:0x3  0xff7a7a7a                  # cobblestone double slab
+0x002b:0x4  0xff926356                  # brick double slab
+0x002b:0x5  0xff7d7d7d                  # stone double slab
+0x002b:0x6  0xff2c161a                  # nether double slab
+0x002b:0x7  0xffece9e2                  # quartz double slab
+0x002b:0x8  0xff9f9f9f                  # smooth stone double slab
+0x002b:0x9  0xffdad29e                  # smooth sandstone double slab
+0x002c:0x0  0xff9f9f9f                  # stone slab
+0x002c:0x1  0xffdad29e                  # sandstone slab
+0x002c:0x2  0xff9c7f4e                  # wooden slab
+0x002c:0x3  0xff7a7a7a                  # cobblestone slab
+0x002c:0x4  0xff926356                  # brick slab
+0x002c:0x5  0xff7d7d7d                  # stone slab
+0x002c:0x6  0xff2c161a                  # nether slab
+0x002c:0x7  0xffece9e2                  # quartz slab
+0x002c:0x8  0xff9f9f9f                  # stone slab
+0x002c:0x9  0xffdad29e                  # sandstone slab
+0x002c:0xa  0xff9c7f4e                  # wooden slab
+0x002c:0xb  0xff7a7a7a                  # cobblestone slab
+0x002c:0xc  0xff926356                  # brick slab
+0x002c:0xd  0xff7d7d7d                  # stone slab
+0x002c:0xe  0xff2c161a                  # nether slab
+0x002c:0xf  0xffece9e2                  # quartz slab
+0x002d      0xff926356                  # bricks
+0x002e      0xff82412f                  # tnt
+0x002f      0xff6b5839                  # bookshelf
+0x0030      0xff677967                  # moss stone
+0x0031      0xff14121d                  # obsidian
+0x0032      0x13826a3a                  # torch
+0x0033      0x8bd38c35                  # fire
+0x0034      0x9b1a2731                  # monster spawner
+0x0035      0xff9c7f4e                  # oak wood stairs
+0x0036      0xfe6f5739                  # chest
+0x0037      0x80fa1010                  # redstone wire
+0x0038      0xff818c8f                  # diamond ore
+0x0039      0xff61dbd5                  # block of diamond
+0x003a      0xff6b472a                  # crafting table
+0x003b:0x0  0x0500b312                  # wheat
+0x003b:0x1  0x1312ac0f                  # wheat
+0x003b:0x2  0x2b1c890b                  # wheat
+0x003b:0x3  0x4d258b08                  # wheat
+0x003b:0x4  0x672e8007                  # wheat
+0x003b:0x5  0x80427b07                  # wheat
+0x003b:0x6  0x8e507607                  # wheat
+0x003b:0x7  0xa6566607                  # wheat
+0x003c:0x0  0xff734b2d                  # dry farmland
+0x003c:0x1  0xff4b280d                  # wet farmland
+0x003c:0x2  0xff4b280d                  # wet farmland
+0x003c:0x3  0xff4b280d                  # wet farmland
+0x003c:0x4  0xff4b280d                  # wet farmland
+0x003c:0x5  0xff4b280d                  # wet farmland
+0x003c:0x6  0xff4b280d                  # wet farmland
+0x003c:0x7  0xff4b280d                  # wet farmland
+0x003c:0x8  0xff4b280d                  # wet farmland
+0x003d      0xff606060                  # furnace
+0x003e      0xff606060                  # burning furnace
+0x003f      0x566f5739                  # sign post
+0x0040      0xcf866733                  # wooden door
+0x0041      0x8f795f34                  # ladders
+0x0042      0x8f796c58                  # rails
+0x0043      0xff7a7a7a                  # cobblestone stairs
+0x0044      0x206f5739                  # wall sign
+0x0045      0x136a5940                  # lever
+0x0046      0xff7d7d7d                  # stone pressure plate
+0x0047      0xcfbababa                  # iron door
+0x0048      0xff9c7f4e                  # wooden pressure plate
+0x0048:0x1  0xff9c7f4e                  # wooden pressure plate
+0x0049      0xff846b6b                  # redstone ore
+0x004a      0xff846b6b                  # glowing redstone ore
+0x004b      0x135d3e26                  # redstone torch (inactive)
+0x004b:0x1  0x135d3e26                  # redstone torch (inactive)
+0x004c      0x19a74b29                  # redstone torch (active)
+0x004d      0x00000000                  # stone button
+0x004e      0xffeffbfb                  # snow
+0x004f      0x9f7dadff                  # ice
+0x0050      0xffeffbfb                  # snow block
+0x0051      0xc30d6318                  # cactus
+0x0052      0xff9ea4b0                  # clay block
+0x0053      0x8c94c065                  # sugar cane
+0x0054      0xff6b4937                  # jukebox
+0x0055      0x8f463822                  # fence
+0x0056      0xffc07615                  # pumpkin
+0x0057      0xff6f3634                  # netherrack
+0x0058      0xff544033                  # soul sand
+0x0059      0xff8f7645                  # glowstone block
+0x005a      0xffffffff                  # nether portal
+0x005b      0xffc07615                  # jack 'o' lantern
+0x005c      0xc3e4cdce                  # cake block
+0x005d      0xff979393                  # redstone repeater (inactive)
+0x005e      0xffa09393                  # redstone repeater (active)
+0x005f:0x0  0x9fdddddd                  # white glass
+0x005f:0x1  0x9fc1824c                  # orange glass
+0x005f:0x2  0x9fa65ec1                  # magenta glass
+0x005f:0x3  0x9f7094c1                  # light blue glass
+0x005f:0x4  0x9fcbcb4c                  # yellow glass
+0x005f:0x5  0x9f83b93b                  # lime glass
+0x005f:0x6  0x9fd4893b                  # pink glass
+0x005f:0x7  0x9f5f5f5f                  # gray glass
+0x005f:0x8  0x9f959595                  # light gray glass
+0x005f:0x9  0x9f5f8395                  # cyan glass
+0x005f:0xa  0x9f624578                  # purple glass
+0x005f:0xb  0x9f4d5ea7                  # blue glass
+0x005f:0xc  0x9f715e4d                  # brown glass
+0x005f:0xd  0x9f71834d                  # green glass
+0x005f:0xe  0x9f944d4d                  # red glass
+0x005f:0xf  0x9f3b3b3b                  # black glass
+0x0060      0xdb7e5d2d                  # trapdoor
+0x0061:0x0  0xff7d7d7d                  # monster egg stone
+0x0061:0x1  0xff7a7a7a                  # monster egg cobblestone
+0x0061:0x2  0xff7a7a7a                  # monster egg stone brick
+0x0061:0x3  0xff7a7a7a                  # monster egg mossy stone brick
+0x0061:0x4  0xff7a7a7a                  # monster egg cracked stone
+0x0061:0x5  0xff7a7a7a                  # monster egg chiseled stone
+0x0062:0x0  0xff7a7a7a                  # stone brick
+0x0062:0x1  0xff72776a                  # mossy stone brick
+0x0062:0x2  0xff767676                  # cracked stone brick
+0x0062:0x3  0xff767676                  # chiseled stone brick
+0x0063      0xff8d6a53                  # huge brown mushroom
+0x0064      0xffb62524                  # huge red mushroom
+0x0065      0x736d6c6a                  # iron bars
+0x0066      0x1fd3eff4                  # glass pane
+0x0067      0xff979924                  # melon
+0x0068      0xffc07615                  # pumpkin stem
+0x0069      0xff979924                  # melon stem
+0x006a      0x8a6f6f6f  biome_foliage   # vines
+0x006b      0x7b463822                  # fence gate
+0x006c      0xff926356                  # brick stairs
+0x006d      0xff7a7a7a                  # stone brick stairs
+0x006e      0xff6f6369                  # mycelium
+0x006f      0x93335a21                  # lily pad
+0x0070      0xff2c161a                  # nether brick
+0x0071      0xff2c161a                  # nether brick fence
+0x0072      0xff2c161a                  # nether brick stairs
+0x0073:0x0  0x2a6a0e1e                  # nether wart
+0x0073:0x1  0x786c0f16                  # nether wart
+0x0073:0x2  0x786c0f16                  # nether wart
+0x0073:0x3  0xcc6f1211                  # nether wart
+0x0074      0xff67403b                  # enchantment table
+0x0075      0x767c6751                  # brewing stand
+0x0076      0xff373737                  # cauldron
+0x0077      0xff101010                  # end portal
+0x0078      0xff597560                  # end portal frame
+0x0079      0xffdddfa5                  # end stone
+0x007a      0xff0c090f                  # dragon egg
+0x007b      0xff462b1a                  # redstone lamp (inactive)
+0x007c      0xff775937                  # redstone lamp (active)
+0x007d:0x0  0xff9c7f4e                  # oak wood double slab
+0x007d:0x1  0xff674d2e                  # spruce wood double slab
+0x007d:0x2  0xffc3b37b                  # birch double slab
+0x007d:0x3  0xff9a6e4d                  # jungle double slab
+0x007d:0x4  0xffad5d32                  # acacia wood double slab
+0x007d:0x5  0xff3e2912                  # dark oak wood double slab
+0x007e:0x0  0xff9c7f4e                  # oak wood slab
+0x007e:0x1  0xff674d2e                  # spruce wood slab
+0x007e:0x2  0xffc3b37b                  # birch slab
+0x007e:0x3  0xff9a6e4d                  # jungle slab
+0x007e:0x4  0xffad5d32                  # acacia wood slab
+0x007e:0x5  0xff3e2912                  # dark oak wood slab
+0x007e:0x8  0xff9c7f4e                  # oak wood slab
+0x007e:0x9  0xff674d2e                  # spruce wood slab
+0x007e:0xa  0xffc3b37b                  # birch slab
+0x007e:0xb  0xff9a6e4d                  # jungle slab
+0x007e:0xc  0xffad5d32                  # acacia wood slab
+0x007e:0xd  0xff3e2912                  # dark oak wood slab
+0x007f:0x0  0x2e8a8c40                  # cocoa
+0x007f:0x1  0x2e8a8c40                  # cocoa
+0x007f:0x2  0x2e8a8c40                  # cocoa
+0x007f:0x3  0x2e8a8c40                  # cocoa
+0x007f:0x4  0x58896b33                  # cocoa
+0x007f:0x5  0x58896b33                  # cocoa
+0x007f:0x6  0x58896b33                  # cocoa
+0x007f:0x7  0x58896b33                  # cocoa
+0x007f:0x8  0x8391501e                  # cocoa
+0x007f:0x9  0x8391501e                  # cocoa
+0x007f:0xa  0x8391501e                  # cocoa
+0x007f:0xb  0x8391501e                  # cocoa
+0x0080      0xffdad29e                  # sandstone stairs
+0x0081      0xff6d8074                  # emerald ore
+0x0082      0xff2e4244                  # ender chest
+0x0083      0x2d8a8171                  # tripwire hook
+0x0084      0x08818181                  # tripwire
+0x0085      0xff51d975                  # block of emerald
+0x0086      0xff674d2e                  # spruce wood stairs
+0x0087      0xffc3b37b                  # birch wood stairs
+0x0088      0xff9a6e4d                  # jungle wood stairs
+0x0089      0xffb2896f                  # command block
+0x008a      0xff74ddd7                  # beacon
+0x008b      0xff7a7a7a                  # cobblestone wall
+0x008c      0x31764133                  # flower pot
+0x008d:0x0  0x0901ab10                  # carrots
+0x008d:0x1  0x0901ab10                  # carrots
+0x008d:0x2  0x1701bb0f                  # carrots
+0x008d:0x3  0x1701bb0f                  # carrots
+0x008d:0x4  0x3600be10                  # carrots
+0x008d:0x5  0x3600be10                  # carrots
+0x008d:0x6  0x3600be10                  # carrots
+0x008d:0x7  0x6f158002                  # carrots
+0x008e:0x0  0x0901ab10                  # potatoes
+0x008e:0x1  0x0901ab10                  # potatoes
+0x008e:0x2  0x1701bb0f                  # potatoes
+0x008e:0x3  0x1701bb0f                  # potatoes
+0x008e:0x4  0x3600be10                  # potatoes
+0x008e:0x5  0x3600be10                  # potatoes
+0x008e:0x6  0x3600be10                  # potatoes
+0x008e:0x7  0x6922aa24                  # potatoes
+0x008f      0xffffffff                  # wooden button
+0x0090      0xffffffff                  # mob head
+0x0091      0x9f403c3c                  # anvil
+0x0092      0xfe6f5739                  # trapped chest
+0x0093      0xfff9ec4e                  # weighted pressure plate (light)
+0x0094      0xffdbdbdb                  # weighted pressure plate (heavy)
+0x0095      0xff9c9695                  # redstone comparator (inactive)
+0x0096      0xffa59594                  # redstone comparator (active)
+0x0097      0xff82745e                  # daylight sensor
+0x0098      0xffab1b09                  # block of redstone
+0x0099      0xff7d544f                  # nether quartz ore
+0x009a      0xff3e3e3e                  # hopper
+0x009b:0x0  0xffece9e2                  # block of quartz
+0x009b:0x1  0xffe7e4db                  # chiseled quartz block
+0x009b:0x2  0xffe8e5dd                  # pillar quartz block
+0x009b:0x3  0xffe7e3db                  # pillar quartz block
+0x009b:0x4  0xffe7e3db                  # pillar quartz block
+0x009c      0xffece9e2                  # quartz stairs
+0x009d      0x9b685347                  # activator rail
+0x009e      0xff565656                  # dropper
+0x009f:0x0  0xffd1afa1                  # white stained clay
+0x009f:0x1  0xffa25326                  # orange stained clay
+0x009f:0x2  0xff95586d                  # magenta stained clay
+0x009f:0x3  0xff6f6a88                  # light blue stained clay
+0x009f:0x4  0xffba8424                  # yellow stained clay
+0x009f:0x5  0xff667433                  # lime stained clay
+0x009f:0x6  0xffa45150                  # pink stained clay
+0x009f:0x7  0xffa45150                  # gray stained clay
+0x009f:0x8  0xff86695e                  # light gray stained clay
+0x009f:0x9  0xff565a5a                  # cyan stained clay
+0x009f:0xa  0xff744352                  # purple stained clay
+0x009f:0xb  0xff493959                  # blue stained clay
+0x009f:0xc  0xff4c3122                  # brown stained clay
+0x009f:0xd  0xff4b522a                  # green stained clay
+0x009f:0xe  0xff8d3b2e                  # red stained clay
+0x009f:0xf  0xff271812                  # black stained clay
+0x00a0:0x0  0x9fdddddd                  # white glass pane
+0x00a0:0x1  0x9fc1824c                  # orange glass pane
+0x00a0:0x2  0x9fa65ec1                  # magenta glass pane
+0x00a0:0x3  0x9f7094c1                  # light blue glass pane
+0x00a0:0x4  0x9fcbcb4c                  # yellow glass pane
+0x00a0:0x5  0x9f83b93b                  # lime glass pane
+0x00a0:0x6  0x9fd4893b                  # pink glass pane
+0x00a0:0x7  0x9f5f5f5f                  # gray glass pane
+0x00a0:0x8  0x9f959595                  # light gray glass pane
+0x00a0:0x9  0x9f5f8395                  # cyan glass pane
+0x00a0:0xa  0x9f624578                  # purple glass pane
+0x00a0:0xb  0x9f4d5ea7                  # blue glass pane
+0x00a0:0xc  0x9f715e4d                  # brown glass pane
+0x00a0:0xd  0x9f71834d                  # green glass pane
+0x00a0:0xe  0x9f944d4d                  # red glass pane
+0x00a0:0xf  0x9f3b3b3b                  # black glass pane
+0x00a1:0x0  0x9a338311  biome_foliage   # acacia leaves
+0x00a1:0x1  0x9a32621d  biome_foliage   # dark oak leaves
+0x00a1:0x2  0x9a338311  biome_foliage   # acacia leaves
+0x00a1:0x3  0x9a32621d  biome_foliage   # dark oak leaves
+0x00a1:0x4  0x9a338311  biome_foliage   # acacia leaves
+0x00a1:0x5  0x9a32621d  biome_foliage   # dark oak leaves
+0x00a1:0x6  0x9a338311  biome_foliage   # acacia leaves
+0x00a1:0x7  0x9a32621d  biome_foliage   # dark oak leaves
+0x00a1:0x8  0x9a338311  biome_foliage   # acacia leaves
+0x00a1:0x9  0x9a32621d  biome_foliage   # dark oak leaves
+0x00a2:0x0  0xff696257                  # acacia wood
+0x00a2:0x1  0xff362a18                  # dark oak wood
+0x00a2:0x2  0xff696257                  # acacia wood
+0x00a2:0x3  0xff362a18                  # dark oak wood
+0x00a2:0x4  0xff696257                  # acacia wood
+0x00a2:0x5  0xff362a18                  # dark oak wood
+0x00a2:0x6  0xff696257                  # acacia wood
+0x00a2:0x7  0xff362a18                  # dark oak wood
+0x00a2:0x8  0xffb25b3b                  # acacia wood
+0x00a2:0x9  0xff5b4830                  # dark oak wood
+0x00a2:0xa  0xffb25b3b                  # acacia wood
+0x00a2:0xb  0xff5b4830                  # dark oak wood
+0x00a2:0xc  0xff696257                  # acacia wood
+0x00a2:0xd  0xff362a18                  # dark oak wood
+0x00a2:0xe  0xff696257                  # acacia wood
+0x00a2:0xf  0xff362a18                  # dark oak wood
+0x00a3      0xff773f23                  # acacia wood stairs
+0x00a4      0xff3e2813                  # dark oak stairs
+0x00aa      0xffa68c0f                  # hay block
+0x00ab:0x0  0xffdddddd                  # white carpet
+0x00ab:0x1  0xffdb7d3e                  # orange carpet
+0x00ab:0x2  0xffb350bc                  # magenta carpet
+0x00ab:0x3  0xff6a8ac9                  # light blue carpet
+0x00ab:0x4  0xffb1a627                  # yellow carpet
+0x00ab:0x5  0xff41ae38                  # lime carpet
+0x00ab:0x6  0xffd08499                  # pink carpet
+0x00ab:0x7  0xff404040                  # gray carpet
+0x00ab:0x8  0xff9aa1a1                  # light gray carpet
+0x00ab:0x9  0xff2e6e89                  # cyan carpet
+0x00ab:0xa  0xff7e3db5                  # purple carpet
+0x00ab:0xb  0xff2e388d                  # blue carpet
+0x00ab:0xc  0xff4f321f                  # brown carpet
+0x00ab:0xd  0xff35461b                  # green carpet
+0x00ab:0xe  0xff963430                  # red carpet
+0x00ab:0xf  0xff191616                  # black carpet
+0x00ac      0xff8e583f                  # hardened clay
+0x00ad      0xff8e583f                  # block of coal
+0x00ae      0x9f90abda                  # packed ice
+0x00af:0x0  0x1df1e424                  # sunflower
+0x00af:0x1  0x1d9f78a4                  # lilac
+0x00af:0x2  0x1d9f78a4                  # double tallgrass
+0x00af:0x3  0x1d486f3d                  # large fern
+0x00af:0x4  0x1dba180b                  # rose bush
+0x00af:0x5  0x1ddea5f7                  # peony
+0x00af:0x8  0x1df1e424                  # sunflower top half
+0x00af:0x9  0x1d9f78a4                  # lilac top half
+0x00af:0xa  0x1d9f78a4                  # double tallgrass top half
+0x00af:0xb  0x1d486f3d                  # large fern top half
+0x00af:0xc  0x1dba180b                  # rose bush top half
+0x00af:0xd  0x1ddea5f7                  # peony top half
+
+## end of file ##

@@ -6,6 +6,8 @@ package com.meowster.test;
 
 import com.meowster.util.StringUtils;
 
+import java.io.File;
+
 import static org.junit.Assert.assertEquals;
 
 /**

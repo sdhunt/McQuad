@@ -13,7 +13,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 /**
- * Unit tests for {@link StringUtils}.
+ * Unit tests for {@link com.meowster.util.PathUtils}.
  *
  * @author Simon Hunt
  */

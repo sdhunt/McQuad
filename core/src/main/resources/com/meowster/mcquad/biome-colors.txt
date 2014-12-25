@@ -1,0 +1,80 @@
+# This file defines colors for biomes.
+# Blank lines and lines starting with # are ignored.
+#
+# The format is:
+#   biome-id  grass-color  foliage-color  water-color  # comment  nnn nnn (?)
+#
+# TODO: discover significance of the two numbers at the end of each record
+#
+# The 'default' record is used for biome IDs that are not mapped explicitly.
+#
+# Block colors marked to be influenced by biome_grass, biome_foliage,
+# or biome_water will be multiplied by the corresponding color of the
+# biome containing the block.
+
+#       ___grass__  __foliage_  ___water__
+default 0xffff00ff  0xff00ffff  0xffffff00
+
+0x00    0xff8eb971  0xff71a74d  0xff0064e4  # oceans                        127 191
+0x01    0xff91bd59  0xff77ab2f  0xff00a0d4  # plains                         50 173
+0x02    0xffbfb755  0xffaea42a  0xff00a0d4  # desert                          0 255
+0x03    0xff8ab689  0xff6da36b  0xff0028f4  # extreme hills                 203 239
+0x04    0xff79c05a  0xff59ae30  0xff0098d6  # forest                         76 112
+0x05    0xff82b593  0xff63a277  0xff000efb  # taiga                         242 244
+0x06    0xff547a5a  0xff587243  0xff5663af  # swampland                      50  71
+0x07    0xff8eb971  0xff71a74d  0xff0064e4  # river                         127 191
+#0x08  nether # hell
+#0x09  end  # sky
+0x0a    0xff82b593  0xff63a277  0xff000efb  # frozen ocean                  242 244
+0x0b    0xff82b593  0xff63a277  0xff000efb  # frozen river                  242 244
+0x0c    0xff82b593  0xff63a277  0xff000efb  # ice plains                    242 244
+0x0d    0xff82b593  0xff63a277  0xff000efb  # ice mountains                 242 244
+0x0e    0xff55c93f  0xff2bbb0f  0xff00cec8  # mushroom island                25  25
+0x0f    0xff55c93f  0xff2bbb0f  0xff00cec8  # mushroom island shore          25  25
+0x10    0xff8eb971  0xff71a74d  0xff0064e4  # beach                         127 191
+0x11    0xffbfb755  0xffaea42a  0xff00a0d4  # desert hills                    0 255
+0x12    0xff79c05a  0xff59ae30  0xff0098d6  # forest hills                   76 112
+0x13    0xff82b593  0xff63a277  0xff000efb  # taiga hills                   242 244
+0x14    0xff8ab689  0xff6da36b  0xff0028f4  # extreme hills edge            203 239
+0x15    0xff53ca37  0xff29bc05  0xff00dcc4  # jungle                          0  25
+0x16    0xff53ca37  0xff29bc05  0xff00dcc4  # jungle hills                    0  25
+0x17    0xff53ca37  0xff29bc05  0xff00dcc4  # jungle edge                     0  25
+0x18    0xff040075  0xff040075  0xff040075  # deep oceans                   127 191
+0x19    0xff8eb971  0xff71a74d  0xff0064e4  # stone beach                   127 191
+0x1a    0xff8eb971  0xff71a74d  0xff0064e4  # cold beach                    242 244
+0x1b    0xff4b663a  0xff485e30  0xff2b39b2  # birch forest                   76 112
+0x1c    0xff4b663a  0xff485e30  0xff2b39b2  # birch forest hills             76 112
+0x1d    0xff2c431c  0xff3d7723  0xff0064e4  # roofed forest                  76 112
+0x1e    0xff82b593  0xff63a277  0xff000efb  # cold taiga                    242 244
+0x1f    0xff82b593  0xff63a277  0xff000efb  # cold taiga hills              242 244
+0x20    0xff82b593  0xff63a277  0xff000efb  # mega taiga                    242 244
+0x21    0xff82b593  0xff63a277  0xff000efb  # mega taiga hills              242 244
+0x22    0xff8ab689  0xff6da36b  0xff0028f4  # extreme hills +               203 239
+0x23    0xff6f6a31  0xff555014  0xff0064e4  # savanna                        76 112
+0x24    0xff6f6a31  0xff555014  0xff0064e4  # savanna platau                 76 112
+0x25    0xff82b593  0xff63a277  0xff000efb  # mesa                           76 112
+0x26    0xff82b593  0xff63a277  0xff000efb  # mesa plateau f                 76 112
+0x27    0xff82b593  0xff63a277  0xff000efb  # mesa plateau                   76 112
+0x81    0xff536b33  0xff4f7020  0xff0064e4  # sunflower plains               50 173
+0x82    0xffbfb755  0xffaea42a  0xff00a0d4  # desert mountains                0 255
+0x83    0xff8ab689  0xff6da36b  0xff0028f4  # extreme hills mountains       203 239
+0x84    0xff445c34  0xff32621d  0xff3238ad  # flower forest                  76 112
+0x85    0xff82b593  0xff63a277  0xff000efb  # taiga mountain                242 244
+0x86    0xff547a5a  0xff587243  0xff5663af  # swampland mountains            50  71
+0x8c    0xff82b593  0xff63a277  0xff000efb  # ice plains spikes             242 244
+0x95    0xff53ca37  0xff29bc05  0xff00dcc4  # jungle mountains                0  25
+0x97    0xff53ca37  0xff29bc05  0xff00dcc4  # jungle edge mountain            0  25
+0x9b    0xff4b663a  0xff485e30  0xff2b39b2  # birch forest mountains         76 112
+0x9c    0xff4b663a  0xff485e30  0xff2b39b2  # birch forest hills mountains   76 112
+0x9d    0xff2c431c  0xff3d7723  0xff0064e4  # roofed forest mountains        76 112
+0x9e    0xff82b593  0xff63a277  0xff000efb  # cold taiga mountain           242 244
+0xa0    0xff82b593  0xff63a277  0xff000efb  # mega spruce taiga             242 244
+0xa1    0xff82b593  0xff63a277  0xff000efb  # mega spruce taiga hills       242 244
+0xa2    0xff8ab689  0xff6da36b  0xff0028f4  # extreme hills + mountains     203 239
+0xa3    0xff6f6a31  0xff555014  0xff0064e4  # savanna mountains              76 112
+0xa4    0xff6f6a31  0xff555014  0xff0064e4  # savanna plateau mountains      76 112
+0xa5    0xff82b593  0xff63a277  0xff000efb  # mesa bryce                     76 112
+0xa6    0xff82b593  0xff63a277  0xff000efb  # mesa plateau f mountains       76 112
+0xa7    0xff82b593  0xff63a277  0xff000efb  # mesa plateau mountains         76 112
+
+## end of file ##
