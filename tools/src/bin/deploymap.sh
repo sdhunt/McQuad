@@ -81,7 +81,7 @@ then
     mkdir "$TARGET"
 fi
 
-TILES_TARGET="$MCMAPS/$WORLD/tiles"
+TILES_TARGET="$TARGET/tiles"
 
 ### ...................................................................
 ## locate the mcquad jar file
