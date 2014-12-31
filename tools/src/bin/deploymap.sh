@@ -68,12 +68,20 @@ then
     exit 1
 fi
 
-echo "Found: $WORLD_SAVE"
+echo "Found save dir: $WORLD_SAVE"
 
 REGION="$WORLD_SAVE/region"
 echo "Region directory contains..."
 ls "$REGION"
 
+TARGET="$MCMAPS/$WORLD"
+if [ ! -d "$TARGET" ]
+then
+    echo "Creating target directory: $TARGET ..."
+    mkdir "$TARGET"
+fi
+
+TILES_TARGET="$MCMAPS/$WORLD/tiles"
 
 ### ...................................................................
 ## locate the mcquad jar file
@@ -97,5 +105,6 @@ fi
 
 JAVA="$JAVA_HOME/bin/java"
 
-$JAVA -jar "$MQ_JAR" params go here
+$JAVA -jar "$MQ_JAR" "$REGION" -o "$TILES_TARGET"
 
+echo DONE

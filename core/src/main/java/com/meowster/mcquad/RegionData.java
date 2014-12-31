@@ -86,6 +86,10 @@ public class RegionData {
             throw new IllegalArgumentException("Not a directory: " + regionDir);
 
         File[] files = regionDir.listFiles(REGION_FILE_FILTER);
+        if (files.length == 0) {
+            printErr("No matching region files :(");
+        }
+
         for (File f: files) {
             try {
                 Matcher m = RE_REGION_FILE.matcher(f.getName());
