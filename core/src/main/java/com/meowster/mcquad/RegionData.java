@@ -146,6 +146,17 @@ public class RegionData {
     }
 
     /**
+     * Returns the region with the given coordinates, or null if no
+     * such region exists.
+     *
+     * @param xz region coordinates
+     * @return the region file, or null
+     */
+    public Region at(Coord xz) {
+        return regionMap.get(xz);
+    }
+
+    /**
      * Returns the number of regions contained in this data set.
      *
      * @return the number of regions

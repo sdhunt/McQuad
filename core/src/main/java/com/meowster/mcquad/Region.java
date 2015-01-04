@@ -93,6 +93,7 @@ public class Region {
      *
      * @return the tile name
      */
+    @Deprecated
     public String tileName() {
         return T_DOT + coord.x() + DOT + coord.z() + DOT_PNG;
     }

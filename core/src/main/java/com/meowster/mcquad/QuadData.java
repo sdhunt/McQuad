@@ -17,11 +17,12 @@ public class QuadData {
     private final Bounds bounds;
 
     private final int quadDim;
+    private final int baseZoom;
     private final int maxZoom;
-    // offsets for the region mapped into the quad
+    // offsets for the region data mapped into the quad data
     private final int xoff;
     private final int zoff;
-    // coordinate calibration
+    // coordinate calibration for origin
     private final int xcc;
     private final int zcc;
     private final Coord calibration;
@@ -32,14 +33,32 @@ public class QuadData {
      * @param regionData the regionData on which to base the quad
      */
     public QuadData(RegionData regionData) {
+        /*
+         NOTE:
+           Regions are composed of 512x512 blocks.
+           Quads are composed of 256x256 pixels.
+
+           So, the base-level quads are four per region, the coords of which
+           are computed from the region (quad-based) coords [X, Z] as follows:
+
+                    2X    2X+1
+                 +------+------+
+           2Z    |      |      |
+                 |      |      |
+                 +------+------+
+           2Z+1  |      |      |
+                 |      |      |
+                 +------+------+
+         */
         this.regionData = regionData;
         bounds = regionData.bounds();
         quadDim = computeQuad();
-        maxZoom = computeMaxZoom(quadDim);
+        baseZoom = computeBaseZoom(quadDim);
+        maxZoom = baseZoom + 2;             // to provide 4x4 pixels per block
         xoff = computeOffset(bounds.nx());
         zoff = computeOffset(bounds.nz());
-        xcc = bounds.minX() - xoff;
-        zcc = bounds.minZ() - zoff;
+        xcc = bounds.minX() * 2 - xoff;
+        zcc = bounds.minZ() * 2 - zoff;
         calibration = new Coord(xcc, zcc);
     }
 
@@ -47,6 +66,7 @@ public class QuadData {
     public String toString() {
         return "QuadData{" +
                 "quadDim=" + quadDim +
+                ", baseZoom=" + baseZoom +
                 ", maxZoom=" + maxZoom +
                 ", xoff=" + xoff +
                 ", zoff=" + zoff +
@@ -59,10 +79,13 @@ public class QuadData {
         final int dim = bounds.maxDim();
         while (q < dim)
             q *= 2;
-        return q;
+        // NOTE: regions are 512x512 blocks, but we want tiles 256*256 so
+        //       double the tiles per side...
+        return q * 2;
     }
 
-    private int computeMaxZoom(int quadDim) {
+    // compute zoom level at which we have 256x256 blocks per tile
+    private int computeBaseZoom(int quadDim) {
         int zoom = 0;
         int dim = quadDim;
         while (dim > 1) {
@@ -73,13 +96,30 @@ public class QuadData {
     }
 
     private int computeOffset(int n) {
-        int pad = quadDim - n;
-        return pad / 2;
+        int pad = (quadDim/2) - n;
+
+        // NOTE: don't try to simplify the following two lines, because we
+        //       are relying on integer division..
+        int off = pad / 2;
+
+        // double to convert region coords to quad coords..
+        off *= 2;
+        return off;
     }
 
     private String tileChar(Region region) {
         return region == null ? " ."
                 : (region.coord().equals(ORIGIN) ? " O" : " #");
+    }
+
+
+    private String charAt(int x, int z) {
+        int rqx = x/2;
+        int rqz = z/2;
+        int cx = rqx + (xcc/2);
+        int cz = rqz + (zcc/2);
+        Region r = regionData.at(cx, cz);
+        return tileChar(r);
     }
 
     /**
@@ -92,7 +132,7 @@ public class QuadData {
         StringBuilder sb = new StringBuilder();
         for (int z=0; z<quadDim; z++) {
             for (int x=0; x<quadDim; x++) {
-                sb.append(tileChar(regionData.at(x + xcc, z + zcc)));
+                sb.append(charAt(x, z));
             }
             sb.append("\n");
         }
@@ -117,8 +157,8 @@ public class QuadData {
      * @return the region mapped at [a,b]
      */
     public Region at(int a, int b) {
-        Coord xz = quadToRegion(a, b);
-        return regionData.at(xz.x(), xz.z());
+        Coord xz = quadToRegion(a/2, b/2);
+        return regionData.at(xz);
     }
 
     /**
@@ -129,7 +169,17 @@ public class QuadData {
      * @return the corresponding region coordinates
      */
     private Coord quadToRegion(int a, int b) {
-        return new Coord(a + xcc, b + zcc);
+        return new Coord(a + xcc/2, b + zcc/2);
+    }
+
+    /**
+     * Returns the base zoom level; that is, the zoom level at which
+     * the resolution is one pixel per block.
+     *
+     * @return the base zoom level
+     */
+    public int baseZoom() {
+        return baseZoom;
     }
 
     /**
