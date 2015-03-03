@@ -58,6 +58,8 @@ WORLD="$1"
 if [ -z "$WORLD" ]
 then
     echo "Usage: $0 <world-dir-name>"
+    echo "World save directories are..."
+    ls "$MCSAVES"
     exit 1
 fi
 
