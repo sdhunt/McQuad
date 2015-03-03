@@ -79,7 +79,7 @@ public class QuadData {
         final int dim = bounds.maxDim();
         while (q < dim)
             q *= 2;
-        // NOTE: regions are 512x512 blocks, but we want tiles 256*256 so
+        // NOTE: regions are 512x512 blocks, but we want tiles 256x256 so
         //       double the tiles per side...
         return q * 2;
     }

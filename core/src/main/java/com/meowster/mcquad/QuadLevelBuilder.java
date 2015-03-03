@@ -14,6 +14,7 @@ import java.io.File;
 public abstract class QuadLevelBuilder {
 
     protected static final int BLOCKS_PER_REGION = 512;
+    protected static final int BLOCKS_PER_BASE_TILE = 256;
     protected static final Coord ORIGIN = new Coord(0, 0);
 
     protected final File outputDir;

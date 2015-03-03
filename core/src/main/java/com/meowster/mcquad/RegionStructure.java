@@ -17,7 +17,7 @@ import static java.awt.image.BufferedImage.TYPE_INT_ARGB;
  */
 public class RegionStructure {
 
-    private static final int NPIXELS = 512; // pixel dimension of tile
+    private static final int NPIXELS = 512; // pixel dimension of region
     private static final int TOTAL_PIXELS = NPIXELS * NPIXELS;
 
     private static final int NCHUNKS = 32;  // chunk dimension of region

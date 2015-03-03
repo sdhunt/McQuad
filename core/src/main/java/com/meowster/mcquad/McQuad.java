@@ -50,10 +50,9 @@ public class McQuad {
         printOut(quad);
         printOut(quad.schematic());
 
-        // FIXME: needs to be fixed
-//        TileRenderer tr = new TileRenderer(quad, parsedArgs.outputDir);
-//        tr.render();
-//        printOut(tr.report());
+        TileRenderer tr = new TileRenderer(quad, parsedArgs.outputDir);
+        tr.render();
+        printOut(tr.report());
 
         done = true;
         printOut("All Done!");

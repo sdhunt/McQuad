@@ -68,4 +68,15 @@ public class Coord {
     public Coord negation() {
         return new Coord(-x, -z);
     }
+
+    /**
+     * Returns the coordinates that are scaled by the given factor.
+     * That is, returns {@code [x*s, z*s]};
+     *
+     * @param s the scale factor
+     * @return these coordinates scaled by the given amount
+     */
+    public Coord scale(int s) {
+        return new Coord(x * s, z * s);
+    }
 }

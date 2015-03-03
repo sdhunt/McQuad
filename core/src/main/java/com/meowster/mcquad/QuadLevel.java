@@ -84,7 +84,7 @@ public interface QuadLevel {
      * Returns the displacement within the origin tile to locate the true
      * origin. Units are in minecraft blocks. The actual pixel can be computed
      * from number of pixels per tile, {@link #blocksPerTile()} for this level,
-     * and the x and z values of the {@link com.meowster.mcquad.Coord} returned from this method.
+     * and the x and z values of the {@link Coord} returned from this method.
      *
      * @return the origin displacement
      */

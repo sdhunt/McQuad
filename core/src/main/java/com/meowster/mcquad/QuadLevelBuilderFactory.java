@@ -7,7 +7,7 @@ package com.meowster.mcquad;
 import java.io.File;
 
 /**
- * A factory for {@link QuadLevelBuilderOld}s.
+ * A factory for {@link QuadLevelBuilder}s.
  *
  * @author Simon Hunt
  */

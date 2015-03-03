@@ -56,6 +56,8 @@ public class TileRenderer {
         builder.generateTiles();
         QuadLevel level = builder.getLevel();
 
+        // TODO:
+/*
         // now progressively zoom out...
         while (level.zoom() > 1) {
             builder = factory.createBuilder(level);
@@ -64,6 +66,7 @@ public class TileRenderer {
             builder.generateTiles();
             level = builder.getLevel();
         }
+*/
     }
 
     private void createZoomDir(QuadLevel level) {
