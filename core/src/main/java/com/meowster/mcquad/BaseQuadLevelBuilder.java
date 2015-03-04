@@ -4,11 +4,11 @@
 
 package com.meowster.mcquad;
 
-import com.meowster.util.ImageUtils;
 import com.meowster.util.PathUtils;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.List;
 
 import static java.awt.image.BufferedImage.TYPE_INT_ARGB;
 
@@ -49,29 +49,33 @@ public class BaseQuadLevelBuilder extends QuadLevelBuilder {
     }
 
     @Override
+    void reportStats(List<LevelStats> stats) {
+        // NOTE: add stats in order from deepest zoom upwards
+        stats.add(levelZoomPlus2.getStats());
+        stats.add(levelZoomPlus1.getStats());
+        stats.add(levelZoomPlus0.getStats());
+    }
+
+    @Override
     public void prepare() {
-        // TODO: Refactor.....
+        levelZoomPlus0 = makeQdLvl(0);
+        levelZoomPlus1 = makeQdLvl(1);
+        levelZoomPlus2 = makeQdLvl(2);
+    }
 
-        levelZoomPlus0 = new QdLvl();
-        levelZoomPlus0.setZoom(quadData.baseZoom());
-        levelZoomPlus0.setBlocksPerTile(BLOCKS_PER_BASE_TILE);
-        levelZoomPlus0.setOriginTile(regionToQuadDelta);
-        levelZoomPlus0.setOriginDisplace(ORIGIN);   // TODO: review
-        levelZoomPlus0.setOutputDir(new File(outputDir, levelZoomPlus0.name()));
+    private QdLvl makeQdLvl(int zoomPlus) {
+        int zoom = quadData.baseZoom() + zoomPlus;
+        int factor = 1 << zoomPlus; // 1, 2, 4
+        int blkPerTile = BLOCKS_PER_BASE_TILE / factor;
+        Coord rqDelta = regionToQuadDelta.scale(factor);
 
-        levelZoomPlus1 = new QdLvl();
-        levelZoomPlus1.setZoom(quadData.baseZoom()+1);
-        levelZoomPlus1.setBlocksPerTile(BLOCKS_PER_BASE_TILE / 2);
-        levelZoomPlus1.setOriginTile(regionToQuadDelta.scale(2));
-        levelZoomPlus1.setOriginDisplace(ORIGIN);   // TODO: review
-        levelZoomPlus1.setOutputDir(new File(outputDir, levelZoomPlus1.name()));
-
-        levelZoomPlus2 = new QdLvl();
-        levelZoomPlus2.setZoom(quadData.baseZoom()+2);
-        levelZoomPlus2.setBlocksPerTile(BLOCKS_PER_BASE_TILE / 4);
-        levelZoomPlus2.setOriginTile(regionToQuadDelta.scale(4));
-        levelZoomPlus2.setOriginDisplace(ORIGIN);   // TODO: review
-        levelZoomPlus2.setOutputDir(new File(outputDir, levelZoomPlus2.name()));
+        QdLvl q = new QdLvl();
+        q.setZoom(zoom);
+        q.setBlocksPerTileSide(blkPerTile);
+        q.setOriginTile(rqDelta);
+        q.setOriginDisplace(ORIGIN);   // TODO: review
+        q.setOutputDir(new File(outputDir, q.name()));
+        return q;
     }
 
     @Override
@@ -163,19 +167,37 @@ public class BaseQuadLevelBuilder extends QuadLevelBuilder {
     }
 
 
+    // return null if image is completely transparent (empty tile)
     private QuadTile makeBaseQuadTile(RegionImageData ri, int dx, int dz) {
+        BufferedImage bi = ri.getImage(dx, dz);
+        if (imageIsBlank(bi))
+            return null;
+
         int x = ri.region().coord().x() * 2 + regionToQuadDelta.x() + dx;
         int z = ri.region().coord().z() * 2 + regionToQuadDelta.z() + dz;
-        return new SubregionQTile(ri.getImage(dx, dz), x, z);
+        return new SubregionQTile(bi, x, z);
+    }
+
+    // scans the image: first non-transparent pixel will exit with false
+    private boolean imageIsBlank(BufferedImage bi) {
+        int a, b;
+        int w = bi.getWidth();
+        int h = bi.getHeight();
+        for (a = 0; a < w; a++) {
+            for (b = 0; b < h; b++) {
+                if (bi.getRGB(a, b) != 0)
+                    return false;
+            }
+        }
+        return true;
     }
 
     private QuadTile makeScaledTile(QuadTile tile, int dx, int dz) {
-        int x = tile.coord().x() * 2 + dx;
-        int z = tile.coord().z() * 2 + dz;
         int ox = HALF_NPIXELS * dx;
         int oz = HALF_NPIXELS * dz;
         BufferedImage src = tile.image();
         int a, a2, b, b2, color;
+        int aggr = 0;
 
         BufferedImage bi =
                 new BufferedImage(NPIXELS, NPIXELS, TYPE_INT_ARGB);
@@ -185,6 +207,7 @@ public class BaseQuadLevelBuilder extends QuadLevelBuilder {
             for (b = 0; b < HALF_NPIXELS; b++) {
                 b2 = 2 * b;
                 color = src.getRGB(ox + a, oz + b);
+                aggr |= color; // aggregate color
                 bi.setRGB(a2, b2, color);
                 bi.setRGB(a2+1, b2, color);
                 bi.setRGB(a2, b2+1, color);
@@ -192,19 +215,9 @@ public class BaseQuadLevelBuilder extends QuadLevelBuilder {
             }
         }
 
-        return new SubregionQTile(bi, x, z);
-    }
-
-    private void writeTiles(QuadLevel ql) {
-        for (QuadTile tile : ql.tiles()) {
-            writeTileImageToDisk(ql, tile);
-        }
-    }
-
-    private void writeTileImageToDisk(QuadLevel ql, QuadTile qtile) {
-        File pngFile = new File(ql.outputDir(), qtile.pngName());
-        qtile.setLocationOnDisk(pngFile);
-        ImageUtils.writeImageToDisk(qtile.image(), pngFile);
+        int x = tile.coord().x() * 2 + dx;
+        int z = tile.coord().z() * 2 + dz;
+        return aggr == 0 ? null : new SubregionQTile(bi, x, z);
     }
 
 }

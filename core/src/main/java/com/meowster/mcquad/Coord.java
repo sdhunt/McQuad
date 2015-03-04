@@ -79,4 +79,14 @@ public class Coord {
     public Coord scale(int s) {
         return new Coord(x * s, z * s);
     }
+
+    /**
+     * Returns the coordinates computed by dividing these coordinates
+     * by 2 (integer division).
+     *
+     * @return these coordinates scaled by half
+     */
+    public Coord div2() {
+        return new Coord(x / 2, z / 2);
+    }
 }

@@ -109,7 +109,7 @@ class QuadLevelBuilderOld {
     private QdLvl prepareFromQuadData() {
         QdLvl ql = new QdLvl();
         ql.setZoom(quadData.maxZoom());
-        ql.setBlocksPerTile(BLOCKS_PER_REGION);
+        ql.setBlocksPerTileSide(BLOCKS_PER_REGION);
         ql.setOriginTile(regionToQuadDelta);
         ql.setOriginDisplace(new Coord(0, 0));
         return ql;
@@ -142,9 +142,9 @@ class QuadLevelBuilderOld {
     }
 
     private void computeAttributes(QdLvl ql, QuadLevel sourceLevel) {
-        final int blocksPerTile = sourceLevel.blocksPerTile();
+        final int blocksPerTile = sourceLevel.blocksPerTileSide();
         ql.setZoom(sourceLevel.zoom() - 1);
-        ql.setBlocksPerTile(blocksPerTile * 2);
+        ql.setBlocksPerTileSide(blocksPerTile * 2);
         Coord sourceOrig = sourceLevel.originTile();
         Coord sourceDisp = sourceLevel.originDisplace();
         int sox = sourceOrig.x();

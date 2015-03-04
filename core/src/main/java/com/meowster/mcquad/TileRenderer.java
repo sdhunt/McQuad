@@ -54,23 +54,18 @@ public class TileRenderer {
         builder.prepare();
         builder.createDirectory();
         builder.generateTiles();
+        builder.reportStats(stats);
         QuadLevel level = builder.getLevel();
 
-        // TODO:
-/*
         // now progressively zoom out...
         while (level.zoom() > 1) {
             builder = factory.createBuilder(level);
             builder.prepare();
             builder.createDirectory();
             builder.generateTiles();
+            builder.reportStats(stats);
             level = builder.getLevel();
         }
-*/
-    }
-
-    private void createZoomDir(QuadLevel level) {
-        level.setOutputDir(PathUtils.makeDir(outputDir, level.name()));
     }
 
     private void prepareOutputDirectory() {
@@ -87,7 +82,12 @@ public class TileRenderer {
      * @return a report string
      */
     public String report() {
-        return "<end of report summary - TBD>" + EOL;
+        StringBuilder sb = new StringBuilder(reportHeader());
+        for (LevelStats s: stats) {
+            sb.append(s).append(EOL);
+        }
+        sb.append("<end of report summary>").append(EOL);
+        return sb.toString();
     }
 
     private StringBuilder reportHeader() {

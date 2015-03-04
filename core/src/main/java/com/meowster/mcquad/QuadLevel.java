@@ -71,7 +71,7 @@ public interface QuadLevel {
      *
      * @return the number of blocks along the side of a tile
      */
-    int blocksPerTile();
+    int blocksPerTileSide();
 
     /**
      * Returns the (quad) coordinates of the tile containing the origin.
@@ -83,8 +83,9 @@ public interface QuadLevel {
     /**
      * Returns the displacement within the origin tile to locate the true
      * origin. Units are in minecraft blocks. The actual pixel can be computed
-     * from number of pixels per tile, {@link #blocksPerTile()} for this level,
-     * and the x and z values of the {@link Coord} returned from this method.
+     * from number of pixels per tile side, {@link #blocksPerTileSide()}
+     * for this level, and the x and z values of the {@link Coord} returned
+     * from this method.
      *
      * @return the origin displacement
      */

@@ -74,7 +74,7 @@ public class QuadLevelBuilderTest extends AbstractTest {
 
         assertEquals(AM_UXS, 3, level.zoom());
         assertEquals(AM_NEQ, "z3", level.name());
-        assertEquals(AM_UXS, 512, level.blocksPerTile());
+        assertEquals(AM_UXS, 512, level.blocksPerTileSide());
         assertEquals(AM_NEQ, new Coord(1, 3), level.originTile());
         assertEquals(AM_NEQ, new Coord(0, 0), level.originDisplace());
 
@@ -103,7 +103,7 @@ public class QuadLevelBuilderTest extends AbstractTest {
 
         assertEquals(AM_UXS, 2, level.zoom());
         assertEquals(AM_NEQ, "z2", level.name());
-        assertEquals(AM_UXS, 1024, level.blocksPerTile());
+        assertEquals(AM_UXS, 1024, level.blocksPerTileSide());
         assertEquals(AM_NEQ, new Coord(0, 1), level.originTile());
         assertEquals(AM_NEQ, new Coord(512, 512), level.originDisplace());
 
@@ -122,7 +122,7 @@ public class QuadLevelBuilderTest extends AbstractTest {
 
         assertEquals(AM_UXS, 1, level.zoom());
         assertEquals(AM_NEQ, "z1", level.name());
-        assertEquals(AM_UXS, 2048, level.blocksPerTile());
+        assertEquals(AM_UXS, 2048, level.blocksPerTileSide());
         assertEquals(AM_NEQ, new Coord(0, 0), level.originTile());
         assertEquals(AM_NEQ, new Coord(512, 512 + 1024), level.originDisplace());
 

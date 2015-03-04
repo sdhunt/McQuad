@@ -19,7 +19,7 @@ class QdLvl implements QuadLevel {
     private final Map<Coord, QuadTile> tileMap = new HashMap<>();
     private int zoom;
     private int dim;
-    private int blocksPerTile;
+    private int blocksPerTileSide;
     private Coord originTile;
     private Coord originDisplace;
     private LevelStats stats = new LevelStats();
@@ -29,6 +29,8 @@ class QdLvl implements QuadLevel {
         if (tile != null) {
             tileMap.put(tile.coord(), tile);
             stats.addStats(tile);
+        } else {
+            stats.incBlanks();
         }
     }
 
@@ -78,12 +80,12 @@ class QdLvl implements QuadLevel {
     }
 
     @Override
-    public int blocksPerTile() {
-        return blocksPerTile;
+    public int blocksPerTileSide() {
+        return blocksPerTileSide;
     }
 
-    void setBlocksPerTile(int blocksPerTile) {
-        this.blocksPerTile = blocksPerTile;
+    void setBlocksPerTileSide(int blocksPerTileSide) {
+        this.blocksPerTileSide = blocksPerTileSide;
     }
 
     @Override
@@ -131,7 +133,7 @@ class QdLvl implements QuadLevel {
                 "zoom=" + zoom +
                 ", dim=" + dim +
                 ", #tiles=" + tileMap.size() +
-                ", blocksPerTile=" + blocksPerTile +
+                ", blocksPerTileSide=" + blocksPerTileSide +
                 ", originTile=" + originTile +
                 ", originDisplace=" + originDisplace +
                 '}';

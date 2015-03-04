@@ -1,3 +1,40 @@
-body {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+/* CSS for McQuad Map */
+
+html, body {
+    height: 100%;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#body {
+    /*border: 4px dotted yellow;*/
+    background-color: #422;
+    font-family: arial, helvetica, tahoma, sans-serif;
+}
+
+#mast {
+    background-color: #422;
+    color: white;
+    padding: 6px 12px;
+    height: 40px;
+}
+
+.headdiv {
+    display: inline-block;
+    margin: 2px;
+    padding: 2px;
+}
+
+#map {
+    height: 92%;
+    margin: 10px;
+    border: 3px solid #644;
+    background-color: #114;
+}
+
+#map svg {
+    display: block;
+    width: 100%;
+    height: 100%;
 }

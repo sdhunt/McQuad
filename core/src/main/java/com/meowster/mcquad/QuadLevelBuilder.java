@@ -4,7 +4,10 @@
 
 package com.meowster.mcquad;
 
+import com.meowster.util.ImageUtils;
+
 import java.io.File;
+import java.util.List;
 
 /**
  * The partially implemented superclass for quad level builders.
@@ -53,4 +56,27 @@ public abstract class QuadLevelBuilder {
      * @return the quad level
      */
     abstract QuadLevel getLevel();
+
+    /**
+     * Builder should append related level stats to the given list.
+     *
+     * @param stats the list to which stats should be added
+     */
+    abstract void reportStats(List<LevelStats> stats);
+
+
+    /**
+     * Writes the image files to disk.
+     *
+     * @param ql the quad level
+     */
+    protected void writeTiles(QuadLevel ql) {
+        for (QuadTile tile : ql.tiles()) {
+            File pngFile = new File(ql.outputDir(), tile.pngName());
+            // remember where we stored the image on disk (for reloading)..
+            tile.setLocationOnDisk(pngFile);
+            ImageUtils.writeImageToDisk(tile.image(), pngFile);
+        }
+    }
+
 }

@@ -16,7 +16,7 @@ import static java.awt.image.BufferedImage.TYPE_INT_ARGB;
  * @author Simon Hunt
  */
 public class CompositeTile {
-    private static final int NPIXELS = 512; // pixel dimension of tile
+    private static final int NPIXELS = 256; // pixel dimension of tile
     private static final int HALF = NPIXELS / 2;
 
     private BufferedImage image;

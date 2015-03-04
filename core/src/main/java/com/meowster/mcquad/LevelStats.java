@@ -14,6 +14,7 @@ import com.meowster.util.Tracker;
 public class LevelStats {
     private int zoom;
     private final Tracker tracker = new Tracker();
+    private int blanks;
 
     /**
      * Sets the zoom level these stats are associated with.
@@ -32,7 +33,13 @@ public class LevelStats {
     public String reportLine() {
         return "Zoom Level " + zoom + ": #tiles = " + tracker.count() +
                 ", duration = " + tracker.duration() +
-                ", throughput = " + tracker.perSecond();
+                ", throughput = " + tracker.perSecond() +
+                ", (blanks=" + blanks + ")";
+    }
+
+    @Override
+    public String toString() {
+        return reportLine();
     }
 
     /**
@@ -56,5 +63,12 @@ public class LevelStats {
      */
     public void addStats(QuadTile tile) {
         tracker.inc();
+    }
+
+    /**
+     * Increments the blank count.
+     */
+    public void incBlanks() {
+        blanks++;
     }
 }

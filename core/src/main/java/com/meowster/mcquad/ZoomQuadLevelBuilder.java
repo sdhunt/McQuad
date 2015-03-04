@@ -4,7 +4,10 @@
 
 package com.meowster.mcquad;
 
+import com.meowster.util.PathUtils;
+
 import java.io.File;
+import java.util.List;
 
 /**
  * A zoom quad level builder. This implementation knows how to create a quad
@@ -15,6 +18,7 @@ import java.io.File;
 public class ZoomQuadLevelBuilder extends QuadLevelBuilder {
 
     private final QuadLevel sourceLevel;
+    private QdLvl q;
 
     /**
      * Constructs a zoom quad level builder.
@@ -29,21 +33,61 @@ public class ZoomQuadLevelBuilder extends QuadLevelBuilder {
 
     @Override
     public void prepare() {
-        // TODO ...
+        q = new QdLvl();
+        q.setZoom(sourceLevel.zoom() - 1);
+        q.setBlocksPerTileSide(sourceLevel.blocksPerTileSide() * 2);
+        q.setOriginTile(sourceLevel.originTile().div2());
+        q.setOriginDisplace(ORIGIN);    // TODO: review
+        q.setOutputDir(new File(outputDir, q.name()));
     }
 
     @Override
     public void createDirectory() {
-        // TODO ...
+        PathUtils.makeDir(outputDir, q.name());
     }
 
     @Override
     public void generateTiles() {
-        // TODO ...
+        genTiles(false);
+    }
+
+    private void genTiles(boolean suppressWrite) {
+        final int dim = sourceLevel.dim();
+        q.startTracker();
+        for (int a=0; a<dim; a+=2) {
+            for (int b=0; b<dim; b+=2) {
+                // get TopLeft, TopRight, BottomLeft, BottomRight tiles
+                QuadTile tl = sourceLevel.at(a, b);
+                QuadTile tr = sourceLevel.at(a+1, b);
+                QuadTile bl = sourceLevel.at(a, b+1);
+                QuadTile br = sourceLevel.at(a+1, b+1);
+                // generate new tile from the 4 input tiles (zoom out 1 level)
+                q.addTile(mergeTiles(a, b, tl, tr, bl, br));
+            }
+        }
+
+        if (!suppressWrite) {
+            writeTiles(q);
+        }
+
+        q.stopTracker();
+    }
+
+    // Merge the four tiles into a single tile "one-fourth the size"
+    private QuadTile mergeTiles(int a, int b, QuadTile tl, QuadTile tr,
+                                QuadTile bl, QuadTile br) {
+        // if no input tiles, no output tile
+        return (tl == null && tr == null && bl == null && br == null)
+                ? null : new FourQTile(a, b, tl, tr, bl, br);
     }
 
     @Override
     public QuadLevel getLevel() {
-        return null;  // TODO ...
+        return q;
+    }
+
+    @Override
+    void reportStats(List<LevelStats> stats) {
+        stats.add(q.getStats());
     }
 }
