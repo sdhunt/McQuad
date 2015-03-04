@@ -32,8 +32,8 @@ public class LevelStats {
      */
     public String reportLine() {
         return "Zoom Level " + zoom + ": #tiles = " + tracker.count() +
-                ", duration = " + tracker.duration() +
-                ", throughput = " + tracker.perSecond() +
+//                ", duration = " + tracker.duration() +
+//                ", throughput = " + tracker.perSecond() +
                 ", (blanks=" + blanks + ")";
     }
 

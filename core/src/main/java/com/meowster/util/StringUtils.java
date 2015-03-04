@@ -94,11 +94,23 @@ public class StringUtils {
     }
 
     /**
-     * Prints the specified object to STDOUT, using its toString() method.
+     * Prints the specified object to STDOUT, using its toString() method,
+     * ending with a newline.
+     *
      * @param o the object to be printed
      */
     public static void printOut(Object o) {
         System.out.println(o);
+    }
+
+    /**
+     * Prints the specified object to STDOUT, using its toString() method (but
+     * no newline).
+     *
+     * @param o the object to be printed
+     */
+    public static void print(Object o) {
+        System.out.print(o);
     }
 
     /**

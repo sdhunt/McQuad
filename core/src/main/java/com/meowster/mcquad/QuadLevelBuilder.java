@@ -68,15 +68,21 @@ public abstract class QuadLevelBuilder {
     /**
      * Writes the image files to disk.
      *
-     * @param ql the quad level
+     * @param tiles the tiles to write to disk
      */
-    protected void writeTiles(QuadLevel ql) {
-        for (QuadTile tile : ql.tiles()) {
-            File pngFile = new File(ql.outputDir(), tile.pngName());
+    protected void writeTiles(List<QuadTile> tiles, File odir) {
+        for (QuadTile tile : tiles) {
+            File pngFile = new File(odir, tile.pngName());
             // remember where we stored the image on disk (for reloading)..
             tile.setLocationOnDisk(pngFile);
             ImageUtils.writeImageToDisk(tile.image(), pngFile);
         }
     }
 
+    protected void releaseTiles(List<QuadTile> tiles) {
+        for (QuadTile tile: tiles) {
+            tile.releaseResources();
+        }
+        tiles.clear();
+    }
 }

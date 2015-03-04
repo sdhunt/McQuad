@@ -52,7 +52,6 @@ public class McQuad {
 
         TileRenderer tr = new TileRenderer(quad, parsedArgs.outputDir);
         tr.render();
-        printOut(tr.report());
 
         done = true;
         printOut("All Done!");

@@ -7,7 +7,10 @@ package com.meowster.mcquad;
 import com.meowster.util.PathUtils;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
+
+import static com.meowster.util.StringUtils.printOut;
 
 /**
  * A zoom quad level builder. This implementation knows how to create a quad
@@ -53,6 +56,9 @@ public class ZoomQuadLevelBuilder extends QuadLevelBuilder {
 
     private void genTiles(boolean suppressWrite) {
         final int dim = sourceLevel.dim();
+        List<QuadTile> tiles = new ArrayList<>();
+        QuadTile tile;
+
         q.startTracker();
         for (int a=0; a<dim; a+=2) {
             for (int b=0; b<dim; b+=2) {
@@ -62,15 +68,24 @@ public class ZoomQuadLevelBuilder extends QuadLevelBuilder {
                 QuadTile bl = sourceLevel.at(a, b+1);
                 QuadTile br = sourceLevel.at(a+1, b+1);
                 // generate new tile from the 4 input tiles (zoom out 1 level)
-                q.addTile(mergeTiles(a, b, tl, tr, bl, br));
-            }
-        }
+                tile = mergeTiles(a, b, tl, tr, bl, br);
+                q.addTile(tile);
 
-        if (!suppressWrite) {
-            writeTiles(q);
+                if (tile != null) {
+                    tiles.add(tile);
+                }
+            }
+
+            if (!suppressWrite) {
+                writeTiles(tiles, q.outputDir());
+            }
+
+            releaseTiles(tiles);
+            tiles.clear();
         }
 
         q.stopTracker();
+        printOut(q.getStats().toString());
     }
 
     // Merge the four tiles into a single tile "one-fourth the size"

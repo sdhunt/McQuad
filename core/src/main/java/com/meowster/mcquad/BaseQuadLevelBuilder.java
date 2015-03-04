@@ -8,8 +8,10 @@ import com.meowster.util.PathUtils;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
+import static com.meowster.util.StringUtils.*;
 import static java.awt.image.BufferedImage.TYPE_INT_ARGB;
 
 /**
@@ -121,49 +123,102 @@ public class BaseQuadLevelBuilder extends QuadLevelBuilder {
         // don't forget, we are splitting the 512x512 block regions
         //  into four 256x256 block sub-regions, and then scaling each
         //  of those up an extra couple of zoom levels
+        List<QuadTile> tiles0, tiles1, tiles2;
 
+        int regionCount = 0;
         for (Region r : quadData.regionData().regions()) {
-            generateZoomPlus0Tiles(r, suppressWrite);
-            generateZoomPlus1Tiles(suppressWrite);
-            generateZoomPlus2Tiles(suppressWrite);
+            regionCount++;
+
+            tiles0 = generateZoomPlus0Tiles(r, suppressWrite);
+            tiles1 = tileZoomIn(tiles0, levelZoomPlus1, suppressWrite);
+            tiles2 = tileZoomIn(tiles1, levelZoomPlus2, suppressWrite);
+
+            print(".");
+            if (regionCount % 20 == 0)
+                print(EOL);
+
+            releaseTiles(tiles0);
+            releaseTiles(tiles1);
+            releaseTiles(tiles2);
         }
+
+        print(EOL);
 
         levelZoomPlus2.stopTracker();
         levelZoomPlus1.stopTracker();
         levelZoomPlus0.stopTracker();
+
+        printOut(levelZoomPlus2.getStats().toString());
+        printOut(levelZoomPlus1.getStats().toString());
+        printOut(levelZoomPlus0.getStats().toString());
     }
 
-    private void generateZoomPlus0Tiles(Region r, boolean suppressWrite) {
+
+    private List<QuadTile> generateZoomPlus0Tiles(Region r, boolean suppressWrite) {
         RegionImageData ri = new RegionImageData(r, regionToQuadDelta);
-        levelZoomPlus0.addTile(makeBaseQuadTile(ri, 0, 0));
-        levelZoomPlus0.addTile(makeBaseQuadTile(ri, 1, 0));
-        levelZoomPlus0.addTile(makeBaseQuadTile(ri, 0, 1));
-        levelZoomPlus0.addTile(makeBaseQuadTile(ri, 1, 1));
+        List<QuadTile> tiles = new ArrayList<>();
+        QuadTile tile;
+
+        tile = makeBaseQuadTile(ri, 0, 0);
+        levelZoomPlus0.addTile(tile);
+        if (tile != null)
+            tiles.add(tile);
+
+        tile = makeBaseQuadTile(ri, 1, 0);
+        levelZoomPlus0.addTile(tile);
+        if (tile != null)
+            tiles.add(tile);
+
+        tile = makeBaseQuadTile(ri, 0, 1);
+        levelZoomPlus0.addTile(tile);
+        if (tile != null)
+            tiles.add(tile);
+
+        tile = makeBaseQuadTile(ri, 1, 1);
+        levelZoomPlus0.addTile(tile);
+        if (tile != null)
+            tiles.add(tile);
 
         if (!suppressWrite) {
-            writeTiles(levelZoomPlus0);
+            writeTiles(tiles, levelZoomPlus0.outputDir());
         }
+
+        return tiles;
     }
 
-    private void generateZoomPlus1Tiles(boolean suppressWrite) {
-        tileZoomIn(levelZoomPlus0, levelZoomPlus1, suppressWrite);
-    }
+    private List<QuadTile> tileZoomIn(List<QuadTile> inTiles, QdLvl destLvl,
+                                      boolean suppressWrite) {
+        List<QuadTile> tiles = new ArrayList<>();
+        QuadTile tile;
 
-    private void generateZoomPlus2Tiles(boolean suppressWrite) {
-        tileZoomIn(levelZoomPlus1, levelZoomPlus2, suppressWrite);
-    }
+        for (QuadTile inTile : inTiles) {
+            tile = makeScaledTile(inTile, 0, 0);
+            destLvl.addTile(tile);
+            if (tile != null)
+                tiles.add(tile);
 
-    private void tileZoomIn(QdLvl input, QdLvl output, boolean suppressWrite) {
-        for (QuadTile tile : input.tiles()) {
-            output.addTile(makeScaledTile(tile, 0, 0));
-            output.addTile(makeScaledTile(tile, 1, 0));
-            output.addTile(makeScaledTile(tile, 0, 1));
-            output.addTile(makeScaledTile(tile, 1, 1));
+            tile = makeScaledTile(inTile, 1, 0);
+            destLvl.addTile(tile);
+            if (tile != null)
+                tiles.add(tile);
+
+            tile = makeScaledTile(inTile, 0, 1);
+            destLvl.addTile(tile);
+            if (tile != null)
+                tiles.add(tile);
+
+            tile = makeScaledTile(inTile, 1, 1);
+            destLvl.addTile(tile);
+            if (tile != null)
+                tiles.add(tile);
+
         }
 
         if (!suppressWrite) {
-            writeTiles(output);
+            writeTiles(tiles, destLvl.outputDir());
         }
+
+        return tiles;
     }
 
 
