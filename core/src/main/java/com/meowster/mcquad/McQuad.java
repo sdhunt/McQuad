@@ -4,6 +4,9 @@
 
 package com.meowster.mcquad;
 
+import java.util.concurrent.TimeUnit;
+
+import static com.meowster.util.StringUtils.EOL;
 import static com.meowster.util.StringUtils.printOut;
 
 /**
@@ -34,6 +37,7 @@ public class McQuad {
         if (parsedArgs.showHelp())
             return 0;
 
+        long started = System.currentTimeMillis();
 
         RegionData regionData;
         try {
@@ -53,9 +57,19 @@ public class McQuad {
         TileRenderer tr = new TileRenderer(quad, parsedArgs.outputDir);
         tr.render();
 
+        long duration = System.currentTimeMillis() - started;
+        printOut(EOL + readableDuration(duration));
+
         done = true;
         printOut("All Done!");
         return 0;
+    }
+
+    private String readableDuration(long ms) {
+        long mins = TimeUnit.MILLISECONDS.toMinutes(ms);
+        long minsAsSecs = TimeUnit.MINUTES.toSeconds(mins);
+        long secs = TimeUnit.MILLISECONDS.toSeconds(ms) - minsAsSecs;
+        return String.format("Duration: %d minutes, %d seconds", mins, secs);
     }
 
     /**

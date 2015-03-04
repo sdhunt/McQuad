@@ -9,6 +9,9 @@ import com.meowster.util.ImageUtils;
 import java.io.File;
 import java.util.List;
 
+import static com.meowster.util.StringUtils.EOL;
+import static com.meowster.util.StringUtils.print;
+
 /**
  * The partially implemented superclass for quad level builders.
  *
@@ -16,9 +19,14 @@ import java.util.List;
  */
 public abstract class QuadLevelBuilder {
 
-    protected static final int BLOCKS_PER_REGION = 512;
     protected static final int BLOCKS_PER_BASE_TILE = 256;
     protected static final Coord ORIGIN = new Coord(0, 0);
+    private static final int MAJOR_TICK = 50;
+    private static final int MINOR_TICK = 10;
+    private static final String MARK = ".";
+    private static final String MAJOR_MARK = "#" + EOL;
+    private static final String MINOR_MARK = "o";
+
 
     protected final File outputDir;
 
@@ -85,4 +93,11 @@ public abstract class QuadLevelBuilder {
         }
         tiles.clear();
     }
+
+    protected void printMark(int i) {
+        print((i % MAJOR_TICK == 0) ? MAJOR_MARK :
+                      (i % MINOR_TICK == 0) ? MINOR_MARK : MARK);
+    }
+
+
 }

@@ -10,7 +10,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.meowster.util.StringUtils.printOut;
+import static com.meowster.util.StringUtils.*;
 
 /**
  * A zoom quad level builder. This implementation knows how to create a quad
@@ -60,6 +60,8 @@ public class ZoomQuadLevelBuilder extends QuadLevelBuilder {
         QuadTile tile;
 
         q.startTracker();
+
+        printOut(String.format(EOL + "Rendering zoom level %d:", q.zoom()));
         for (int a=0; a<dim; a+=2) {
             for (int b=0; b<dim; b+=2) {
                 // get TopLeft, TopRight, BottomLeft, BottomRight tiles
@@ -80,9 +82,13 @@ public class ZoomQuadLevelBuilder extends QuadLevelBuilder {
                 writeTiles(tiles, q.outputDir());
             }
 
+            printMark(a+2);
+
             releaseTiles(tiles);
             tiles.clear();
         }
+
+        print(EOL);
 
         q.stopTracker();
         printOut(q.getStats().toString());

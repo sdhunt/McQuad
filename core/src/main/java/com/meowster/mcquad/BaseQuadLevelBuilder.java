@@ -125,6 +125,11 @@ public class BaseQuadLevelBuilder extends QuadLevelBuilder {
         //  of those up an extra couple of zoom levels
         List<QuadTile> tiles0, tiles1, tiles2;
 
+        printOut(String.format(EOL + "Rendering zoom levels %d, %d, and %d:",
+                               levelZoomPlus0.zoom(),
+                               levelZoomPlus1.zoom(),
+                               levelZoomPlus2.zoom()));
+
         int regionCount = 0;
         for (Region r : quadData.regionData().regions()) {
             regionCount++;
@@ -133,9 +138,7 @@ public class BaseQuadLevelBuilder extends QuadLevelBuilder {
             tiles1 = tileZoomIn(tiles0, levelZoomPlus1, suppressWrite);
             tiles2 = tileZoomIn(tiles1, levelZoomPlus2, suppressWrite);
 
-            print(".");
-            if (regionCount % 20 == 0)
-                print(EOL);
+            printMark(regionCount);
 
             releaseTiles(tiles0);
             releaseTiles(tiles1);
@@ -152,7 +155,6 @@ public class BaseQuadLevelBuilder extends QuadLevelBuilder {
         printOut(levelZoomPlus1.getStats().toString());
         printOut(levelZoomPlus0.getStats().toString());
     }
-
 
     private List<QuadTile> generateZoomPlus0Tiles(Region r, boolean suppressWrite) {
         RegionImageData ri = new RegionImageData(r, regionToQuadDelta);
