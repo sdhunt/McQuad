@@ -4,6 +4,8 @@
 
 package com.meowster.mcquad;
 
+import static com.meowster.util.StringUtils.EOL;
+
 /**
  * Encapsulates data computed for the quad map.
  *
@@ -123,18 +125,18 @@ public class QuadData {
     }
 
     /**
-     * Produces a schematic showing the quad tiling and which regions
-     * have data defined.
+     * Produces a schematic showing how the regions map onto the
+     * quad tiling grid.
      *
      * @return a schematic
      */
     public String schematic() {
         StringBuilder sb = new StringBuilder();
-        for (int z=0; z<quadDim; z++) {
-            for (int x=0; x<quadDim; x++) {
+        for (int z=0; z<quadDim; z+=2) {
+            for (int x=0; x<quadDim; x+=2) {
                 sb.append(charAt(x, z));
             }
-            sb.append("\n");
+            sb.append(EOL);
         }
         return sb.toString();
     }
