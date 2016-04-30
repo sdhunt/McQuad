@@ -23,8 +23,8 @@ default 0xffff00ff  0xff00ffff  0xffffff00
 0x05    0xff82b593  0xff63a277  0xff000efb  # taiga                         242 244
 0x06    0xff547a5a  0xff587243  0xff5663af  # swampland                      50  71
 0x07    0xff8eb971  0xff71a74d  0xff0064e4  # river                         127 191
-#0x08  nether # hell
-#0x09  end  # sky
+# 0x08  nether # hell
+# 0x09  end  # sky
 0x0a    0xff82b593  0xff63a277  0xff000efb  # frozen ocean                  242 244
 0x0b    0xff82b593  0xff63a277  0xff000efb  # frozen river                  242 244
 0x0c    0xff82b593  0xff63a277  0xff000efb  # ice plains                    242 244

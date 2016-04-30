@@ -9,6 +9,10 @@
 # water is flowing, and how much water is in the block. We just care about it
 # being water, and what its color is.
 #
+# Color format is 0xAARRGGBB
+#   when alpha component (AA) is 'ff', the block is fully opaque
+#   when alpha component (AA) is '00', the block is fully transparent
+#
 # The 'default' record is used for block IDs that are not mapped explicitly.
 #
 
