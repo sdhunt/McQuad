@@ -1,0 +1,5 @@
+# notes
+
+xpaw.ru/mcstatus/status.json
+xpaw.ru/mcstatus/
+
