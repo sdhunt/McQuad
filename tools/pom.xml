@@ -13,18 +13,20 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>mcquad-web</artifactId>
-    <packaging>war</packaging>
+    <artifactId>mcquad-tools</artifactId>
+    <packaging>jar</packaging>
 
-    <name>McQuad Web Module</name>
-    <description>Generates the mapping web page</description>
+    <name>McQuad Tools Module</name>
+    <description>Builds and packages tool scripts</description>
 
     <dependencies>
+<!--
         <dependency>
             <groupId>com.meowster</groupId>
             <artifactId>mcquad-core</artifactId>
             <version>1.1.0-SNAPSHOT</version>
         </dependency>
+-->
     </dependencies>
 
     <build>

@@ -23,6 +23,7 @@
     <modules>
         <module>core</module>
         <module>web</module>
+        <module>tools</module>
     </modules>
 
     <url>http://meowster.com/</url>

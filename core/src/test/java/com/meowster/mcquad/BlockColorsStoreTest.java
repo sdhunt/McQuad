@@ -32,7 +32,7 @@ public class BlockColorsStoreTest extends AbstractTest {
     public void basic() {
         title("basic");
         print(store);
-        assertEquals(AM_UXS, 438, store.size());
+        assertEquals(AM_UXS, 487, store.size());
     }
 
     @Test
@@ -41,7 +41,13 @@ public class BlockColorsStoreTest extends AbstractTest {
         Iterator<Record> iter = store.getRecords().iterator();
         checkIdDv(iter.next(), -1);
         checkIdDv(iter.next(), 0);
-        checkIdDv(iter.next(), 1);
+        checkIdDv(iter.next(), 1, 0);
+        checkIdDv(iter.next(), 1, 1);
+        checkIdDv(iter.next(), 1, 2);
+        checkIdDv(iter.next(), 1, 3);
+        checkIdDv(iter.next(), 1, 4);
+        checkIdDv(iter.next(), 1, 5);
+        checkIdDv(iter.next(), 1, 6);
         checkIdDv(iter.next(), 2);
         checkIdDv(iter.next(), 3, 0);
         checkIdDv(iter.next(), 3, 1);
@@ -50,6 +56,9 @@ public class BlockColorsStoreTest extends AbstractTest {
         checkIdDv(iter.next(), 5, 0);
         checkIdDv(iter.next(), 5, 1);
         checkIdDv(iter.next(), 5, 2);
+        checkIdDv(iter.next(), 5, 3);
+        checkIdDv(iter.next(), 5, 4);
+        checkIdDv(iter.next(), 5, 5);
     }
 
     private void checkIdDv(Record rec, int id) {
