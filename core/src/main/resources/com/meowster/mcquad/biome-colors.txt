@@ -6,6 +6,10 @@
 #
 # TODO: discover significance of the two numbers at the end of each record
 #
+# Color format is 0xAARRGGBB
+#   when alpha component (AA) is 'ff', the block is fully opaque
+#   when alpha component (AA) is '00', the block is fully transparent
+#
 # The 'default' record is used for biome IDs that are not mapped explicitly.
 #
 # Block colors marked to be influenced by biome_grass, biome_foliage,
