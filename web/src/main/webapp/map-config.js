@@ -1,0 +1,3 @@
+McQuad = {
+  maxZoom: 6
+};

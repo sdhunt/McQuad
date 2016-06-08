@@ -1,0 +1,39 @@
+{
+    "type": "FeatureCollection",
+    "features" : [
+        {
+            "type": "Feature",
+            "id": "Jn-Lisa",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [2.0, 2.055],
+                "properties": {
+                    "loc" : "a",
+                    "title": "Lisa's Halt"
+                }
+            }
+        }, {
+            "type": "Feature",
+            "id": "Calib_0_0",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [90.025, 40.96],
+                "properties": {
+                    "loc" : "a",
+                    "title": "(0, 0) - Origin"
+                }
+            }
+        }, {
+            "type": "Feature",
+            "id": "Calib_0_40",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [91.785, 40.96],
+                "properties": {
+                    "loc" : "a",
+                    "title": "(0, 40)"
+                }
+            }
+        }
+    ]
+}

@@ -15,9 +15,9 @@ html, body {
 
 #mast {
     background-color: #422;
-    color: #ce5b58;
+    color: white;
     padding: 6px 12px;
-    height: 64px;
+    height: 40px;
 }
 
 .headdiv {
@@ -26,22 +26,8 @@ html, body {
     padding: 2px;
 }
 
-#mast-title.headdiv {
-    font-size: 18pt;
-    top: 16px;
-    left: 90px;
-    position: absolute;
-}
-
-#mast-version.headdiv {
-    font-size: 11pt;
-    top: 42px;
-    left: 90px;
-    position: absolute;
-}
-
 #map {
-    height: 90%;
+    height: 92%;
     margin: 10px;
     border: 3px solid #644;
     background-color: #114;
