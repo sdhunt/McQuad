@@ -58,6 +58,15 @@ public class OutputUtils {
     }
 
     /**
+     * Returns the root output directory.
+     *
+     * @return root directory
+     */
+    public File rootDir() {
+        return outputDir;
+    }
+
+    /**
      * Returns a reference to the aux directory.
      *
      * @return aux directory

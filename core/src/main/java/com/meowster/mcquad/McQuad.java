@@ -6,7 +6,9 @@ package com.meowster.mcquad;
 
 import java.util.concurrent.TimeUnit;
 
-import static com.meowster.util.StringUtils.*;
+import static com.meowster.util.StringUtils.EOL;
+import static com.meowster.util.StringUtils.print;
+import static com.meowster.util.StringUtils.printOut;
 
 /**
  * Main class for creating a QuadTiles Map from a Minecraft region DB.
@@ -66,6 +68,9 @@ public class McQuad {
         printOut(quad);
         print(EOL);
         printOut(quad.schematic());
+
+        // Parameterize the Javascript
+        new ParameterizedJs(outputUtils.rootDir(), quad.maxZoom() + 1);
 
         printOut("Regions to process: " + regionData.regions().size());
 
