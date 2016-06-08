@@ -26,28 +26,20 @@
     <div id="mast-version" class="headdiv">
             Version 1.1b
     </div>
-    <div class="headdiv"></div>
-    <!--
-                <div class="headdiv">
-                    [x] button
-                </div>
-                <div class="headdiv">
-                    [x] button
-                </div>
-    -->
 </div>
 <div id="map"></div>
 
 <script type="text/javascript">
-    var tileUrl = 'tiles/z{Z}/t.{X}/{Y}.png',
+    var tileUrl = 'tiles/z{Z}/t.{X}.{Y}.png',
         po = org.polymaps,
-        svg = document.getElementById("map").appendChild(po.svg('svg')),
+        svg = document.getElementById('map').appendChild(po.svg('svg')),
         map = po.map()
                 .container(svg)
-                .center({"lat": 0.0, "lon": 0.0})
-                .zoom(1).zoomRange([1, McQuad.maxZoom])
+                .center({'lat': 0.0, 'lon': 0.0})
+                .zoom(1)
+                .zoomRange([1, McQuad.maxZoom])
                 .tileSize({x: 256, y: 256})
-                .add(po.image().url(po.url("tiles/z{Z}/t.{X}.{Y}.png")))
+                .add(po.image().url(po.url(tileUrl)))
                 .add(po.interact());
 </script>
 </body>
