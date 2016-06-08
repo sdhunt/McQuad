@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Meowster.com
+ * Copyright (c) 2014-2016 Meowster.com
  */
 
 package com.meowster.mcquad;
@@ -16,12 +16,14 @@ import static com.meowster.util.StringUtils.*;
 public class McQuad {
 
     private final ParsedArgs parsedArgs;
+    private final OutputUtils outputUtils;
 
     private boolean done;
 
     // package private for unit tests access too.
     McQuad(ParsedArgs parsedArgs) {
         this.parsedArgs = parsedArgs;
+        outputUtils = new OutputUtils(parsedArgs.outputDir);
     }
 
     /**
@@ -49,6 +51,17 @@ public class McQuad {
             return 1;
         }
 
+        // At this point we have created a region model for the world.
+
+        // We need to load region metadata information, so we know which
+        //  regions have been modified since last we generated the tiles.
+        RegionCachedMetaData meta =
+                RegionCachedMetaData.load(outputUtils.metaDir());
+        printOut(meta);
+        // TODO: once we have this, need to pass it to tile renderer
+
+        // Now we need to project the regions into a Quad format.
+
         QuadData quad = new QuadData(regionData);
         printOut(quad);
         print(EOL);
@@ -56,7 +69,7 @@ public class McQuad {
 
         printOut("Regions to process: " + regionData.regions().size());
 
-        TileRenderer tr = new TileRenderer(quad, parsedArgs.outputDir);
+        TileRenderer tr = new TileRenderer(quad, outputUtils.tilesDir());
         tr.render();
 
         long duration = System.currentTimeMillis() - started;

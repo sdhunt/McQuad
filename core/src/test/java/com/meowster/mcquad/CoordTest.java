@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Meowster.com
+ * Copyright (c) 2014-2016 Meowster.com
  */
 
 package com.meowster.mcquad;
@@ -7,7 +7,9 @@ package com.meowster.mcquad;
 import com.meowster.test.AbstractTest;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotSame;
 
 /**
  * Unit tests for {@link com.meowster.mcquad.Coord}.
@@ -54,4 +56,27 @@ public class CoordTest extends AbstractTest {
         assertEquals(AM_NEQ, -3, c2.z());
     }
 
+    @Test
+    public void fromString() {
+        title("fromString");
+        c = Coord.coord("[1, 2]");
+        print(c);
+        assertEquals(AM_NEQ, 1, c.x());
+        assertEquals(AM_NEQ, 2, c.z());
+    }
+
+    @Test
+    public void fromStringNeg() {
+        title("fromStringNeg");
+        c = Coord.coord("[-3,-5]");
+        print(c);
+        assertEquals(AM_NEQ, -3, c.x());
+        assertEquals(AM_NEQ, -5, c.z());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void fromStringBad() {
+        title("fromStringBad");
+        Coord.coord("bad");
+    }
 }

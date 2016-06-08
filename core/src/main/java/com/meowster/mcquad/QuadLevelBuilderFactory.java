@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Meowster.com
+ * Copyright (c) 2014-2016 Meowster.com
  */
 
 package com.meowster.mcquad;
@@ -13,10 +13,10 @@ import java.io.File;
  */
 public class QuadLevelBuilderFactory {
 
-    private final File outputDir;
+    private final File tileDir;
 
-    public QuadLevelBuilderFactory(File outputDir) {
-        this.outputDir = outputDir;
+    public QuadLevelBuilderFactory(File tileDir) {
+        this.tileDir = tileDir;
     }
 
     /**
@@ -27,7 +27,7 @@ public class QuadLevelBuilderFactory {
      * @return a quad level builder
      */
     public QuadLevelBuilder createBuilder(QuadData quadData) {
-        return new BaseQuadLevelBuilder(outputDir, quadData);
+        return new BaseQuadLevelBuilder(tileDir, quadData);
     }
 
     /**
@@ -38,6 +38,6 @@ public class QuadLevelBuilderFactory {
      * @return a builder for the level (zoom factor Z-1)
      */
     public QuadLevelBuilder createBuilder(QuadLevel level) {
-        return new ZoomQuadLevelBuilder(outputDir, level);
+        return new ZoomQuadLevelBuilder(tileDir, level);
     }
 }

@@ -1,13 +1,20 @@
 /*
- * Copyright (c) 2014 Meowster.com
+ * Copyright (c) 2014-2016 Meowster.com
  */
 
 package com.meowster.mcquad;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * An immutable class that combines x and z coordinates into a single key.
  */
 public class Coord {
+
+    private static final Pattern RE_COORD =
+            Pattern.compile("\\[(-?\\d+),\\s*(-?\\d+)\\]");
+
     private final int x;
     private final int z;
 
@@ -38,7 +45,7 @@ public class Coord {
 
     @Override
     public int hashCode() {
-        return  31 * x + z;
+        return 31 * x + z;
     }
 
     /**
@@ -88,5 +95,26 @@ public class Coord {
      */
     public Coord div2() {
         return new Coord(x / 2, z / 2);
+    }
+
+    /**
+     * Parses the given string, expected to be of the form:
+     * <pre>
+     *     [ {x}, {z} ]
+     * </pre>
+     * where {x} and {z} are integers.
+     *
+     * @param s string to parse
+     * @return corresponding coordinates instance
+     * @throws IllegalArgumentException if string is not parsable
+     */
+    public static Coord coord(String s) {
+        Matcher m = RE_COORD.matcher(s);
+        if (m.matches()) {
+            int x = Integer.valueOf(m.group(1));
+            int z = Integer.valueOf(m.group(2));
+            return new Coord(x, z);
+        }
+        throw new IllegalArgumentException("Unable to parse coords: " + s);
     }
 }

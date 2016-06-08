@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Meowster.com
+ * Copyright (c) 2014-2016 Meowster.com
  */
 
 package com.meowster.mcquad;
@@ -23,7 +23,7 @@ public class TileRenderer {
     private static final String HEADER_LINE = "----------------------";
 
     private final QuadData quadData;
-    private final File outputDir;
+    private final File tilesDir;
     private final QuadLevelBuilderFactory factory;
 
 
@@ -31,16 +31,16 @@ public class TileRenderer {
 
 
     /**
-     * Creates a tile renderer for the specified quad data, with the given
-     * biome and block color databases.
+     * Creates a tile renderer for the specified quad data, creating tiles
+     * under the given directory.
      *
      * @param quadData the quad data
-     * @param outputDir the output directory
+     * @param tilesDir the tiles output directory
      */
-    public TileRenderer(QuadData quadData, File outputDir) {
+    public TileRenderer(QuadData quadData, File tilesDir) {
         this.quadData = quadData;
-        this.outputDir = outputDir;
-        factory = new QuadLevelBuilderFactory(outputDir);
+        this.tilesDir = tilesDir;
+        factory = new QuadLevelBuilderFactory(tilesDir);
     }
 
     /**
@@ -72,8 +72,8 @@ public class TileRenderer {
         // For now we'll blow everything away and create all tiles.
         // An enhancement is to only write out tiles that have changed,
         // based on the modification date of the region files.
-        PathUtils.deleteTree(outputDir);
-        PathUtils.makeDir(outputDir);
+        PathUtils.deleteTree(tilesDir);
+        PathUtils.makeDir(tilesDir);
     }
 
     /**

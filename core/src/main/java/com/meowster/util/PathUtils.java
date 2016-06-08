@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Meowster.com
+ * Copyright (c) 2014-2016 Meowster.com
  */
 
 package com.meowster.util;
@@ -59,4 +59,18 @@ public class PathUtils {
         return dir;
     }
 
+    /**
+     * Tests the given path and attempts to create a directory if
+     * one does not already exist yet.
+     *
+     * @param path directory path
+     * @return true if a directory was created, false if already present
+     */
+    public static boolean createIfNeedBe(File path) {
+        if (path.exists()) {
+            return false;
+        }
+        makeDir(path);
+        return true;
+    }
 }
