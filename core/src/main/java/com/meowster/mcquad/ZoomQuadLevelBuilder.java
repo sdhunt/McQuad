@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Meowster.com
+ * Copyright (c) 2014-2016 Meowster.com
  */
 
 package com.meowster.mcquad;
@@ -10,7 +10,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.meowster.util.StringUtils.*;
+import static com.meowster.util.StringUtils.EOL;
+import static com.meowster.util.StringUtils.print;
+import static com.meowster.util.StringUtils.printOut;
 
 /**
  * A zoom quad level builder. This implementation knows how to create a quad
@@ -27,7 +29,7 @@ public class ZoomQuadLevelBuilder extends QuadLevelBuilder {
      * Constructs a zoom quad level builder.
      *
      * @param outputDir the top level output directory
-     * @param level the source level
+     * @param level     the source level
      */
     public ZoomQuadLevelBuilder(File outputDir, QuadLevel level) {
         super(outputDir);
@@ -41,12 +43,12 @@ public class ZoomQuadLevelBuilder extends QuadLevelBuilder {
         q.setBlocksPerTileSide(sourceLevel.blocksPerTileSide() * 2);
         q.setOriginTile(sourceLevel.originTile().div2());
         q.setOriginDisplace(ORIGIN);    // TODO: review
-        q.setOutputDir(new File(outputDir, q.name()));
+        q.setOutputDir(new File(tilesDir, q.name()));
     }
 
     @Override
     public void createDirectory() {
-        PathUtils.makeDir(outputDir, q.name());
+        PathUtils.createIfNeedBe(tilesDir, q.name());
     }
 
     @Override
@@ -62,13 +64,13 @@ public class ZoomQuadLevelBuilder extends QuadLevelBuilder {
         q.startTracker();
 
         printOut(String.format(EOL + "Rendering zoom level %d:", q.zoom()));
-        for (int a=0; a<dim; a+=2) {
-            for (int b=0; b<dim; b+=2) {
+        for (int a = 0; a < dim; a += 2) {
+            for (int b = 0; b < dim; b += 2) {
                 // get TopLeft, TopRight, BottomLeft, BottomRight tiles
                 QuadTile tl = sourceLevel.at(a, b);
-                QuadTile tr = sourceLevel.at(a+1, b);
-                QuadTile bl = sourceLevel.at(a, b+1);
-                QuadTile br = sourceLevel.at(a+1, b+1);
+                QuadTile tr = sourceLevel.at(a + 1, b);
+                QuadTile bl = sourceLevel.at(a, b + 1);
+                QuadTile br = sourceLevel.at(a + 1, b + 1);
                 // generate new tile from the 4 input tiles (zoom out 1 level)
                 tile = mergeTiles(a, b, tl, tr, bl, br);
                 q.addTile(tile);
@@ -82,7 +84,7 @@ public class ZoomQuadLevelBuilder extends QuadLevelBuilder {
                 writeTiles(tiles, q.outputDir());
             }
 
-            printMark(a+2);
+            printMark(a + 2);
 
             releaseTiles(tiles);
             tiles.clear();

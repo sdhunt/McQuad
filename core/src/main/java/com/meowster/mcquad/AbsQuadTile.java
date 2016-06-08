@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Meowster.com
+ * Copyright (c) 2014-2016 Meowster.com
  */
 
 package com.meowster.mcquad;
@@ -10,19 +10,20 @@ import java.io.File;
 import java.io.IOException;
 
 /**
-* Abstract base class of a quad tile implementation.
-*
-* @author Simon Hunt
-*/
+ * Abstract base class of a quad tile implementation.
+ *
+ * @author Simon Hunt
+ */
 abstract class AbsQuadTile implements QuadTile {
 
+    private static final String SUBDIR_PREFIX = "x";
     private static final String FILE_PREFIX = "t.";
-    private static final String DOT = ".";
     private static final String FILE_SUFFIX = ".png";
 
     protected Coord coord;
     protected BufferedImage image;
-    protected File onDisk;
+
+    private File onDisk;
 
     @Override
     public BufferedImage image() {
@@ -40,8 +41,13 @@ abstract class AbsQuadTile implements QuadTile {
     }
 
     @Override
-    public String pngName() {
-        return FILE_PREFIX + coord.x() + DOT + coord.z() + FILE_SUFFIX;
+    public String xDirName() {
+        return SUBDIR_PREFIX + coord.x();
+    }
+
+    @Override
+    public String zPngName() {
+        return FILE_PREFIX + coord.z() + FILE_SUFFIX;
     }
 
     @Override

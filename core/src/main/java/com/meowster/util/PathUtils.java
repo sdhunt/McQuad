@@ -29,7 +29,7 @@ public class PathUtils {
         if (path.isDirectory()) {
             File[] files = path.listFiles();
             if (files != null)
-                for (File f: files)
+                for (File f : files)
                     result = result && deleteTree(f);
         }
         return result && path.delete();
@@ -46,20 +46,6 @@ public class PathUtils {
     }
 
     /**
-     * Creates a subdirectory in the specified directory.
-     *
-     * @param path the directory path
-     * @param child the name of the subdirectory
-     * @return the newly made directory
-     */
-    public static File makeDir(File path, String child) {
-        File dir = new File(path, child);
-        if (!dir.mkdir())
-            printErr("Failed to create output directory: {}", dir);
-        return dir;
-    }
-
-    /**
      * Tests the given path and attempts to create a directory if
      * one does not already exist yet.
      *
@@ -71,6 +57,23 @@ public class PathUtils {
             return false;
         }
         makeDir(path);
+        return true;
+    }
+
+    /**
+     * Tests the given path (subdirectory) and attempts to create a directory
+     * if one does not already exist yet.
+     *
+     * @param path  directory path
+     * @param child the name of the subdirectory
+     * @return true if a directory was created, false if already present
+     */
+    public static boolean createIfNeedBe(File path, String child) {
+        File sub = new File(path, child);
+        if (sub.exists()) {
+            return false;
+        }
+        makeDir(sub);
         return true;
     }
 }

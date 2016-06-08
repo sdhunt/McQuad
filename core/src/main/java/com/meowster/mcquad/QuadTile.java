@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Meowster.com
+ * Copyright (c) 2014-2016 Meowster.com
  */
 
 package com.meowster.mcquad;
@@ -40,11 +40,18 @@ public interface QuadTile {
     void releaseResources();
 
     /**
-     * Return the file name for the tile image.
+     * Returns the name of the subdirectory for the x-coord of the tile.
+     *
+     * @return x subdirectory name
+     */
+    String xDirName();
+
+    /**
+     * Returns the file name for the tile image (containing the z-coord).
      *
      * @return the file name for the tile
      */
-    String pngName();
+    String zPngName();
 
     /**
      * Sets the image file location.
@@ -59,4 +66,5 @@ public interface QuadTile {
      * @return the tile image
      */
     BufferedImage loadImageFromDisk() throws IOException;
+
 }

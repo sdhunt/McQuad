@@ -129,7 +129,7 @@ class QuadLevelBuilderOld {
     }
 
     private void writeTileImageToDisk(QuadLevel ql, QuadTile qtile) {
-        File pngFile = new File(ql.outputDir(), qtile.pngName());
+        File pngFile = new File(ql.outputDir(), qtile.zPngName());
         qtile.setLocationOnDisk(pngFile);
         ImageUtils.writeImageToDisk(qtile.image(), pngFile);
     }

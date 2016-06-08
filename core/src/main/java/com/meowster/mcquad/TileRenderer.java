@@ -19,7 +19,7 @@ import static com.meowster.util.StringUtils.EOL;
  * @author Simon Hunt
  */
 public class TileRenderer {
-    private static final String HEADER      = "Tile Generation Report";
+    private static final String HEADER = "Tile Generation Report";
     private static final String HEADER_LINE = "----------------------";
 
     private final QuadData quadData;
@@ -48,7 +48,7 @@ public class TileRenderer {
      */
     public void render() {
         // first, the top level directory, in which we place the zoom dirs.
-        prepareOutputDirectory();
+        PathUtils.createIfNeedBe(tilesDir);
 
         QuadLevelBuilder builder = factory.createBuilder(quadData);
         builder.prepare();
@@ -68,14 +68,6 @@ public class TileRenderer {
         }
     }
 
-    private void prepareOutputDirectory() {
-        // For now we'll blow everything away and create all tiles.
-        // An enhancement is to only write out tiles that have changed,
-        // based on the modification date of the region files.
-        PathUtils.deleteTree(tilesDir);
-        PathUtils.makeDir(tilesDir);
-    }
-
     /**
      * Returns a string detailing information about the rendering process.
      *
@@ -83,7 +75,7 @@ public class TileRenderer {
      */
     public String report() {
         StringBuilder sb = new StringBuilder(reportHeader());
-        for (LevelStats s: stats) {
+        for (LevelStats s : stats) {
             sb.append(s).append(EOL);
         }
         sb.append("<end of report summary>").append(EOL);

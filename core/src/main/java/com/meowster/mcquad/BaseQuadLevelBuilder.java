@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Meowster.com
+ * Copyright (c) 2014-2016 Meowster.com
  */
 
 package com.meowster.mcquad;
@@ -11,7 +11,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.meowster.util.StringUtils.*;
+import static com.meowster.util.StringUtils.EOL;
+import static com.meowster.util.StringUtils.print;
+import static com.meowster.util.StringUtils.printOut;
 import static java.awt.image.BufferedImage.TYPE_INT_ARGB;
 
 /**
@@ -36,11 +38,11 @@ public class BaseQuadLevelBuilder extends QuadLevelBuilder {
     /**
      * Constructs a base quad level builder.
      *
-     * @param outputDir the top level output directory
+     * @param tilesDir the top level tiles output directory
      * @param quadData the source data
      */
-    public BaseQuadLevelBuilder(File outputDir, QuadData quadData) {
-        super(outputDir);
+    public BaseQuadLevelBuilder(File tilesDir, QuadData quadData) {
+        super(tilesDir);
         this.quadData = quadData;
         regionToQuadDelta = quadData.calibration().negation();
     }
@@ -76,15 +78,15 @@ public class BaseQuadLevelBuilder extends QuadLevelBuilder {
         q.setBlocksPerTileSide(blkPerTile);
         q.setOriginTile(rqDelta);
         q.setOriginDisplace(ORIGIN);   // TODO: review
-        q.setOutputDir(new File(outputDir, q.name()));
+        q.setOutputDir(new File(tilesDir, q.name()));
         return q;
     }
 
     @Override
     public void createDirectory() {
-        PathUtils.makeDir(outputDir, levelZoomPlus0.name());
-        PathUtils.makeDir(outputDir, levelZoomPlus1.name());
-        PathUtils.makeDir(outputDir, levelZoomPlus2.name());
+        PathUtils.createIfNeedBe(tilesDir, levelZoomPlus0.name());
+        PathUtils.createIfNeedBe(tilesDir, levelZoomPlus1.name());
+        PathUtils.createIfNeedBe(tilesDir, levelZoomPlus2.name());
     }
 
     @Override
@@ -126,9 +128,9 @@ public class BaseQuadLevelBuilder extends QuadLevelBuilder {
         List<QuadTile> tiles0, tiles1, tiles2;
 
         printOut(String.format(EOL + "Rendering zoom levels %d, %d, and %d:",
-                               levelZoomPlus0.zoom(),
-                               levelZoomPlus1.zoom(),
-                               levelZoomPlus2.zoom()));
+                levelZoomPlus0.zoom(),
+                levelZoomPlus1.zoom(),
+                levelZoomPlus2.zoom()));
 
         int regionCount = 0;
         for (Region r : quadData.regionData().regions()) {
@@ -266,9 +268,9 @@ public class BaseQuadLevelBuilder extends QuadLevelBuilder {
                 color = src.getRGB(ox + a, oz + b);
                 aggr |= color; // aggregate color
                 bi.setRGB(a2, b2, color);
-                bi.setRGB(a2+1, b2, color);
-                bi.setRGB(a2, b2+1, color);
-                bi.setRGB(a2+1, b2+1, color);
+                bi.setRGB(a2 + 1, b2, color);
+                bi.setRGB(a2, b2 + 1, color);
+                bi.setRGB(a2 + 1, b2 + 1, color);
             }
         }
 
