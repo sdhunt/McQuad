@@ -715,11 +715,11 @@ default     0xffff00ff                  # (magenta)
 #0x00c4      0x00000000                  # acacia door # TODO: color
 #0x00c5      0x00000000                  # dark oak door # TODO: color
 
-#0x00d0      0x00000000                  # grass path # TODO: color
+0x00d0      0xff997e3e                  # grass path
 
-#0x00d8:0x0  0x00000000                  # bone block (u/d)  # TODO: color
-#0x00d8:0x4  0x00000000                  # bone block (e/w)  # TODO: color
-#0x00d8:0x8  0x00000000                  # bone block (n/s)  # TODO: color
+0x00d8:0x0  0xffb3ae91                  # bone block (u/d)
+0x00d8:0x4  0xffe6e3d1                  # bone block (e/w)
+0x00d8:0x8  0xffe6e3d1                  # bone block (n/s)
 
 #0x01b3:0x0  0x00000000                  # beetroot (stage 0)    # TODO: color
 #0x01b3:0x1  0x00000000                  # beetroot (stage 1)    # TODO: color
