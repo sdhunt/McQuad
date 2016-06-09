@@ -43,7 +43,7 @@ default 0xffff00ff  0xff00ffff  0xffffff00
 0x15    0xff53ca37  0xff29bc05  0xff00dcc4  # jungle                          0  25
 0x16    0xff53ca37  0xff29bc05  0xff00dcc4  # jungle hills                    0  25
 0x17    0xff53ca37  0xff29bc05  0xff00dcc4  # jungle edge                     0  25
-0x18    0xff040075  0xff040075  0xff040075  # deep oceans                   127 191
+0x18    0xff040075  0xff040075  0xff0420b5  # deep oceans                   127 191
 0x19    0xff8eb971  0xff71a74d  0xff0064e4  # stone beach                   127 191
 0x1a    0xff8eb971  0xff71a74d  0xff0064e4  # cold beach                    242 244
 0x1b    0xff4b663a  0xff485e30  0xff2b39b2  # birch forest                   76 112
