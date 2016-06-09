@@ -4,11 +4,15 @@
 
 package com.meowster.mcquad;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import static com.meowster.util.StringUtils.EOL;
 import static com.meowster.util.StringUtils.print;
 import static com.meowster.util.StringUtils.printOut;
+import static java.lang.System.currentTimeMillis;
 
 /**
  * Main class for creating a QuadTiles Map from a Minecraft region DB.
@@ -16,6 +20,7 @@ import static com.meowster.util.StringUtils.printOut;
  * @author Simon Hunt
  */
 public class McQuad {
+    private static final int ZOOM_PLUS = 2;
 
     private final ParsedArgs parsedArgs;
     private final OutputUtils outputUtils;
@@ -40,7 +45,7 @@ public class McQuad {
         if (parsedArgs.showHelp())
             return 0;
 
-        long started = System.currentTimeMillis();
+        long started = currentTimeMillis();
 
         RegionData regionData;
         try {
@@ -52,6 +57,7 @@ public class McQuad {
             parsedArgs.printUsage();
             return 1;
         }
+        printOut("Regions to process: " + regionData.regions().size());
 
         // At this point we have created a region model for the world.
 
@@ -69,20 +75,32 @@ public class McQuad {
         print(EOL);
         printOut(quad.schematic());
 
-        // Parameterize the Javascript
-        new ParameterizedJs(outputUtils.rootDir(), quad.maxZoom() + 1);
-
-        printOut("Regions to process: " + regionData.regions().size());
+        new ParameterizedJs(outputUtils.rootDir(), quad.maxZoom() + ZOOM_PLUS);
 
         TileRenderer tr = new TileRenderer(quad, outputUtils.tilesDir());
         tr.render();
 
-        long duration = System.currentTimeMillis() - started;
-        printOut(EOL + readableDuration(duration));
+        printOut(EOL + readableDuration(currentTimeMillis() - started));
+
+        reportDefaultedBlocks();
 
         done = true;
         printOut("All Done!");
         return 0;
+    }
+
+    private void reportDefaultedBlocks() {
+        printOut(EOL + "Defaulted blocks...");
+        List<BlockId> defaulted =
+                new ArrayList<>(BlockColors.BLOCK_DB.getDefaulted());
+        Collections.sort(defaulted);
+        if (defaulted.isEmpty()) {
+            printOut("  (none)");
+        } else {
+            for (BlockId id: defaulted) {
+                printOut("  " + id);
+            }
+        }
     }
 
     private String readableDuration(long ms) {

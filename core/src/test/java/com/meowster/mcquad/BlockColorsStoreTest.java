@@ -32,7 +32,7 @@ public class BlockColorsStoreTest extends AbstractTest {
     public void basic() {
         title("basic");
         print(store);
-        assertEquals(AM_UXS, 487, store.size());
+        assertEquals(AM_UXS, 456, store.size());
     }
 
     @Test

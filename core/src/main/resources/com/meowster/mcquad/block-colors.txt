@@ -21,12 +21,12 @@ default     0xffff00ff                  # (magenta)
 0x0000      0x00000000                  # air
 
 0x0001:0x0  0xff7d7d7d                  # stone
-0x0001:0x1  0xff7d7d7d                  # granite           // TODO : color
-0x0001:0x2  0xff7d7d7d                  # polished granite  // TODO : color
-0x0001:0x3  0xff7d7d7d                  # diorite           // TODO : color
-0x0001:0x4  0xff7d7d7d                  # polished diorite  // TODO : color
-0x0001:0x5  0xff7d7d7d                  # andesite          // TODO : color
-0x0001:0x6  0xff7d7d7d                  # polished andesite // TODO : color
+0x0001:0x1  0xff8c5f4e                  # granite
+0x0001:0x2  0xffa06e5b                  # polished granite
+0x0001:0x3  0xffb1b1b4                  # diorite
+0x0001:0x4  0xffdcdcd8                  # polished diorite
+0x0001:0x5  0xff767678                  # andesite
+0x0001:0x6  0xff828587                  # polished andesite
 
 0x0002      0xff939393  biome_grass     # grass block
 
@@ -147,7 +147,7 @@ default     0xffff00ff                  # (magenta)
 
 0x0021      0xff998159                  # piston
 
-0x0022      0xff998159                  # piston head # TODO: color
+#0x0022      0xff998159                  # piston head # TODO: color
 
 0x0023:0x0  0xffdddddd                  # white wool
 0x0023:0x1  0xffdb7d3e                  # orange wool
@@ -166,7 +166,7 @@ default     0xffff00ff                  # (magenta)
 0x0023:0xe  0xff963430                  # red wool
 0x0023:0xf  0xff191616                  # black wool
 
-0x0024      0xff998159                  # piston extension  #TODO: Color
+#0x0024      0xff998159                  # piston extension  #TODO: Color
 
 0x0025      0x1e6ca200                  # dandelion
 
@@ -313,7 +313,7 @@ default     0xffff00ff                  # (magenta)
 
 0x0054      0xff6b4937                  # jukebox
 
-0x0055      0x8f463822                  # fence
+0x0055      0x8f463822                  # oak fence
 
 0x0056      0xffc07615                  # pumpkin
 
@@ -380,7 +380,7 @@ default     0xffff00ff                  # (magenta)
 
 0x006a      0x8a6f6f6f  biome_foliage   # vines
 
-0x006b      0x7b463822                  # fence gate
+0x006b      0x7b463822                  # oak fence gate
 
 0x006c      0xff926356                  # brick stairs
 
@@ -479,19 +479,19 @@ default     0xffff00ff                  # (magenta)
 0x008b:0x1  0xff7a7a7a                  # mossy cobblestone wall
 
 0x008c:0x0  0x31764133                  # flower pot - empty
-0x008c:0x1  0x31764133                  # flower pot - poppy #TODO: color
-0x008c:0x2  0x31764133                  # flower pot - dandelion #TODO: color
-0x008c:0x3  0x31764133                  # flower pot - oak sapling #TODO: color
-0x008c:0x4  0x31764133                  # flower pot - spruce sapling #TODO: color
-0x008c:0x5  0x31764133                  # flower pot - birch sapling #TODO: color
-0x008c:0x6  0x31764133                  # flower pot - jungle sapling #TODO: color
-0x008c:0x7  0x31764133                  # flower pot - red mushroom #TODO: color
-0x008c:0x8  0x31764133                  # flower pot - brown mushroom #TODO: color
-0x008c:0x9  0x31764133                  # flower pot - cactus #TODO: color
-0x008c:0xa  0x31764133                  # flower pot - dead bush #TODO: color
-0x008c:0xb  0x31764133                  # flower pot - fern #TODO: color
-0x008c:0xc  0x31764133                  # flower pot - acacia sapling #TODO: color
-0x008c:0xd  0x31764133                  # flower pot - dark oak sapling #TODO: color
+#0x008c:0x1  0x31764133                  # flower pot - poppy #TODO: color
+#0x008c:0x2  0x31764133                  # flower pot - dandelion #TODO: color
+#0x008c:0x3  0x31764133                  # flower pot - oak sapling #TODO: color
+#0x008c:0x4  0x31764133                  # flower pot - spruce sapling #TODO: color
+#0x008c:0x5  0x31764133                  # flower pot - birch sapling #TODO: color
+#0x008c:0x6  0x31764133                  # flower pot - jungle sapling #TODO: color
+#0x008c:0x7  0x31764133                  # flower pot - red mushroom #TODO: color
+#0x008c:0x8  0x31764133                  # flower pot - brown mushroom #TODO: color
+#0x008c:0x9  0x31764133                  # flower pot - cactus #TODO: color
+#0x008c:0xa  0x31764133                  # flower pot - dead bush #TODO: color
+#0x008c:0xb  0x31764133                  # flower pot - fern #TODO: color
+#0x008c:0xc  0x31764133                  # flower pot - acacia sapling #TODO: color
+#0x008c:0xd  0x31764133                  # flower pot - dark oak sapling #TODO: color
 
 0x008d:0x0  0x0901ab10                  # carrots (stage 0,1)
 0x008d:0x1  0x0901ab10                  # carrots (stage 0,1)
@@ -621,17 +621,17 @@ default     0xffff00ff                  # (magenta)
 
 0x00a4      0xff3e2813                  # dark oak stairs
 
-0x00a5      0xffff00ff                  # slime block # TODO : color
+0x00a5      0xc06eb65c                  # slime block
 
-0x00a6      0xffff00ff                  # barrier # TODO: color
+#0x00a6      0xffff00ff                  # barrier # TODO: color
 
-0x00a7      0xffff00ff                  # iron trapdoor # TODO: color
+#0x00a7      0xffff00ff                  # iron trapdoor # TODO: color
 
-0x00a8:0x0  0xffff00ff                  # prismarine # TODO: color
-0x00a8:0x1  0xffff00ff                  # prismarine bricks # TODO: color
-0x00a8:0x2  0xffff00ff                  # dark prismarine # TODO: color
+#0x00a8:0x0  0xffff00ff                  # prismarine # TODO: color
+#0x00a8:0x1  0xffff00ff                  # prismarine bricks # TODO: color
+#0x00a8:0x2  0xffff00ff                  # dark prismarine # TODO: color
 
-0x00a9      0xffff00ff                  # sea lantern # TODO: color
+#0x00a9      0xffff00ff                  # sea lantern # TODO: color
 
 0x00aa      0xffa68c0f                  # hay block
 
@@ -689,38 +689,38 @@ default     0xffff00ff                  # (magenta)
 
 0x00b6      0xffac5b22                  # red sandstone slab
 
-0x00b7      0x00000000                  # spruce fence gate         # TODO: color
+0x00b7      0x7b332617                  # spruce fence gate
 
-0x00b8      0x00000000                  # birch fence gate         # TODO: color
+0x00b8      0x7b61593d                  # birch fence gate
 
-0x00b9      0x00000000                  # jungle fence gate         # TODO: color
+0x00b9      0x7b4d3726                  # jungle fence gate
 
-0x00ba      0x00000000                  # dark oak fence gate         # TODO: color
+0x00ba      0x7b1f1409                  # dark oak fence gate
 
-0x00bb      0x00000000                  # acacia fence gate         # TODO: color
+0x00bb      0x7b562e19                  # acacia fence gate
 
-0x00bc      0x00000000                  # spruce fence          # TODO: color
+0x00bc      0x8f332617                  # spruce fence
 
-0x00bd      0x00000000                  # birch fence          # TODO: color
+0x00bd      0x8f61593d                  # birch fence
 
-0x00be      0x00000000                  # jungle fence          # TODO: color
+0x00be      0x8f4d3726                  # jungle fence
 
-0x00bf      0x00000000                  # dark oak fence          # TODO: color
+0x00bf      0x8f1f1409                  # dark oak fence
 
-0x00c0      0x00000000                  # acacia fence          # TODO: color
+0x00c0      0x8f562e19                  # acacia fence
 
-0x00c1      0x00000000                  # spruce door # TODO: color
-0x00c2      0x00000000                  # birch door # TODO: color
-0x00c3      0x00000000                  # jungle door # TODO: color
-0x00c4      0x00000000                  # acacia door # TODO: color
-0x00c5      0x00000000                  # dark oak door # TODO: color
+#0x00c1      0x00000000                  # spruce door # TODO: color
+#0x00c2      0x00000000                  # birch door # TODO: color
+#0x00c3      0x00000000                  # jungle door # TODO: color
+#0x00c4      0x00000000                  # acacia door # TODO: color
+#0x00c5      0x00000000                  # dark oak door # TODO: color
 
-0x00d0      0x00000000                  # grass path # TODO: color
+#0x00d0      0x00000000                  # grass path # TODO: color
 
-0x01b3:0x0  0x00000000                  # beetroot (stage 0)    # TODO: color
-0x01b3:0x1  0x00000000                  # beetroot (stage 1)    # TODO: color
-0x01b3:0x2  0x00000000                  # beetroot (stage 2)    # TODO: color
-0x01b3:0x3  0x00000000                  # beetroot (fully grown)    # TODO: color
+#0x01b3:0x0  0x00000000                  # beetroot (stage 0)    # TODO: color
+#0x01b3:0x1  0x00000000                  # beetroot (stage 1)    # TODO: color
+#0x01b3:0x2  0x00000000                  # beetroot (stage 2)    # TODO: color
+#0x01b3:0x3  0x00000000                  # beetroot (fully grown)    # TODO: color
 
 
 ## end of file ##
