@@ -15,8 +15,8 @@ public class QuadLevelBuilderFactory {
 
     private final File tileDir;
 
-    public QuadLevelBuilderFactory(File tileDir) {
-        this.tileDir = tileDir;
+    public QuadLevelBuilderFactory(File tilesDir) {
+        this.tileDir = tilesDir;
     }
 
     /**

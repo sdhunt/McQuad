@@ -29,11 +29,11 @@ public class ZoomQuadLevelBuilder extends QuadLevelBuilder {
     /**
      * Constructs a zoom quad level builder.
      *
-     * @param outputDir the top level output directory
-     * @param level     the source level
+     * @param tilesDir the top level tiles output directory
+     * @param level    the source level
      */
-    public ZoomQuadLevelBuilder(File outputDir, QuadLevel level) {
-        super(outputDir);
+    public ZoomQuadLevelBuilder(File tilesDir, QuadLevel level) {
+        super(tilesDir);
         this.sourceLevel = level;
     }
 
@@ -75,10 +75,10 @@ public class ZoomQuadLevelBuilder extends QuadLevelBuilder {
                 }
 
                 // get TopLeft, TopRight, BottomLeft, BottomRight tiles
-                QuadTile tl = sourceLevel.at(a, b);
-                QuadTile tr = sourceLevel.at(a + 1, b);
-                QuadTile bl = sourceLevel.at(a, b + 1);
-                QuadTile br = sourceLevel.at(a + 1, b + 1);
+                QuadTile tl = gimmeATile(a, b);
+                QuadTile tr = gimmeATile(a + 1, b);
+                QuadTile bl = gimmeATile(a, b + 1);
+                QuadTile br = gimmeATile(a + 1, b + 1);
                 // generate new tile from the 4 input tiles (zoom out 1 level)
                 tile = mergeTiles(a, b, tl, tr, bl, br);
                 q.addTile(tile);
@@ -102,6 +102,22 @@ public class ZoomQuadLevelBuilder extends QuadLevelBuilder {
 
         q.stopTracker();
         printOut(q.getStats().toString());
+    }
+
+    private QuadTile gimmeATile(int a, int b) {
+        // first, check to see if the tile is in-memory...
+        QuadTile qt = sourceLevel.at(a, b);
+
+        if (toProcess != null && qt == null) {
+            // hmmm, sparse rendering and tile not in memory; is it on disk?
+            Coord coord = new Coord(a, b);
+            String tp = AbsQuadTile.tilePath(sourceLevel.zoom(), coord);
+            File tileFile = new File(tilesDir, tp);
+            if (tileFile.exists()) {
+                qt = new FromDiskQuadTile(coord, tileFile);
+            }
+        }
+        return qt;
     }
 
     // Merge the four tiles into a single tile "one-fourth the size"

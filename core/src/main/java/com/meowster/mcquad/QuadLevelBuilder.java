@@ -47,7 +47,9 @@ public abstract class QuadLevelBuilder {
     /**
      * This allows the builder to initialize its internal structures,
      * ready for operation. The list of coordinates are those quad tiles
-     * that need to be rendered.
+     * that need to be rendered. If stale is null, it means we have to
+     * re-render all the tiles, because the region-to-quad calibration
+     * changed since last time.
      *
      * @param stale list of stale tile coordinates
      */

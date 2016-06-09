@@ -136,13 +136,6 @@ public class BaseQuadLevelBuilder extends QuadLevelBuilder {
 
         int regionCount = 0;
         for (Region r : quadData.regionData().regions()) {
-            // TODO: figure out how to track tiles that we may not have
-            //       generated this time round, but might be required as
-            //       input to merged tiles...!!!
-            //       They aren't getting added to the tiles map for the level
-            //       when they are not re-generated. Should we perhaps
-            //       scan the tiles directory for existing tiles, first??
-
             if (noChangeSinceLastTime(r)) {
                 continue;
             }
@@ -159,7 +152,6 @@ public class BaseQuadLevelBuilder extends QuadLevelBuilder {
             releaseTiles(tiles1);
             releaseTiles(tiles2);
         }
-
         print(EOL);
 
         levelZoomPlus2.stopTracker();

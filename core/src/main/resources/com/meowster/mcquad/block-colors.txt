@@ -715,7 +715,7 @@ default     0xffff00ff                  # (magenta)
 #0x00c4      0x00000000                  # acacia door # TODO: color
 #0x00c5      0x00000000                  # dark oak door # TODO: color
 
-0x00d0      0xff997e3e                  # grass path
+0x00d0      0xff6d582f                  # grass path
 
 0x00d8:0x0  0xffb3ae91                  # bone block (u/d)
 0x00d8:0x4  0xffe6e3d1                  # bone block (e/w)

@@ -105,9 +105,9 @@ public class RegionCachedMetaData {
         for (MetaRegion mr : metaMap.values()) {
             tf.add(mr.stringRecord());
         }
-        tf.add("# = end of region data =")
+        tf.add("# === end of region data === <" + metaMap.size() + " regions>")
                 .add("quad-shift: " + quadShift)
-                .add("# = end of file =")
+                .add("# === end of file ===")
                 .write();
     }
 

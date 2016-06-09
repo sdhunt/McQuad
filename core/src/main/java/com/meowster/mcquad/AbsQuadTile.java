@@ -16,14 +16,15 @@ import java.io.IOException;
  */
 abstract class AbsQuadTile implements QuadTile {
 
+    private static final String SLASH = "/";
+    private static final String ZOOM_PREFIX = "z";
     private static final String SUBDIR_PREFIX = "x";
     private static final String FILE_PREFIX = "t.";
     private static final String FILE_SUFFIX = ".png";
 
     protected Coord coord;
     protected BufferedImage image;
-
-    private File onDisk;
+    protected File onDisk;
 
     @Override
     public BufferedImage image() {
@@ -58,5 +59,18 @@ abstract class AbsQuadTile implements QuadTile {
     @Override
     public BufferedImage loadImageFromDisk() throws IOException {
         return onDisk == null ? null : ImageIO.read(onDisk);
+    }
+
+    /**
+     * Returns the tile path, relative to the tiles directory.
+     *
+     * @param zoom zoom level
+     * @param coord coordinates
+     * @return tile image file path
+     */
+    public static String tilePath(int zoom, Coord coord) {
+        return ZOOM_PREFIX + zoom + SLASH +
+                SUBDIR_PREFIX + coord.x() + SLASH +
+                FILE_PREFIX + coord.z() + FILE_SUFFIX;
     }
 }

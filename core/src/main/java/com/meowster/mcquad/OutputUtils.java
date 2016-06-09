@@ -21,7 +21,11 @@ public class OutputUtils {
                             +-- index.html
                             |
                             +-- aux/
-                            |   +-- heatmap.png
+                            |   +-- heatmap/
+                            |   |   +-- heat-2016-06-24.png
+                            |   |   +-- heat-2016-06-25.png
+                            |   |   +-- heat-2016-06-26.png
+                            |   |   :
                             |   :
                             |
                             +-- meta/
@@ -30,7 +34,13 @@ public class OutputUtils {
                             |
                             +-- tiles/
                             |   +-- z1/
-                            |   |   :
+                            |   |   +-- x0/
+                            |   |   |   +-- t.0.png
+                            |   |   |   +-- t.1.png
+                            |   |   |
+                            |   |   +-- x1/
+                            |   |       +-- t.0.png
+                            |   |       +-- t.1.png
                             |   |
                             |   +-- z2/
                             |   |   :
