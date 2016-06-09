@@ -11,11 +11,11 @@ import java.io.File;
  *
  * @author Simon Hunt
  */
-public class QuadLevelBuilderFactory {
+class QuadLevelBuilderFactory {
 
     private final File tileDir;
 
-    public QuadLevelBuilderFactory(File tilesDir) {
+    QuadLevelBuilderFactory(File tilesDir) {
         this.tileDir = tilesDir;
     }
 
@@ -26,7 +26,7 @@ public class QuadLevelBuilderFactory {
      * @param quadData the source data
      * @return a quad level builder
      */
-    public QuadLevelBuilder createBuilder(QuadData quadData) {
+    QuadLevelBuilder createBuilder(QuadData quadData) {
         return new BaseQuadLevelBuilder(tileDir, quadData);
     }
 
@@ -37,7 +37,7 @@ public class QuadLevelBuilderFactory {
      * @param level the source level (zoom factor Z)
      * @return a builder for the level (zoom factor Z-1)
      */
-    public QuadLevelBuilder createBuilder(QuadLevel level) {
+    QuadLevelBuilder createBuilder(QuadLevel level) {
         return new ZoomQuadLevelBuilder(tileDir, level);
     }
 }

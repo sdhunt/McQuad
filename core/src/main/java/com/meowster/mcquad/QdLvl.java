@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Meowster.com
+ * Copyright (c) 2014-2016 Meowster.com
  */
 
 package com.meowster.mcquad;
@@ -11,10 +11,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
-* A concrete implementation of {@link QuadLevel}.
-*
-* @author Simon Hunt
-*/
+ * A concrete implementation of {@link QuadLevel}.
+ *
+ * @author Simon Hunt
+ */
 class QdLvl implements QuadLevel {
     private final Map<Coord, QuadTile> tileMap = new HashMap<>();
     private int zoom;
@@ -38,8 +38,8 @@ class QdLvl implements QuadLevel {
         this.zoom = zoom;
         stats.setZoom(zoom);
         dim = 1;
-        for (int i=0; i<zoom; i++)
-            dim *=2;
+        for (int i = 0; i < zoom; i++)
+            dim *= 2;
     }
 
     @Override
@@ -65,8 +65,8 @@ class QdLvl implements QuadLevel {
     @Override
     public String schematic() {
         StringBuilder sb = new StringBuilder();
-        for (int b=0; b<dim; b++) {
-            for (int a=0; a<dim; a++) {
+        for (int b = 0; b < dim; b++) {
+            for (int a = 0; a < dim; a++) {
                 sb.append(tileChar(at(a, b)));
             }
             sb.append("\n");

@@ -24,7 +24,8 @@ abstract class AbsQuadTile implements QuadTile {
 
     protected Coord coord;
     protected BufferedImage image;
-    protected File onDisk;
+
+    File onDisk;
 
     @Override
     public BufferedImage image() {
@@ -64,11 +65,11 @@ abstract class AbsQuadTile implements QuadTile {
     /**
      * Returns the tile path, relative to the tiles directory.
      *
-     * @param zoom zoom level
+     * @param zoom  zoom level
      * @param coord coordinates
      * @return tile image file path
      */
-    public static String tilePath(int zoom, Coord coord) {
+    static String tilePath(int zoom, Coord coord) {
         return ZOOM_PREFIX + zoom + SLASH +
                 SUBDIR_PREFIX + coord.x() + SLASH +
                 FILE_PREFIX + coord.z() + FILE_SUFFIX;

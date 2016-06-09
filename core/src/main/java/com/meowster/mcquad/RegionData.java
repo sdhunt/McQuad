@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Meowster.com
+ * Copyright (c) 2014-2016 Meowster.com
  */
 
 package com.meowster.mcquad;
@@ -21,19 +21,13 @@ import static com.meowster.util.StringUtils.printErr;
  *
  * @author Simon Hunt
  */
-public class RegionData {
+class RegionData {
 
     private static final Pattern RE_REGION_FILE =
             Pattern.compile("^r\\.(-?\\d+)\\.(-?\\d+)\\.mca$");
 
     private static final FilenameFilter REGION_FILE_FILTER =
-            new FilenameFilter() {
-                @Override
-                public boolean accept(File dir, String name) {
-                    return RE_REGION_FILE.matcher(name).matches();
-                }
-            };
-
+            (dir, name) -> RE_REGION_FILE.matcher(name).matches();
 
     private final Bounds bounds = new Bounds();
     private final Map<Coord, Region> regionMap = new HashMap<>();
@@ -43,8 +37,8 @@ public class RegionData {
      *
      * @param regions the regions
      */
-    public void load(Set<Region> regions) {
-        for (Region r: regions)
+    void load(Set<Region> regions) {
+        for (Region r : regions)
             loadRegion(r);
     }
 
@@ -66,7 +60,7 @@ public class RegionData {
      * @param regionDir the region directory
      * @return self, for chaining
      */
-    public RegionData loadMock(File regionDir) {
+    RegionData loadMock(File regionDir) {
         return load(regionDir, true);
     }
 
@@ -76,7 +70,7 @@ public class RegionData {
      * @param regionDir the region directory
      * @return self, for chaining
      */
-    public RegionData load(File regionDir) {
+    RegionData load(File regionDir) {
         return load(regionDir, false);
     }
 
@@ -90,7 +84,7 @@ public class RegionData {
             printErr("No matching region files :(");
         }
 
-        for (File f: files) {
+        for (File f : files) {
             try {
                 Matcher m = RE_REGION_FILE.matcher(f.getName());
                 if (m.matches()) {
@@ -120,7 +114,7 @@ public class RegionData {
      *
      * @return the regions
      */
-    public Collection<Region> regions() {
+    Collection<Region> regions() {
         return Collections.unmodifiableCollection(regionMap.values());
     }
 
@@ -129,7 +123,7 @@ public class RegionData {
      *
      * @return the region bounds
      */
-    public Bounds bounds() {
+    Bounds bounds() {
         return bounds;
     }
 
@@ -141,7 +135,7 @@ public class RegionData {
      * @param z region z-coord
      * @return the region file, or null
      */
-    public Region at(int x, int z) {
+    Region at(int x, int z) {
         return regionMap.get(new Coord(x, z));
     }
 
@@ -152,7 +146,7 @@ public class RegionData {
      * @param xz region coordinates
      * @return the region file, or null
      */
-    public Region at(Coord xz) {
+    Region at(Coord xz) {
         return regionMap.get(xz);
     }
 
@@ -161,9 +155,7 @@ public class RegionData {
      *
      * @return the number of regions
      */
-    public int size() {
+    int size() {
         return regionMap.size();
     }
-    // ===================================================================
-
 }

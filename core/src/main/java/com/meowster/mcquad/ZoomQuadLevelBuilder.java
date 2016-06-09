@@ -21,7 +21,7 @@ import static com.meowster.util.StringUtils.printOut;
  *
  * @author Simon Hunt
  */
-public class ZoomQuadLevelBuilder extends QuadLevelBuilder {
+class ZoomQuadLevelBuilder extends QuadLevelBuilder {
 
     private final QuadLevel sourceLevel;
     private QdLvl q;
@@ -32,7 +32,7 @@ public class ZoomQuadLevelBuilder extends QuadLevelBuilder {
      * @param tilesDir the top level tiles output directory
      * @param level    the source level
      */
-    public ZoomQuadLevelBuilder(File tilesDir, QuadLevel level) {
+    ZoomQuadLevelBuilder(File tilesDir, QuadLevel level) {
         super(tilesDir);
         this.sourceLevel = level;
     }
@@ -114,7 +114,7 @@ public class ZoomQuadLevelBuilder extends QuadLevelBuilder {
             String tp = AbsQuadTile.tilePath(sourceLevel.zoom(), coord);
             File tileFile = new File(tilesDir, tp);
             if (tileFile.exists()) {
-                qt = new FromDiskQuadTile(coord, tileFile);
+                qt = new FromDiskQTile(coord, tileFile);
             }
         }
         return qt;

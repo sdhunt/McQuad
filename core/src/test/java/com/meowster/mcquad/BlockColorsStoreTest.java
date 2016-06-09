@@ -21,6 +21,8 @@ import static org.junit.Assert.assertNull;
  */
 public class BlockColorsStoreTest extends AbstractTest {
 
+    private static final int EXP_NUM_BLOCK_RECORDS = 460;
+
     private BlockColorsStore store;
 
     @Before
@@ -32,7 +34,7 @@ public class BlockColorsStoreTest extends AbstractTest {
     public void basic() {
         title("basic");
         print(store);
-        assertEquals(AM_UXS, 456, store.size());
+        assertEquals(AM_UXS, EXP_NUM_BLOCK_RECORDS, store.size());
     }
 
     @Test

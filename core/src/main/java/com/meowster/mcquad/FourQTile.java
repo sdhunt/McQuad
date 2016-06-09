@@ -1,14 +1,14 @@
 /*
- * Copyright (c) 2014 Meowster.com
+ * Copyright (c) 2014-2016 Meowster.com
  */
 
 package com.meowster.mcquad;
 
 /**
-* A quad tile generated from the composition of four other quad tiles.
-*
-* @author Simon Hunt
-*/
+ * A quad tile generated from the composition of four other quad tiles.
+ *
+ * @author Simon Hunt
+ */
 class FourQTile extends AbsQuadTile {
     private final String tag;
 
@@ -25,7 +25,7 @@ class FourQTile extends AbsQuadTile {
     }
 
     private String tileTag(QuadTile qt) {
-        return qt==null ? "." : "#";
+        return qt == null ? "." : "#";
     }
 
     @Override

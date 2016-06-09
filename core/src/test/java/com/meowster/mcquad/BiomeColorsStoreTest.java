@@ -21,6 +21,8 @@ import static org.junit.Assert.*;
  */
 public class BiomeColorsStoreTest extends AbstractTest {
 
+    private static final int EXP_NUM_BIOME_RECORDS = 60;
+
     private static final String DEFAULT_REC_STR =
             "default 0xffff00ff  0xff00ffff  0xffffff00";
     private BiomeColorsStore store;
@@ -34,7 +36,7 @@ public class BiomeColorsStoreTest extends AbstractTest {
     public void basic() {
         title("basic");
         print(store);
-        assertEquals(AM_UXS, 60, store.size());
+        assertEquals(AM_UXS, EXP_NUM_BIOME_RECORDS, store.size());
         Iterator<Record> iter = store.getRecords().iterator();
         Record rec = iter.next();
         assertTrue(AM_WRCL, rec instanceof BiomeColorsStore.BiomeRecord);

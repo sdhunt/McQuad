@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Meowster.com
+ * Copyright (c) 2014-2016 Meowster.com
  */
 
 package com.meowster.mcquad;
@@ -11,7 +11,7 @@ import com.meowster.util.Tracker;
  *
  * @author Simon Hunt
  */
-public class LevelStats {
+class LevelStats {
     private int zoom;
     private final Tracker tracker = new Tracker();
     private int blanks;
@@ -30,7 +30,7 @@ public class LevelStats {
      *
      * @return the report line
      */
-    public String reportLine() {
+    private String reportLine() {
         return "Zoom Level " + zoom + ": #tiles = " + tracker.count() +
 //                ", duration = " + tracker.duration() +
 //                ", throughput = " + tracker.perSecond() +
@@ -45,14 +45,14 @@ public class LevelStats {
     /**
      * Starts measuring throughput of tile generation.
      */
-    public void startTracker() {
+    void startTracker() {
         tracker.start();
     }
 
     /**
      * Stops measuring tile generation throughput.
      */
-    public void stopTracker() {
+    void stopTracker() {
         tracker.stop();
     }
 
@@ -61,14 +61,14 @@ public class LevelStats {
      *
      * @param tile the quad tile
      */
-    public void addStats(QuadTile tile) {
+    void addStats(QuadTile tile) {
         tracker.inc();
     }
 
     /**
      * Increments the blank count.
      */
-    public void incBlanks() {
+    void incBlanks() {
         blanks++;
     }
 }

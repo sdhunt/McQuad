@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Meowster.com
+ * Copyright (c) 2014-2016 Meowster.com
  */
 
 package com.meowster.mcquad;
@@ -19,7 +19,7 @@ import java.util.TreeSet;
  *
  * @author Simon Hunt
  */
-public class BiomeColors {
+class BiomeColors {
     private static final String E_NO_DEFAULT = "No default biome record found";
 
     private final Biome defaultBiome;
@@ -29,14 +29,14 @@ public class BiomeColors {
     /**
      * Creates a biome color data instance.
      */
-    public BiomeColors() {
+    BiomeColors() {
         // create a biome colors store from the text configuration file
         BiomeColorsStore store = new BiomeColorsStore();
 
         // encapsulate each biome record in a biome instance, and
         // create the lookup map, indexed by biome id
         Biome defaultFound = null;
-        for (Record r: store.getRecords()) {
+        for (Record r : store.getRecords()) {
             Biome b = new Biome((BiomeColorsStore.BiomeRecord) r);
             if (b.biomeId() == null) {
                 defaultFound = b;
@@ -63,7 +63,7 @@ public class BiomeColors {
      *
      * @return the default biome
      */
-    public Biome getDefaultBiome() {
+    Biome getDefaultBiome() {
         return defaultBiome;
     }
 
@@ -75,7 +75,7 @@ public class BiomeColors {
      * @param id the biome id
      * @return the corresponding biome (or the default biome)
      */
-    public Biome getBiome(int id) {
+    Biome getBiome(int id) {
         BiomeId biomeId = new BiomeId(id);
         Biome b = cache.get(biomeId);
         if (b == null) {
@@ -91,7 +91,7 @@ public class BiomeColors {
      *
      * @return the set of defaulted biome IDs
      */
-    public Set<BiomeId> getDefaulted() {
+    Set<BiomeId> getDefaulted() {
         return Collections.unmodifiableSet(defaulted);
     }
 
@@ -99,5 +99,5 @@ public class BiomeColors {
     /**
      * Our shared instance.
      */
-    public static final BiomeColors BIOME_DB = new BiomeColors();
+    static final BiomeColors BIOME_DB = new BiomeColors();
 }

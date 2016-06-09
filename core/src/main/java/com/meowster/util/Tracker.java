@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Meowster.com
+ * Copyright (c) 2014-2016 Meowster.com
  */
 
 package com.meowster.util;
@@ -82,7 +82,7 @@ public class Tracker {
      *
      * @param amount the amount by which to increment the counter
      * @throws IllegalArgumentException if amount is &lt; 1
-     * @throws IllegalStateException if the tracker clock is not running
+     * @throws IllegalStateException    if the tracker clock is not running
      */
     public void inc(long amount) {
         if (amount < 1)
@@ -96,7 +96,7 @@ public class Tracker {
      * Freezes the tracker clock.
      *
      * @throws IllegalStateException if the tracker clock is not running or if
-     *          we have already stopped
+     *                               we have already stopped
      */
     public void stop() {
         if (!started)

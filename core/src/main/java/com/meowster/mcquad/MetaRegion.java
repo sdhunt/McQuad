@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 /**
  * Captures meta information about a region.
  */
-public class MetaRegion {
+class MetaRegion {
 
     private static final Pattern P_REGION_RECORD =
             Pattern.compile("^(\\[-?\\d+,-?\\d+\\])\\s+(\\d+)\\s+(\\d+)");
@@ -45,7 +45,7 @@ public class MetaRegion {
      *
      * @return the TTL
      */
-    public int ttl() {
+    int ttl() {
         return ttl;
     }
 
@@ -54,7 +54,7 @@ public class MetaRegion {
      *
      * @return the last modified timestamp
      */
-    public long touched() {
+    long touched() {
         return touched;
     }
 
@@ -70,7 +70,7 @@ public class MetaRegion {
      * @param touched value to set
      * @return self, for chaining
      */
-    public MetaRegion setTouched(long touched) {
+    MetaRegion setTouched(long touched) {
         this.touched = touched;
         return this;
     }
@@ -81,7 +81,7 @@ public class MetaRegion {
      * @param ttl value to set
      * @return self, for chaining
      */
-    public MetaRegion setTtl(int ttl) {
+    MetaRegion setTtl(int ttl) {
         this.ttl = ttl;
         return this;
     }
@@ -89,7 +89,7 @@ public class MetaRegion {
     /**
      * Decrements the TTL by 1.
      */
-    public void decTtl() {
+    void decTtl() {
         if (ttl > 0) {
             ttl--;
         }
@@ -100,7 +100,7 @@ public class MetaRegion {
      *
      * @return string record format
      */
-    public String stringRecord() {
+    String stringRecord() {
         return String.format(FMT_RECORD, coord, ttl, touched);
     }
 
@@ -110,7 +110,7 @@ public class MetaRegion {
      * @param s string representation
      * @return corresponding instance
      */
-    public static MetaRegion metaRegion(String s) {
+    static MetaRegion metaRegion(String s) {
         Matcher m = P_REGION_RECORD.matcher(s);
         if (m.matches()) {
             Coord coord = Coord.coord(m.group(1));

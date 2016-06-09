@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Meowster.com
+ * Copyright (c) 2014-2016 Meowster.com
  */
 
 package com.meowster.mcquad;
@@ -12,7 +12,7 @@ import java.awt.image.BufferedImage;
  *
  * @author Simon Hunt
  */
-class RegionImageData  {
+class RegionImageData {
     private static final int NPIXELS = 256;
 
     private final Region region;
@@ -22,7 +22,7 @@ class RegionImageData  {
     /**
      * Construct region image data from the given region.
      *
-     * @param region the source region
+     * @param region            the source region
      * @param regionToQuadDelta offset from region coords to quad coords
      */
     RegionImageData(Region region, Coord regionToQuadDelta) {
@@ -50,14 +50,14 @@ class RegionImageData  {
      * @param dz upper or lower quadrant {0|1}
      * @return the buffered image for the tile
      */
-    public BufferedImage getImage(int dx, int dz) {
+    BufferedImage getImage(int dx, int dz) {
         return image.getSubimage(dx * NPIXELS, dz * NPIXELS, NPIXELS, NPIXELS);
     }
 
     /**
      * Release the backing resources so that they may be garbage collected.
      */
-    public void releaseResources() {
+    void releaseResources() {
         region.releaseResources();
         image = null;
     }

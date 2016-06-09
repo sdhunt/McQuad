@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Meowster.com
+ * Copyright (c) 2014-2016 Meowster.com
  */
 
 package com.meowster.mcquad;
@@ -9,7 +9,7 @@ package com.meowster.mcquad;
  *
  * @author Simon Hunt
  */
-public class ChunkBiomeData {
+class ChunkBiomeData {
 
     private static final int FF = 0xff;
     private static final int NBLOCKS = 16;
@@ -20,7 +20,7 @@ public class ChunkBiomeData {
     /**
      * Constructs an empty chunk biome data instance.
      */
-    public ChunkBiomeData() {
+    ChunkBiomeData() {
         data = null;
     }
 
@@ -29,7 +29,7 @@ public class ChunkBiomeData {
      *
      * @param data the biome data
      */
-    public ChunkBiomeData(byte[] data) {
+    ChunkBiomeData(byte[] data) {
         this.data = data;
     }
 
@@ -40,10 +40,9 @@ public class ChunkBiomeData {
      * @param yzxIndex the Y-Z-X coordinates
      * @return the biome for the corresponding [x,z] coordinates
      */
-    public Biome biomeAt(int yzxIndex) {
+    Biome biomeAt(int yzxIndex) {
         int xz = yzxIndex % SQUARE_NBLOCKS;
         return data == null ? BiomeColors.BIOME_DB.getDefaultBiome()
                 : BiomeColors.BIOME_DB.getBiome(data[xz] & FF);
     }
-
 }

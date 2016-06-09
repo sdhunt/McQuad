@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Meowster.com
+ * Copyright (c) 2014-2016 Meowster.com
  */
 
 package com.meowster.mcquad;
@@ -12,7 +12,7 @@ import java.util.Collection;
  *
  * @author Simon Hunt
  */
-public interface QuadLevel {
+interface QuadLevel {
 
     /**
      * The name of this level. This will be used as the directory name for

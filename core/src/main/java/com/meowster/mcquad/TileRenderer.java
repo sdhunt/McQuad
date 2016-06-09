@@ -20,7 +20,7 @@ import static com.meowster.util.StringUtils.printOut;
  *
  * @author Simon Hunt
  */
-public class TileRenderer {
+class TileRenderer {
     private static final String HEADER = "Tile Generation Report";
     private static final String HEADER_LINE = "----------------------";
 
@@ -39,7 +39,7 @@ public class TileRenderer {
      * @param quadData the quad data
      * @param tilesDir the tiles output directory
      */
-    public TileRenderer(QuadData quadData, File tilesDir) {
+    TileRenderer(QuadData quadData, File tilesDir) {
         this.quadData = quadData;
         this.tilesDir = tilesDir;
         factory = new QuadLevelBuilderFactory(tilesDir);
@@ -51,7 +51,7 @@ public class TileRenderer {
      *
      * @param stale coordinates of stale regions
      */
-    public void render(Set<Coord> stale) {
+    void render(Set<Coord> stale) {
         if (stale == null) {
             printOut("Calibration change detected -- regenerating all tiles!");
             PathUtils.deleteTree(tilesDir);
@@ -88,7 +88,7 @@ public class TileRenderer {
      *
      * @return a report string
      */
-    public String report() {
+    String report() {
         StringBuilder sb = new StringBuilder(reportHeader());
         for (LevelStats s : stats) {
             sb.append(s).append(EOL);

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Meowster.com
+ * Copyright (c) 2014-2016 Meowster.com
  */
 
 package com.meowster.mcquad;
@@ -17,14 +17,14 @@ import java.util.List;
  *
  * @author Simon Hunt
  */
-public class NbtUtils {
-    public static final String LEVEL = "Level";
-    public static final String BIOMES = "Biomes";
-    public static final String SECTIONS = "Sections";
-    public static final String Y = "Y";
-    public static final String BLOCKS = "Blocks";
-    public static final String DATA = "Data";
-    public static final String ADD = "Add";
+class NbtUtils {
+    static final String LEVEL = "Level";
+    static final String BIOMES = "Biomes";
+    static final String SECTIONS = "Sections";
+    static final String Y = "Y";
+    static final String BLOCKS = "Blocks";
+    static final String DATA = "Data";
+    static final String ADD = "Add";
 
     /**
      * Returns true if a sub tag with the given key exists on the specified
@@ -34,7 +34,7 @@ public class NbtUtils {
      * @param key the key for the sub tag
      * @return true if the sub tag exists
      */
-    public static boolean tagExists(CompoundTag tag, String key) {
+    static boolean tagExists(CompoundTag tag, String key) {
         return tag.getValue().get(key) != null;
     }
 
@@ -46,7 +46,7 @@ public class NbtUtils {
      * @param key the key for the sub tag
      * @return the byte array
      */
-    public static CompoundTag getCompoundTagFromTag(CompoundTag tag, String key) {
+    static CompoundTag getCompoundTagFromTag(CompoundTag tag, String key) {
         return (CompoundTag) tag.getValue().get(key);
     }
 
@@ -58,7 +58,7 @@ public class NbtUtils {
      * @param key the key for the byte array attribute
      * @return the byte array
      */
-    public static ByteArrayTag getByteArrayTagFromTag(CompoundTag tag, String key) {
+    private static ByteArrayTag getByteArrayTagFromTag(CompoundTag tag, String key) {
         return (ByteArrayTag) tag.getValue().get(key);
     }
 
@@ -70,7 +70,7 @@ public class NbtUtils {
      * @param key the key for the byte array attribute
      * @return the byte array
      */
-    public static byte[] getByteArrayFromTag(CompoundTag tag, String key) {
+    static byte[] getByteArrayFromTag(CompoundTag tag, String key) {
         return getByteArrayTagFromTag(tag, key).getValue();
     }
 
@@ -82,7 +82,7 @@ public class NbtUtils {
      * @param key the key for the byte array attribute
      * @return the byte array
      */
-    public static int getIntFromTag(CompoundTag tag, String key) {
+    static int getIntFromTag(CompoundTag tag, String key) {
         return ((ByteTag) tag.getValue().get(key)).getValue().intValue();
     }
 
@@ -94,8 +94,8 @@ public class NbtUtils {
      * @param key the key for the byte array attribute
      * @return the byte array
      */
-    public static List<Tag> getTagListFromTag(CompoundTag tag, String key) {
-        return ((ListTag)tag.getValue().get(key)).getValue();
+    static List<Tag> getTagListFromTag(CompoundTag tag, String key) {
+        return ((ListTag) tag.getValue().get(key)).getValue();
     }
 
 }

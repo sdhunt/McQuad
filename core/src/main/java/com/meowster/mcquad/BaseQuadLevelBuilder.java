@@ -24,7 +24,7 @@ import static java.awt.image.BufferedImage.TYPE_INT_ARGB;
  *
  * @author Simon Hunt
  */
-public class BaseQuadLevelBuilder extends QuadLevelBuilder {
+class BaseQuadLevelBuilder extends QuadLevelBuilder {
 
     private static final int NPIXELS = 256;
     private static final int HALF_NPIXELS = NPIXELS / 2;
@@ -42,7 +42,7 @@ public class BaseQuadLevelBuilder extends QuadLevelBuilder {
      * @param tilesDir the top level tiles output directory
      * @param quadData the source data
      */
-    public BaseQuadLevelBuilder(File tilesDir, QuadData quadData) {
+    BaseQuadLevelBuilder(File tilesDir, QuadData quadData) {
         super(tilesDir);
         this.quadData = quadData;
         regionToQuadDelta = quadData.calibration().negation();
@@ -101,7 +101,7 @@ public class BaseQuadLevelBuilder extends QuadLevelBuilder {
      *
      * @param suppressWrite if true, don't write image files to disk
      */
-    public void genTiles(boolean suppressWrite) {
+    private void genTiles(boolean suppressWrite) {
         /*
          NOTE:
          Since we will have the region data in memory, it makes sense

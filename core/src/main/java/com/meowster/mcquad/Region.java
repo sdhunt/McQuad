@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Meowster.com
+ * Copyright (c) 2014-2016 Meowster.com
  */
 
 package com.meowster.mcquad;
@@ -13,7 +13,7 @@ import java.io.File;
  *
  * @author Simon Hunt
  */
-public class Region {
+class Region {
     private static final String T_DOT = "t.";
     private static final String DOT = ".";
     private static final String DOT_PNG = ".png";
@@ -28,9 +28,9 @@ public class Region {
      * Constructs a region with the given coordinates, and the specified
      * region file. If mock is true the file is assumed to be a mock (empty).
      *
-     * @param x the x-coord
-     * @param z the z-coord
-     * @param f the region file
+     * @param x    the x-coord
+     * @param z    the z-coord
+     * @param f    the region file
      * @param mock file is a mock
      */
     public Region(int x, int z, File f, boolean mock) {
@@ -75,7 +75,7 @@ public class Region {
      *
      * @return the region file
      */
-    public File regionFile() {
+    File regionFile() {
         return f;
     }
 
@@ -86,7 +86,7 @@ public class Region {
      *
      * @return last modified timestamp
      */
-    public long modified() {
+    long modified() {
         return f == null ? 0 : f.lastModified();
     }
 
@@ -105,7 +105,7 @@ public class Region {
      * @return the tile name
      */
     @Deprecated
-    public String tileName() {
+    String tileName() {
         return T_DOT + coord.x() + DOT + coord.z() + DOT_PNG;
     }
 
@@ -119,25 +119,16 @@ public class Region {
      * @param cz chunk z-coord
      * @return a data input stream for the chunk data, or null
      */
-    public DataInputStream getChunkDataStream(int cx, int cz) {
+    DataInputStream getChunkDataStream(int cx, int cz) {
         return rf == null ? null : rf.getChunkDataStream(cx, cz);
     }
 
     /**
      * Instructs the region to release any resources used to hold region data,
      * since we have generated the image and the data is no longer required.
-     *
      */
-    public void releaseResources() {
+    void releaseResources() {
         rf = null;
     }
 
-    /**
-     * Returns true if this region is a mock region (no backing file).
-     *
-     * @return true if a mock region
-     */
-    public boolean mock() {
-        return mock;
-    }
 }

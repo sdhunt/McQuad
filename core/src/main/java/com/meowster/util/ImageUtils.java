@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Meowster.com
+ * Copyright (c) 2014-2016 Meowster.com
  */
 
 package com.meowster.util;
@@ -21,7 +21,7 @@ public class ImageUtils {
     /**
      * Writes the specified image to disk as a .png file.
      *
-     * @param bi the buffered image to write
+     * @param bi  the buffered image to write
      * @param out the file to write the image into
      * @throws RuntimeException if an error occurred
      */

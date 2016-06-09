@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Meowster.com
+ * Copyright (c) 2014-2016 Meowster.com
  */
 
 package com.meowster.mcquad;
@@ -12,7 +12,7 @@ import java.awt.image.BufferedImage;
  *
  * @author Simon Hunt
  */
-public class TileUtils {
+class TileUtils {
 
 
     /**
@@ -21,7 +21,7 @@ public class TileUtils {
      * @param region the region
      * @return an image of the region
      */
-    public static BufferedImage generateImage(Region region) {
+    static BufferedImage generateImage(Region region) {
         return new RegionStructure(region).getImage();
     }
 
@@ -34,8 +34,8 @@ public class TileUtils {
      * @param br bottom-right tile
      * @return the composite image
      */
-    public static BufferedImage generateImage(QuadTile tl, QuadTile tr,
-                                              QuadTile bl, QuadTile br) {
+    static BufferedImage generateImage(QuadTile tl, QuadTile tr,
+                                       QuadTile bl, QuadTile br) {
         return new CompositeTile(tl, tr, bl, br).getImage();
     }
 }

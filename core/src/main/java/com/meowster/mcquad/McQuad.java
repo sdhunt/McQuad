@@ -103,7 +103,7 @@ public class McQuad {
         if (defaulted.isEmpty()) {
             printOut("  (none)");
         } else {
-            for (BlockId id: defaulted) {
+            for (BlockId id : defaulted) {
                 printOut("  " + id);
             }
         }
@@ -121,7 +121,7 @@ public class McQuad {
      *
      * @return the parsed args
      */
-    public ParsedArgs parsedArgs() {
+    ParsedArgs parsedArgs() {
         return parsedArgs;
     }
 
@@ -130,7 +130,7 @@ public class McQuad {
      *
      * @return true of processing was done
      */
-    public boolean processingDone() {
+    boolean processingDone() {
         return done;
     }
 

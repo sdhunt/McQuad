@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Meowster.com
+ * Copyright (c) 2014-2016 Meowster.com
  */
 
 package com.meowster.mcquad;
@@ -15,7 +15,7 @@ import static java.awt.image.BufferedImage.TYPE_INT_ARGB;
  *
  * @author Simon Hunt
  */
-public class CompositeTile {
+class CompositeTile {
     private static final int NPIXELS = 256; // pixel dimension of tile
     private static final int HALF = NPIXELS / 2;
 
@@ -29,7 +29,7 @@ public class CompositeTile {
      * @param bl bottom-left quadrant
      * @param br bottom-right quadrant
      */
-    public CompositeTile(QuadTile tl, QuadTile tr, QuadTile bl, QuadTile br) {
+    CompositeTile(QuadTile tl, QuadTile tr, QuadTile bl, QuadTile br) {
         image = new BufferedImage(NPIXELS, NPIXELS, TYPE_INT_ARGB);
         compose(tl, 0, 0);
         compose(tr, HALF, 0);
@@ -48,9 +48,9 @@ public class CompositeTile {
                 return; // unable to load image
 
             for (int z = 0; z < NPIXELS; z += 2) {
-                int z2 = z/2;
+                int z2 = z / 2;
                 for (int x = 0; x < NPIXELS; x += 2) {
-                    int x2 = x/2;
+                    int x2 = x / 2;
                     Color av = getAvColor(tileImage, x, z);
                     image.setRGB(offx + x2, offz + z2, av.toInt());
                 }
@@ -64,9 +64,9 @@ public class CompositeTile {
 
     private Color getAvColor(BufferedImage tileImage, int x, int z) {
         int a = tileImage.getRGB(x, z);
-        int b = tileImage.getRGB(x+1, z);
-        int c = tileImage.getRGB(x, z+1);
-        int d = tileImage.getRGB(x+1, z+1);
+        int b = tileImage.getRGB(x + 1, z);
+        int c = tileImage.getRGB(x, z + 1);
+        int d = tileImage.getRGB(x + 1, z + 1);
         return Color.averageColor(a, b, c, d);
     }
 

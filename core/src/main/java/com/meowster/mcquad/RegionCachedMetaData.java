@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Meowster.com
+ * Copyright (c) 2014-2016 Meowster.com
  */
 
 package com.meowster.mcquad;
@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
  * Encapsulates region meta data stored on disk, such as region access times
  * and other interesting attributes.
  */
-public class RegionCachedMetaData {
+class RegionCachedMetaData {
 
     private static final String REGION_CACHE = "region-cache.txt";
     private static final String HEADER = "# Region Cache : %s";
@@ -92,14 +92,14 @@ public class RegionCachedMetaData {
      *
      * @return number of meta regions
      */
-    public int size() {
+    int size() {
         return metaMap.size();
     }
 
     /**
      * Writes the current in-memory data to the backing file.
      */
-    public void persist() {
+    void persist() {
         tf.clear()
                 .add(header());
         for (MetaRegion mr : metaMap.values()) {
@@ -126,7 +126,7 @@ public class RegionCachedMetaData {
      *
      * @param regionData data about the regions
      */
-    public void update(RegionData regionData) {
+    void update(RegionData regionData) {
         toProcess = new HashSet<>();
 
         for (Region region : regionData.regions()) {
@@ -150,7 +150,7 @@ public class RegionCachedMetaData {
      *
      * @return stale region coordinates
      */
-    public Set<Coord> stale() {
+    Set<Coord> stale() {
         Set<Coord> stale = new HashSet<>(toProcess.size());
         for (MetaRegion mr : toProcess) {
             stale.add(mr.coord());
@@ -164,7 +164,7 @@ public class RegionCachedMetaData {
      * @param calibration current calibration
      * @return true if change in calibration occurred
      */
-    public boolean updateQuadShift(Coord calibration) {
+    boolean updateQuadShift(Coord calibration) {
         boolean changed = !calibration.equals(quadShift);
         quadShift = calibration;
         return changed;

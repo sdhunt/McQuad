@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Meowster.com
+ * Copyright (c) 2014-2016 Meowster.com
  */
 
 package com.meowster.mcquad;
@@ -9,7 +9,7 @@ package com.meowster.mcquad;
  *
  * @author Simon Hunt
  */
-public class Biome {
+class Biome {
     private final BiomeColorsStore.BiomeRecord record;
 
     /**
@@ -26,7 +26,7 @@ public class Biome {
      *
      * @return the biome ID
      */
-    public BiomeId biomeId() {
+    BiomeId biomeId() {
         return record.biomeId();
     }
 
@@ -37,12 +37,16 @@ public class Biome {
      * @param influence biome influence type
      * @return the influence color
      */
-    public Color influence(BiomeInfluence influence) {
+    Color influence(BiomeInfluence influence) {
         switch (influence) {
-            case GRASS: return record.grass();
-            case WATER: return record.water();
-            case FOLIAGE: return record.foliage();
-            default: return Color.WHITE;  // no influence
+            case GRASS:
+                return record.grass();
+            case WATER:
+                return record.water();
+            case FOLIAGE:
+                return record.foliage();
+            default:
+                return Color.WHITE;  // no influence
         }
     }
 

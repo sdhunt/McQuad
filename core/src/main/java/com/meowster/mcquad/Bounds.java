@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Meowster.com
+ * Copyright (c) 2014-2016 Meowster.com
  */
 
 package com.meowster.mcquad;
@@ -9,7 +9,7 @@ package com.meowster.mcquad;
  *
  * @author Simon Hunt
  */
-public class Bounds {
+class Bounds {
     private static final int ZERO = 0;
 
     private int minX = Integer.MAX_VALUE;
@@ -58,7 +58,7 @@ public class Bounds {
      *
      * @return number of X elements
      */
-    public int nx() {
+    int nx() {
         return noData ? ZERO : maxX - minX + 1;
     }
 
@@ -67,7 +67,7 @@ public class Bounds {
      *
      * @return number of Z elements
      */
-    public int nz() {
+    int nz() {
         return noData ? ZERO : maxZ - minZ + 1;
     }
 
@@ -76,7 +76,7 @@ public class Bounds {
      *
      * @return the maximum dimension
      */
-    public int maxDim() {
+    int maxDim() {
         return noData ? ZERO : (nx() > nz() ? nx() : nz());
     }
 
@@ -85,27 +85,34 @@ public class Bounds {
      *
      * @return min X
      */
-    public int minX() { return noData ? ZERO : minX; }
+    int minX() {
+        return noData ? ZERO : minX;
+    }
 
     /**
      * Returns the maximum X-value.
      *
      * @return max X
      */
-    public int maxX() { return noData ? ZERO : maxX; }
+    int maxX() {
+        return noData ? ZERO : maxX;
+    }
 
     /**
      * Returns the minimum Z-value.
      *
      * @return min Z
      */
-    public int minZ() { return noData ? ZERO : minZ; }
+    int minZ() {
+        return noData ? ZERO : minZ;
+    }
 
     /**
      * Returns the maximum Z-value.
      *
      * @return max Z
      */
-    public int maxZ() { return noData ? ZERO : maxZ; }
-
+    int maxZ() {
+        return noData ? ZERO : maxZ;
+    }
 }

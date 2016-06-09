@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Meowster.com
+ * Copyright (c) 2014-2016 Meowster.com
  */
 
 package com.meowster.mcquad;
@@ -21,7 +21,7 @@ import java.util.TreeSet;
  *
  * @author Simon Hunt
  */
-public class BlockColors {
+class BlockColors {
     private static final String E_NO_DEFAULT = "No default block record found";
     private static final int MAX_DV = 16;
 
@@ -33,14 +33,14 @@ public class BlockColors {
     /**
      * Creates a block color data instance.
      */
-    public BlockColors() {
+    BlockColors() {
         // create a block colors store from the text configuration file
         BlockColorsStore store = new BlockColorsStore();
 
         // encapsulate each block record in a block instance, and
         // create the lookup maps, indexed by block id
         Block defaultFound = null;
-        for (Record r: store.getRecords()) {
+        for (Record r : store.getRecords()) {
             Block b = new Block((BlockColorsStore.BlockRecord) r);
             if (b.blockId() == null) {
                 defaultFound = b;
@@ -60,7 +60,7 @@ public class BlockColors {
         // if data value is not applicable, store an entry in the cache for
         // every possible data value, so we can still do a fast lookup..
         if (blockId.dv() == BlockId.DV_NA)
-            for (BlockId replicatedId: replicateIds(blockId))
+            for (BlockId replicatedId : replicateIds(blockId))
                 indexUnder(replicatedId, b);
         else
             indexUnder(blockId, b);
@@ -91,7 +91,7 @@ public class BlockColors {
      *
      * @return the default block
      */
-    public Block getDefaultBlock() {
+    Block getDefaultBlock() {
         return defaultBlock;
     }
 
@@ -103,7 +103,7 @@ public class BlockColors {
      * @param id the block id
      * @return the corresponding block (or the default block)
      */
-    public Block getBlock(int id) {
+    Block getBlock(int id) {
         return getBlock(id, 0);
     }
 
@@ -116,7 +116,7 @@ public class BlockColors {
      * @param dv the block data value
      * @return the corresponding block (or the default block)
      */
-    public Block getBlock(int id, int dv) {
+    Block getBlock(int id, int dv) {
         BlockId blockId = new BlockId(id, dv);
         Block b = cache.get(blockId);
         if (b == null) {
@@ -127,7 +127,7 @@ public class BlockColors {
     }
 
     /**
-     * Returns true if the block with the given ID (and data value 0) is fully
+     * Returns true if the block with the given ID and data value is fully
      * opaque; that is, if its alpha component is 0xff.
      *
      * @param id the block id
@@ -144,7 +144,7 @@ public class BlockColors {
      *
      * @return the set of defaulted block IDs
      */
-    public Set<BlockId> getDefaulted() {
+    Set<BlockId> getDefaulted() {
         return Collections.unmodifiableSet(defaulted);
     }
 
@@ -152,5 +152,5 @@ public class BlockColors {
     /**
      * Our shared instance.
      */
-    public static final BlockColors BLOCK_DB = new BlockColors();
+    static final BlockColors BLOCK_DB = new BlockColors();
 }

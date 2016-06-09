@@ -20,7 +20,7 @@ import static com.meowster.util.StringUtils.print;
  *
  * @author Simon Hunt
  */
-public abstract class QuadLevelBuilder {
+abstract class QuadLevelBuilder {
 
     private static final int MAJOR_TICK = 50;
     private static final int MINOR_TICK = 10;
@@ -40,7 +40,7 @@ public abstract class QuadLevelBuilder {
      *
      * @param tilesDir the top level tiles output directory
      */
-    protected QuadLevelBuilder(File tilesDir) {
+    QuadLevelBuilder(File tilesDir) {
         this.tilesDir = tilesDir;
     }
 
@@ -88,7 +88,7 @@ public abstract class QuadLevelBuilder {
      *
      * @param tiles the tiles to write to disk
      */
-    protected void writeTiles(List<QuadTile> tiles, File odir) {
+    void writeTiles(List<QuadTile> tiles, File odir) {
         for (QuadTile tile : tiles) {
             File xDir = new File(odir, tile.xDirName());
             PathUtils.createIfNeedBe(xDir);
@@ -100,14 +100,14 @@ public abstract class QuadLevelBuilder {
         }
     }
 
-    protected void releaseTiles(List<QuadTile> tiles) {
+    void releaseTiles(List<QuadTile> tiles) {
         for (QuadTile tile : tiles) {
             tile.releaseResources();
         }
         tiles.clear();
     }
 
-    protected void printMark(int i) {
+    void printMark(int i) {
         print((i % MAJOR_TICK == 0) ? MAJOR_MARK :
                 (i % MINOR_TICK == 0) ? MINOR_MARK : MARK);
     }
@@ -117,12 +117,12 @@ public abstract class QuadLevelBuilder {
      *
      * @return stale coordinates one level up
      */
-    public Set<Coord> zoomedOutStale() {
+    Set<Coord> zoomedOutStale() {
         if (toProcess == null) {
             return null;
         }
         Set<Coord> result = new HashSet<>();
-        for (Coord c: toProcess) {
+        for (Coord c : toProcess) {
             result.add(c.div2());
         }
         return result;

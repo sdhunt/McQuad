@@ -13,7 +13,7 @@ import java.io.IOException;
  *
  * @author Simon Hunt
  */
-public interface QuadTile {
+interface QuadTile {
 
     /**
      * Returns the tile image.

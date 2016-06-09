@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Meowster.com
+ * Copyright (c) 2014-2016 Meowster.com
  */
 
 package com.meowster.mcquad;
@@ -26,7 +26,7 @@ class BiomeColorsStore extends FileRecordStore {
     /**
      * Constructs the store from the default file location.
      */
-    public BiomeColorsStore() {
+    BiomeColorsStore() {
         super(PATH);
     }
 
@@ -50,7 +50,7 @@ class BiomeColorsStore extends FileRecordStore {
         private Color foliageShading;
         private Color waterShading;
         private String comment;
-        private String numbersStr;
+//        private String numbersStr;
 
         BiomeRecord(String raw) {
             super(raw);
@@ -65,7 +65,7 @@ class BiomeColorsStore extends FileRecordStore {
                 foliageShading = new Color(m.group(3));
                 waterShading = new Color(m.group(4));
                 comment = m.group(6) == null ? null : m.group(6).trim();
-                numbersStr = m.group(7);
+//                numbersStr = m.group(7);
             }
         }
 

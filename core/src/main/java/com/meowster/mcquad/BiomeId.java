@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Meowster.com
+ * Copyright (c) 2014-2016 Meowster.com
  */
 
 package com.meowster.mcquad;
@@ -13,7 +13,7 @@ import com.meowster.util.StringUtils;
  *
  * @author Simon Hunt
  */
-public class BiomeId implements Comparable<BiomeId> {
+class BiomeId implements Comparable<BiomeId> {
     private static final int MAX_ID = 255;
     private static final String E_OOB = "Out of bounds: ";
 
@@ -26,8 +26,8 @@ public class BiomeId implements Comparable<BiomeId> {
      * @param id the biome ID
      * @throws IllegalArgumentException if the ID is out of bounds
      */
-    public BiomeId(int id) {
-        if (id < 0 || id > MAX_ID )
+    BiomeId(int id) {
+        if (id < 0 || id > MAX_ID)
             throw new IllegalArgumentException(E_OOB + id);
         this.id = id;
     }

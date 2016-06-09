@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Meowster.com
+ * Copyright (c) 2014-2016 Meowster.com
  */
 
 package com.meowster.mcquad;
@@ -9,7 +9,7 @@ package com.meowster.mcquad;
  *
  * @author Simon Hunt
  */
-public class Block {
+class Block {
     private static final int FF = 0xff;
 
     private final BlockColorsStore.BlockRecord record;
@@ -30,7 +30,7 @@ public class Block {
      *
      * @return the block ID
      */
-    public BlockId blockId() {
+    BlockId blockId() {
         return record.blockId();
     }
 
@@ -48,7 +48,7 @@ public class Block {
      *
      * @return the block biome influence
      */
-    public BiomeInfluence biomeInfluence() {
+    BiomeInfluence biomeInfluence() {
         return record.biomeInfluence();
     }
 
@@ -67,7 +67,7 @@ public class Block {
      *
      * @return true if this block is fully opaque
      */
-    public boolean isFullyOpaque() {
+    boolean isFullyOpaque() {
         return fullyOpaque;
     }
 

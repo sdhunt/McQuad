@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Meowster.com
+ * Copyright (c) 2014-2016 Meowster.com
  */
 
 package com.meowster.mcquad;
@@ -12,7 +12,7 @@ import java.io.File;
  * General utilities regarding the output directory tree.
  */
 
-public class OutputUtils {
+class OutputUtils {
 
     /*
       == Output Directory Layout ==
@@ -54,7 +54,6 @@ public class OutputUtils {
     private static final String AUX = "aux";
     private static final String META = "meta";
     private static final String TILES = "tiles";
-    private static final String TP = "tp";
 
     private final File outputDir;
 
@@ -63,7 +62,7 @@ public class OutputUtils {
      *
      * @param outputDir root output directory
      */
-    public OutputUtils(File outputDir) {
+    OutputUtils(File outputDir) {
         this.outputDir = outputDir;
     }
 
@@ -72,7 +71,7 @@ public class OutputUtils {
      *
      * @return root directory
      */
-    public File rootDir() {
+    File rootDir() {
         return outputDir;
     }
 
@@ -81,7 +80,7 @@ public class OutputUtils {
      *
      * @return aux directory
      */
-    public File auxDir() {
+    File auxDir() {
         return ensureDirectory(AUX);
     }
 
@@ -90,7 +89,7 @@ public class OutputUtils {
      *
      * @return meta directory
      */
-    public File metaDir() {
+    File metaDir() {
         return ensureDirectory(META);
     }
 
@@ -99,7 +98,7 @@ public class OutputUtils {
      *
      * @return tiles directory
      */
-    public File tilesDir() {
+    File tilesDir() {
         return ensureDirectory(TILES);
     }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Meowster.com
+ * Copyright (c) 2014-2016 Meowster.com
  */
 
 package com.meowster.rec;
@@ -10,7 +10,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import static com.meowster.util.StringUtils.*;
+import static com.meowster.util.StringUtils.EOL;
+import static com.meowster.util.StringUtils.getFileContents;
+import static com.meowster.util.StringUtils.stripCommentLines;
 
 /**
  * A file-based implementation of {@link com.meowster.rec.RecordStore}.

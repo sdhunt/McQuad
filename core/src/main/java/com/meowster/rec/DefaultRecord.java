@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Meowster.com
+ * Copyright (c) 2014-2016 Meowster.com
  */
 
 package com.meowster.rec;
@@ -32,7 +32,8 @@ public class DefaultRecord implements Record {
      *
      * @param raw the raw data
      */
-    protected void parseRaw(String raw) { }
+    protected void parseRaw(String raw) {
+    }
 
     @Override
     public String raw() {
@@ -43,5 +44,4 @@ public class DefaultRecord implements Record {
     public String toString() {
         return "DefaultRecord{raw='" + raw + '\'' + '}';
     }
-
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Meowster.com
+ * Copyright (c) 2014-2016 Meowster.com
  */
 
 package com.meowster.mcquad;
@@ -9,7 +9,7 @@ package com.meowster.mcquad;
  *
  * @author Simon Hunt
  */
-public class BlockData {
+class BlockData {
     private static final int FF = 0xff;
 
     /**
@@ -26,11 +26,11 @@ public class BlockData {
      * Constructs a block data instance that fully describes a block at
      * a particular [x,y,z] location in the chunk-section / chunk.
      *
-     * @param id the block ID
-     * @param data the block data value
+     * @param id    the block ID
+     * @param data  the block data value
      * @param biome the biome the block belongs in
      */
-    public BlockData(short id, byte data, Biome biome) {
+    BlockData(short id, byte data, Biome biome) {
         int dv = data & FF; // convert byte value to 0..255
         block = BlockColors.BLOCK_DB.getBlock(id, dv);
         this.biome = biome;
@@ -40,7 +40,7 @@ public class BlockData {
     /**
      * Constructs a block data instance representing an air block.
      */
-    public BlockData() {
+    BlockData() {
         biome = BiomeColors.BIOME_DB.getDefaultBiome();
         block = BlockColors.BLOCK_DB.getBlock(0); // AIR
         computedColor = Color.TRANSPARENT;
@@ -63,7 +63,7 @@ public class BlockData {
      *
      * @return the computed color of the block
      */
-    public Color computedColor() {
+    Color computedColor() {
         return computedColor;
     }
 
@@ -73,7 +73,7 @@ public class BlockData {
      *
      * @return true if this block is fully opaque
      */
-    public boolean isFullyOpaque() {
+    boolean isFullyOpaque() {
         return block.isFullyOpaque();
     }
 
@@ -84,7 +84,7 @@ public class BlockData {
      *
      * @return true if this block is opaque enough
      */
-    public boolean opaqueEnough() {
+    boolean opaqueEnough() {
         return computedColor.alpha() >= SHADE_OPACITY_CUTOFF;
     }
 }

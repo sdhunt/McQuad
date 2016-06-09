@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Meowster.com
+ * Copyright (c) 2014-2016 Meowster.com
  */
 
 package com.meowster.mcquad;
@@ -55,7 +55,7 @@ import java.util.zip.InflaterInputStream;
  data is the chunk length - 1.
  */
 
-public class RegionFile {
+class RegionFile {
     private static final String E_NO_SUCH_FILE = "No such region file: ";
     private static final String E_MALFORMED_REGION_FILE = "Malformed region file: ";
 
@@ -85,7 +85,7 @@ public class RegionFile {
      * @param path the region file path
      * @param mock if true, this is a mock file
      */
-    public RegionFile(File path, boolean mock) {
+    RegionFile(File path, boolean mock) {
         if (!mock && !path.exists())
             throw new IllegalArgumentException(E_NO_SUCH_FILE);
 
@@ -139,7 +139,7 @@ public class RegionFile {
      *
      * @return the number of sectors
      */
-    public int getSectorCount() {
+    int getSectorCount() {
         return nSectors;
     }
 
@@ -151,7 +151,7 @@ public class RegionFile {
      * @param z chunk z-coord
      * @return the chunk data stream
      */
-    public DataInputStream getChunkDataStream(int x, int z) {
+    DataInputStream getChunkDataStream(int x, int z) {
         if (outOfBounds(x, z))
             return noStream(x, z, "Coordinates Out-of-Bounds!");
 
@@ -215,5 +215,4 @@ public class RegionFile {
         System.err.println("Region: " + fileName.getName() + ": " + s);
         return null;
     }
-
 }

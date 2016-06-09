@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Meowster.com
+ * Copyright (c) 2014-2016 Meowster.com
  */
 
 package com.meowster.mcquad;
@@ -12,36 +12,54 @@ import com.meowster.util.StringUtils;
  *
  * @author Simon Hunt
  */
-public class Color {
+class Color {
     private static final int FF = 0xff;
     private static final int BYTE_LEN = 8;
     private static final int MAX_BYTE = 255;
 
-    /** Totally transparent. */
+    /**
+     * Totally transparent.
+     */
     public static final Color TRANSPARENT = new Color(0x0);
 
-    /** The color black. */
+    /**
+     * The color black.
+     */
     public static final Color BLACK = new Color(0xff000000);
 
-    /** The color red. */
+    /**
+     * The color red.
+     */
     public static final Color RED = new Color(0xffff0000);
 
-    /** The color green. */
+    /**
+     * The color green.
+     */
     public static final Color GREEN = new Color(0xff00ff00);
 
-    /** The color blue. */
+    /**
+     * The color blue.
+     */
     public static final Color BLUE = new Color(0xff0000ff);
 
-    /** The color yellow. */
+    /**
+     * The color yellow.
+     */
     public static final Color YELLOW = new Color(0xffffff00);
 
-    /** The color magenta. */
+    /**
+     * The color magenta.
+     */
     public static final Color MAGENTA = new Color(0xffff00ff);
 
-    /** The color cyan. */
+    /**
+     * The color cyan.
+     */
     public static final Color CYAN = new Color(0xff00ffff);
 
-    /** The color white. */
+    /**
+     * The color white.
+     */
     public static final Color WHITE = new Color(0xffffffff);
 
 
@@ -86,9 +104,9 @@ public class Color {
      * treated as 255.
      *
      * @param alpha the alpha (opacity) component
-     * @param red the red component
+     * @param red   the red component
      * @param green the green component
-     * @param blue the blue component
+     * @param blue  the blue component
      */
     public Color(int alpha, int red, int green, int blue) {
         this.alpha = clampByte(alpha);
@@ -133,7 +151,9 @@ public class Color {
      *
      * @return the transparency
      */
-    public int transparency() { return FF - alpha; }
+    public int transparency() {
+        return FF - alpha;
+    }
 
     /**
      * Returns the red component (from 0 .. 255).
@@ -225,11 +245,11 @@ public class Color {
     /**
      * Returns the color resulting from starting with "this" color, and
      * repeatedly overlaying the given color the specified number of times.
-     * Note that invoking {@link #overlay(com.meowster.mcquad.Color)} is equivalent to invoking
-     * this method with a repeat count of 1.
+     * Note that invoking {@link #overlay(com.meowster.mcquad.Color)} is
+     * equivalent to invoking this method with a repeat count of 1.
      *
      * @param overlayColor the overlay color
-     * @param repeatCount the repeat count
+     * @param repeatCount  the repeat count
      * @return the resulting combined color
      */
     public Color overlay(Color overlayColor, int repeatCount) {
@@ -341,7 +361,7 @@ public class Color {
         int g = 0;
         int b = 0;
 
-        for (int c: argb) {
+        for (int c : argb) {
             Color color = new Color(c);
             a += color.alpha;
             r += color.red;
@@ -349,6 +369,6 @@ public class Color {
             b += color.blue;
         }
         final int n = argb.length;
-        return new Color(a/n, r/n, g/n, b/n);
+        return new Color(a / n, r / n, g / n, b / n);
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Meowster.com
+ * Copyright (c) 2014-2016 Meowster.com
  */
 
 package com.meowster.mcquad;
@@ -15,7 +15,7 @@ import static java.awt.image.BufferedImage.TYPE_INT_ARGB;
  *
  * @author Simon Hunt
  */
-public class RegionStructure {
+class RegionStructure {
 
     private static final int NPIXELS = 512; // pixel dimension of region
     private static final int TOTAL_PIXELS = NPIXELS * NPIXELS;
@@ -41,7 +41,7 @@ public class RegionStructure {
      *
      * @param region the region for which a structure is to be created
      */
-    public RegionStructure(Region region) {
+    RegionStructure(Region region) {
         this.region = region;
         prerender();
         shade();

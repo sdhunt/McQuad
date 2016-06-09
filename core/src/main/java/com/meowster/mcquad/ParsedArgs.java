@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Meowster.com
+ * Copyright (c) 2014-2016 Meowster.com
  */
 
 package com.meowster.mcquad;
@@ -13,7 +13,7 @@ import static com.meowster.util.StringUtils.printOut;
  *
  * @author Simon Hunt
  */
-public class ParsedArgs {
+class ParsedArgs {
     private static final char DASH = '-';
     private static final String _O = "-o";
     private static final String _HELP = "-help";
@@ -21,7 +21,7 @@ public class ParsedArgs {
 
     private static final String USAGE_ARGS = "<region-dir> -o <output-dir>";
 
-    boolean showHelp = false;
+    private boolean showHelp = false;
     File regionDir;
     File outputDir;
 
@@ -69,13 +69,13 @@ public class ParsedArgs {
      *
      * @return true if help was requested
      */
-    public boolean showHelp() {
+    boolean showHelp() {
         if (showHelp)
             printUsage();
         return showHelp;
     }
 
-    public void printUsage() {
+    void printUsage() {
         printOut("Usage: {} {}", McQuad.class.getName(), USAGE_ARGS);
     }
 
@@ -87,7 +87,7 @@ public class ParsedArgs {
      *
      * @return true if these parameters would be good for processing
      */
-    public boolean valid() {
+    boolean valid() {
         if (regionDir == null || outputDir == null)
             return false;
 
@@ -96,6 +96,6 @@ public class ParsedArgs {
 
         boolean regOk = regionDir.isDirectory();
         boolean outOk = (!outputDir.exists() || outputDir.isDirectory());
-        return  regOk && outOk;
+        return regOk && outOk;
     }
 }

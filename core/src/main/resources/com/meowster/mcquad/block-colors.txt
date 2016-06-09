@@ -76,7 +76,7 @@ default     0xffff00ff                  # (magenta)
 
 0x000f      0xff87827e                  # iron ore
 
-0x0010      0xff737373                  # coal ore
+0x0010      0xff686868                  # coal ore
 
 0x0011:0x0  0xff9a7d4d                  # oak wood      (u/d)
 0x0011:0x1  0xff9a7d4d                  # spruce wood   (u/d)

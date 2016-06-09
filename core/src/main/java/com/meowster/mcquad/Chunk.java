@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Meowster.com
+ * Copyright (c) 2014-2016 Meowster.com
  */
 
 package com.meowster.mcquad;
@@ -12,14 +12,22 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.util.List;
 
-import static com.meowster.mcquad.NbtUtils.*;
+import static com.meowster.mcquad.NbtUtils.BIOMES;
+import static com.meowster.mcquad.NbtUtils.LEVEL;
+import static com.meowster.mcquad.NbtUtils.SECTIONS;
+import static com.meowster.mcquad.NbtUtils.Y;
+import static com.meowster.mcquad.NbtUtils.getByteArrayFromTag;
+import static com.meowster.mcquad.NbtUtils.getCompoundTagFromTag;
+import static com.meowster.mcquad.NbtUtils.getIntFromTag;
+import static com.meowster.mcquad.NbtUtils.getTagListFromTag;
+import static com.meowster.mcquad.NbtUtils.tagExists;
 
 /**
  * Encapsulates the data associated with a chunk.
  *
  * @author Simon Hunt
  */
-public class Chunk {
+class Chunk {
     private static final int NSECTIONS = 16;
     private static final int NBLOCKS = 16;
 
@@ -38,7 +46,7 @@ public class Chunk {
      *
      * @param dis the source data
      */
-    public Chunk(DataInputStream dis) {
+    Chunk(DataInputStream dis) {
         NBTInputStream nis = null;
         try {
             nis = new NBTInputStream(dis);
@@ -78,7 +86,7 @@ public class Chunk {
         ChunkBiomeData biomeData = loadBiomeData(levelTag);
 
         // then grab all the defined sections...
-        for (Tag t: getSectionTags(levelTag)) {
+        for (Tag t : getSectionTags(levelTag)) {
             CompoundTag sectionTag = (CompoundTag) t;
             int sIdx = getSectionIndex(sectionTag);
             sections[sIdx] = new ChunkSection(sectionTag, biomeData);
@@ -107,7 +115,7 @@ public class Chunk {
      *
      * @return the surface colors
      */
-    public Color[][] getSurfaceColors() {
+    Color[][] getSurfaceColors() {
         return surfaceColors;
     }
 
@@ -116,14 +124,14 @@ public class Chunk {
      *
      * @return the surface heights
      */
-    public short[][] getSurfaceHeights() {
+    short[][] getSurfaceHeights() {
         return surfaceHeights;
     }
 
     /**
      * Computes the surface colors and heights based on the loaded data.
      */
-    public void computeColorsAndHeights() {
+    void computeColorsAndHeights() {
         // iterate over each vertical stack of blocks...
         for (int z = 0; z < NBLOCKS; z++) {
             for (int x = 0; x < NBLOCKS; x++) {

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Meowster.com
+ * Copyright (c) 2014-2016 Meowster.com
  */
 
 package com.meowster.mcquad;
@@ -26,7 +26,7 @@ class BlockColorsStore extends FileRecordStore {
     /**
      * Constructs the store from the default file location.
      */
-    public BlockColorsStore() {
+    BlockColorsStore() {
         super(PATH);
     }
 

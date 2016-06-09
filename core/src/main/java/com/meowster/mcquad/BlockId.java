@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Meowster.com
+ * Copyright (c) 2014-2016 Meowster.com
  */
 
 package com.meowster.mcquad;
@@ -14,9 +14,11 @@ import com.meowster.util.StringUtils;
  *
  * @author Simon Hunt
  */
-public class BlockId implements Comparable<BlockId> {
-    /** Data value denoting "not applicable" */
-    public static final int DV_NA = -1;
+class BlockId implements Comparable<BlockId> {
+    /**
+     * Data value denoting "not applicable"
+     */
+    static final int DV_NA = -1;
 
     private static final int FF = 0xff;
     private static final int MAX_ID = 4095;
@@ -37,7 +39,7 @@ public class BlockId implements Comparable<BlockId> {
      * @param dv the block data value
      * @throws IllegalArgumentException if either value is out of bounds
      */
-    public BlockId(int id, int dv) {
+    BlockId(int id, int dv) {
         validate(id, dv);
         this.id = id;
         this.dv = dv;
@@ -63,7 +65,7 @@ public class BlockId implements Comparable<BlockId> {
      *
      * @return the data value
      */
-    public int dv() {
+    int dv() {
         return dv;
     }
 

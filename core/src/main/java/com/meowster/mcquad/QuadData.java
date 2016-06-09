@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Meowster.com
+ * Copyright (c) 2014-2016 Meowster.com
  */
 
 package com.meowster.mcquad;
@@ -14,7 +14,7 @@ import static com.meowster.util.StringUtils.EOL;
  *
  * @author Simon Hunt
  */
-public class QuadData {
+class QuadData {
 
     private static final Coord ORIGIN = new Coord(0, 0);
 
@@ -37,7 +37,7 @@ public class QuadData {
      *
      * @param regionData the regionData on which to base the quad
      */
-    public QuadData(RegionData regionData) {
+    QuadData(RegionData regionData) {
         /*
          NOTE:
            Regions are composed of 512x512 blocks.
@@ -133,7 +133,7 @@ public class QuadData {
      *
      * @return a schematic
      */
-    public String schematic() {
+    String schematic() {
         StringBuilder sb = new StringBuilder();
         for (int z = 0; z < quadDim; z += 2) {
             for (int x = 0; x < quadDim; x += 2) {
@@ -149,7 +149,7 @@ public class QuadData {
      *
      * @return the region data
      */
-    public RegionData regionData() {
+    RegionData regionData() {
         return regionData;
     }
 
@@ -184,7 +184,7 @@ public class QuadData {
      * @param b b-coord
      * @return the corresponding quad coordinates
      */
-    public Coord regionToQuad(int a, int b) {
+    Coord regionToQuad(int a, int b) {
         return new Coord(a * 2 - xcc, b * 2 - zcc);
     }
 
@@ -194,7 +194,7 @@ public class QuadData {
      *
      * @return the base zoom level
      */
-    public int baseZoom() {
+    int baseZoom() {
         return baseZoom;
     }
 
@@ -203,7 +203,7 @@ public class QuadData {
      *
      * @return the maximum zoom level
      */
-    public int maxZoom() {
+    int maxZoom() {
         return maxZoom;
     }
 
@@ -212,7 +212,7 @@ public class QuadData {
      *
      * @return the calibration data
      */
-    public Coord calibration() {
+    Coord calibration() {
         return calibration;
     }
 
@@ -223,7 +223,7 @@ public class QuadData {
      * @param coords the coordinates to adjust
      * @return the corresponding quad coordinates
      */
-    public Set<Coord> adjust(Set<Coord> coords) {
+    Set<Coord> adjust(Set<Coord> coords) {
         Set<Coord> quadEquiv = new HashSet<>(coords.size() * 4);
         for (Coord c : coords) {
             Coord qc = regionToQuad(c.x(), c.z());
@@ -233,9 +233,5 @@ public class QuadData {
             quadEquiv.add(qc.xzPlus1());
         }
         return quadEquiv;
-    }
-
-    public Iterable<? extends Region> staleRegions() {
-        return null;
     }
 }

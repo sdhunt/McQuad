@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Meowster.com
+ * Copyright (c) 2014-2016 Meowster.com
  */
 
 package com.meowster.mcquad;
@@ -8,14 +8,17 @@ import org.jnbt.ByteArrayTag;
 import org.jnbt.CompoundTag;
 import org.jnbt.Tag;
 
-import static com.meowster.mcquad.NbtUtils.*;
+import static com.meowster.mcquad.NbtUtils.ADD;
+import static com.meowster.mcquad.NbtUtils.BLOCKS;
+import static com.meowster.mcquad.NbtUtils.DATA;
+import static com.meowster.mcquad.NbtUtils.getByteArrayFromTag;
 
 /**
  * Encapsulates data about a chunk section (16x16x16 blocks).
  *
  * @author Simon Hunt
  */
-public class ChunkSection {
+class ChunkSection {
 
     private static final int CUBE_16 = 16 * 16 * 16;
     private static final int NBLOCKS = 16;
@@ -27,9 +30,9 @@ public class ChunkSection {
      * Creates the chunk section from the specified (NBT compound) section tag.
      *
      * @param sectionTag the section tag
-     * @param biomeData the biome data associated with this chunk
+     * @param biomeData  the biome data associated with this chunk
      */
-    public ChunkSection(CompoundTag sectionTag, ChunkBiomeData biomeData) {
+    ChunkSection(CompoundTag sectionTag, ChunkBiomeData biomeData) {
         byte[] idsLow = getByteArrayFromTag(sectionTag, BLOCKS);
         Tag addTag = sectionTag.getValue().get(ADD);
         byte[] add = addTag == null ? null : ((ByteArrayTag) addTag).getValue();
@@ -68,12 +71,12 @@ public class ChunkSection {
      * in each byte (even nybble indexes) occupies the lower 4 bits and the
      * second (odd nybble indexes) occupies the high bits.
      *
-     * @param arr the source array
+     * @param arr   the source array
      * @param index the index (in nybbles) of the desired 4 bits
      * @return the desired 4 bits as the lower bits of a byte
      */
     private byte nybble(byte[] arr, int index) {
-        byte data = arr[index/2];
+        byte data = arr[index / 2];
         if (index % 2 == 1)
             data >>= 4;
         return (byte) (data & 0xf);
@@ -87,7 +90,7 @@ public class ChunkSection {
      * @param z the z-coord (0..15)
      * @return the block at those coordinates
      */
-    public BlockData blockAt(int x, int y, int z) {
+    BlockData blockAt(int x, int y, int z) {
         return blockData[index(x, y, z)];
     }
 
@@ -99,8 +102,8 @@ public class ChunkSection {
      * @param z the z-coord
      * @return the y value of the highest fully opaque block at those coords
      */
-    public int highOpaque(int x, int z) {
-        for (int y = NBLOCKS-1; y >= 0; y--) {
+    int highOpaque(int x, int z) {
+        for (int y = NBLOCKS - 1; y >= 0; y--) {
             BlockData block = blockAt(x, y, z);
             if (block.isFullyOpaque())
                 return y;
