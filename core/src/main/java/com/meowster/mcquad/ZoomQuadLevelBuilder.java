@@ -9,6 +9,7 @@ import com.meowster.util.PathUtils;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import static com.meowster.util.StringUtils.EOL;
 import static com.meowster.util.StringUtils.print;
@@ -37,7 +38,8 @@ public class ZoomQuadLevelBuilder extends QuadLevelBuilder {
     }
 
     @Override
-    public void prepare() {
+    public void prepare(Set<Coord> stale) {
+        toProcess = stale;
         q = new QdLvl();
         q.setZoom(sourceLevel.zoom() - 1);
         q.setBlocksPerTileSide(sourceLevel.blocksPerTileSide() * 2);
@@ -66,6 +68,12 @@ public class ZoomQuadLevelBuilder extends QuadLevelBuilder {
         printOut(String.format(EOL + "Rendering zoom level %d:", q.zoom()));
         for (int a = 0; a < dim; a += 2) {
             for (int b = 0; b < dim; b += 2) {
+                Coord c = new Coord(a / 2, b / 2);
+                if (toProcess != null && !toProcess.contains(c)) {
+                    continue;
+                    // TODO: how to track tiles that were skipped?
+                }
+
                 // get TopLeft, TopRight, BottomLeft, BottomRight tiles
                 QuadTile tl = sourceLevel.at(a, b);
                 QuadTile tr = sourceLevel.at(a + 1, b);
@@ -80,7 +88,7 @@ public class ZoomQuadLevelBuilder extends QuadLevelBuilder {
                 }
             }
 
-            if (!suppressWrite) {
+            if (!suppressWrite && !tiles.isEmpty()) {
                 writeTiles(tiles, q.outputDir());
             }
 
@@ -110,7 +118,7 @@ public class ZoomQuadLevelBuilder extends QuadLevelBuilder {
     }
 
     @Override
-    void reportStats(List<LevelStats> stats) {
+    void saveStats(List<LevelStats> stats) {
         stats.add(q.getStats());
     }
 }

@@ -8,7 +8,9 @@ import com.meowster.util.ImageUtils;
 import com.meowster.util.PathUtils;
 
 import java.io.File;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static com.meowster.util.StringUtils.EOL;
 import static com.meowster.util.StringUtils.print;
@@ -31,6 +33,8 @@ public abstract class QuadLevelBuilder {
 
     final File tilesDir;
 
+    Set<Coord> toProcess;
+
     /**
      * Constructs the builder.
      *
@@ -42,9 +46,12 @@ public abstract class QuadLevelBuilder {
 
     /**
      * This allows the builder to initialize its internal structures,
-     * ready for operation.
+     * ready for operation. The list of coordinates are those quad tiles
+     * that need to be rendered.
+     *
+     * @param stale list of stale tile coordinates
      */
-    abstract void prepare();
+    abstract void prepare(Set<Coord> stale);
 
     /**
      * This instructs the builder to create the directory in which the
@@ -71,7 +78,7 @@ public abstract class QuadLevelBuilder {
      *
      * @param stats the list to which stats should be added
      */
-    abstract void reportStats(List<LevelStats> stats);
+    abstract void saveStats(List<LevelStats> stats);
 
 
     /**
@@ -101,5 +108,21 @@ public abstract class QuadLevelBuilder {
     protected void printMark(int i) {
         print((i % MAJOR_TICK == 0) ? MAJOR_MARK :
                 (i % MINOR_TICK == 0) ? MINOR_MARK : MARK);
+    }
+
+    /**
+     * Returns the set of stale coordinates for one level zoomed out.
+     *
+     * @return stale coordinates one level up
+     */
+    public Set<Coord> zoomedOutStale() {
+        if (toProcess == null) {
+            return null;
+        }
+        Set<Coord> result = new HashSet<>();
+        for (Coord c: toProcess) {
+            result.add(c.div2());
+        }
+        return result;
     }
 }

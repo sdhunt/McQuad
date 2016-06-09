@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 /**
  * An immutable class that combines x and z coordinates into a single key.
  */
-public class Coord {
+public class Coord implements Comparable<Coord> {
 
     private static final Pattern RE_COORD =
             Pattern.compile("\\[(-?\\d+),\\s*(-?\\d+)\\]");
@@ -95,6 +95,42 @@ public class Coord {
      */
     public Coord div2() {
         return new Coord(x / 2, z / 2);
+    }
+
+    @Override
+    public int compareTo(Coord o) {
+        int result = this.x - o.x;
+        if (result == 0) {
+            result = this.z - o.z;
+        }
+        return result;
+    }
+
+    /**
+     * Returns the coordinate that is this plus one to the x element.
+     *
+     * @return this coord (x+1, z)
+     */
+    public Coord xPlus1() {
+        return new Coord(x + 1, z);
+    }
+
+    /**
+     * Returns the coordinate that is this plus one to the z element.
+     *
+     * @return this coord (x, z+1)
+     */
+    public Coord zPlus1() {
+        return new Coord(x, z + 1);
+    }
+
+    /**
+     * Returns the coordinate that is this plus one to both x and z elements.
+     *
+     * @return this coord (x+1, z+1)
+     */
+    public Coord xzPlus1() {
+        return new Coord(x + 1, z + 1);
     }
 
     /**

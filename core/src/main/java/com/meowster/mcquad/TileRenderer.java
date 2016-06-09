@@ -9,8 +9,10 @@ import com.meowster.util.PathUtils;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import static com.meowster.util.StringUtils.EOL;
+import static com.meowster.util.StringUtils.printOut;
 
 /**
  * Takes quad data and biome/block color data, and renders tiles in the form
@@ -44,27 +46,40 @@ public class TileRenderer {
     }
 
     /**
-     * Does the actual work of rendering the tiles (for all zoom levels).
+     * Does the actual work of rendering the tiles (for all zoom levels), for
+     * the given quad coordinates.
+     *
+     * @param stale coordinates of stale regions
      */
-    public void render() {
-        // first, the top level directory, in which we place the zoom dirs.
+    public void render(Set<Coord> stale) {
+        if (stale == null) {
+            printOut("Calibration change detected -- regenerating all tiles!");
+            PathUtils.deleteTree(tilesDir);
+        }
         PathUtils.createIfNeedBe(tilesDir);
 
+        if (stale != null && stale.isEmpty()) {
+            printOut("No stale regions -- nothing to do!!");
+            return;
+        }
+
         QuadLevelBuilder builder = factory.createBuilder(quadData);
-        builder.prepare();
+        builder.prepare(stale);
         builder.createDirectory();
         builder.generateTiles();
-        builder.reportStats(stats);
+        builder.saveStats(stats);
         QuadLevel level = builder.getLevel();
+        Set<Coord> zoomedOutStale = builder.zoomedOutStale();
 
         // now progressively zoom out...
         while (level.zoom() > 1) {
             builder = factory.createBuilder(level);
-            builder.prepare();
+            builder.prepare(zoomedOutStale);
             builder.createDirectory();
             builder.generateTiles();
-            builder.reportStats(stats);
+            builder.saveStats(stats);
             level = builder.getLevel();
+            zoomedOutStale = builder.zoomedOutStale();
         }
     }
 

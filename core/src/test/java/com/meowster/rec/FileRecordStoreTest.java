@@ -38,10 +38,11 @@ public class FileRecordStoreTest extends AbstractTest {
         title("someFile");
         store = new FileRecordStore(SOME_FILE);
         print(store.toDebugString());
-        assertEquals(AM_UXS, 2, store.size());
+        assertEquals(AM_UXS, 3, store.size());
         Iterator<Record> iter = store.getRecords().iterator();
         assertEquals(AM_NEQ, "Some data = foo", iter.next().raw());
         assertEquals(AM_NEQ, "123", iter.next().raw());
+        assertEquals(AM_NEQ, "Another line", iter.next().raw());
     }
 
     @Test
@@ -49,10 +50,12 @@ public class FileRecordStoreTest extends AbstractTest {
         title("someFileWithBlanks");
         store = new FileRecordStore(SOME_FILE, false);
         print(store.toDebugString());
-        assertEquals(AM_UXS, 3, store.size());
+        assertEquals(AM_UXS, 4, store.size());
+        // NOTE: trailing empty strings are suppressed (see String.split())
         Iterator<Record> iter = store.getRecords().iterator();
         assertEquals(AM_NEQ, "", iter.next().raw());
         assertEquals(AM_NEQ, "Some data = foo", iter.next().raw());
         assertEquals(AM_NEQ, "123", iter.next().raw());
+        assertEquals(AM_NEQ, "Another line", iter.next().raw());
     }
 }

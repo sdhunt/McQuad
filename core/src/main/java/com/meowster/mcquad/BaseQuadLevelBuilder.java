@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import static com.meowster.util.StringUtils.EOL;
 import static com.meowster.util.StringUtils.print;
@@ -53,7 +54,7 @@ public class BaseQuadLevelBuilder extends QuadLevelBuilder {
     }
 
     @Override
-    void reportStats(List<LevelStats> stats) {
+    void saveStats(List<LevelStats> stats) {
         // NOTE: add stats in order from deepest zoom upwards
         stats.add(levelZoomPlus2.getStats());
         stats.add(levelZoomPlus1.getStats());
@@ -61,7 +62,8 @@ public class BaseQuadLevelBuilder extends QuadLevelBuilder {
     }
 
     @Override
-    public void prepare() {
+    public void prepare(Set<Coord> stale) {
+        toProcess = stale;
         levelZoomPlus0 = makeQdLvl(0);
         levelZoomPlus1 = makeQdLvl(1);
         levelZoomPlus2 = makeQdLvl(2);
@@ -134,6 +136,17 @@ public class BaseQuadLevelBuilder extends QuadLevelBuilder {
 
         int regionCount = 0;
         for (Region r : quadData.regionData().regions()) {
+            // TODO: figure out how to track tiles that we may not have
+            //       generated this time round, but might be required as
+            //       input to merged tiles...!!!
+            //       They aren't getting added to the tiles map for the level
+            //       when they are not re-generated. Should we perhaps
+            //       scan the tiles directory for existing tiles, first??
+
+            if (noChangeSinceLastTime(r)) {
+                continue;
+            }
+
             regionCount++;
 
             tiles0 = generateZoomPlus0Tiles(r, suppressWrite);
@@ -156,6 +169,16 @@ public class BaseQuadLevelBuilder extends QuadLevelBuilder {
         printOut(levelZoomPlus2.getStats().toString());
         printOut(levelZoomPlus1.getStats().toString());
         printOut(levelZoomPlus0.getStats().toString());
+    }
+
+    private boolean noChangeSinceLastTime(Region r) {
+        if (toProcess == null) {
+            // calibration change -- force all tiles to be stale
+            return false;
+        }
+        Coord rc = r.coord();
+        Coord qc = quadData.regionToQuad(rc.x(), rc.z());
+        return !toProcess.contains(qc);
     }
 
     private List<QuadTile> generateZoomPlus0Tiles(Region r, boolean suppressWrite) {

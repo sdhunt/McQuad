@@ -80,6 +80,17 @@ public class Region {
     }
 
     /**
+     * Returns the last modified timestamp for the backing region file.
+     * If there is no backing file (for example, unit tests running in
+     * mock mode) then 0 will be returned.
+     *
+     * @return last modified timestamp
+     */
+    public long modified() {
+        return f == null ? 0 : f.lastModified();
+    }
+
+    /**
      * Returns a coordinate instance for this region.
      *
      * @return the coordinates

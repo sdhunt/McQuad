@@ -4,6 +4,9 @@
 
 package com.meowster.mcquad;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import static com.meowster.util.StringUtils.EOL;
 
 /**
@@ -98,7 +101,7 @@ public class QuadData {
     }
 
     private int computeOffset(int n) {
-        int pad = (quadDim/2) - n;
+        int pad = (quadDim / 2) - n;
 
         // NOTE: don't try to simplify the following two lines, because we
         //       are relying on integer division..
@@ -116,10 +119,10 @@ public class QuadData {
 
 
     private String charAt(int x, int z) {
-        int rqx = x/2;
-        int rqz = z/2;
-        int cx = rqx + (xcc/2);
-        int cz = rqz + (zcc/2);
+        int rqx = x / 2;
+        int rqz = z / 2;
+        int cx = rqx + (xcc / 2);
+        int cz = rqz + (zcc / 2);
         Region r = regionData.at(cx, cz);
         return tileChar(r);
     }
@@ -132,8 +135,8 @@ public class QuadData {
      */
     public String schematic() {
         StringBuilder sb = new StringBuilder();
-        for (int z=0; z<quadDim; z+=2) {
-            for (int x=0; x<quadDim; x+=2) {
+        for (int z = 0; z < quadDim; z += 2) {
+            for (int x = 0; x < quadDim; x += 2) {
                 sb.append(charAt(x, z));
             }
             sb.append(EOL);
@@ -159,7 +162,7 @@ public class QuadData {
      * @return the region mapped at [a,b]
      */
     public Region at(int a, int b) {
-        Coord xz = quadToRegion(a/2, b/2);
+        Coord xz = quadToRegion(a / 2, b / 2);
         return regionData.at(xz);
     }
 
@@ -171,7 +174,18 @@ public class QuadData {
      * @return the corresponding region coordinates
      */
     private Coord quadToRegion(int a, int b) {
-        return new Coord(a + xcc/2, b + zcc/2);
+        return new Coord(a + xcc / 2, b + zcc / 2);
+    }
+
+    /**
+     * Converts region coordinates to quad coordinates.
+     *
+     * @param a a-coord
+     * @param b b-coord
+     * @return the corresponding quad coordinates
+     */
+    public Coord regionToQuad(int a, int b) {
+        return new Coord(a * 2 - xcc, b * 2 - zcc);
     }
 
     /**
@@ -200,5 +214,28 @@ public class QuadData {
      */
     public Coord calibration() {
         return calibration;
+    }
+
+    /**
+     * Converts a set of region coordinates into quad coordinates, (implicitly
+     * converting from 512x512 to four 256x256 entities).
+     *
+     * @param coords the coordinates to adjust
+     * @return the corresponding quad coordinates
+     */
+    public Set<Coord> adjust(Set<Coord> coords) {
+        Set<Coord> quadEquiv = new HashSet<>(coords.size() * 4);
+        for (Coord c : coords) {
+            Coord qc = regionToQuad(c.x(), c.z());
+            quadEquiv.add(qc);
+            quadEquiv.add(qc.xPlus1());
+            quadEquiv.add(qc.zPlus1());
+            quadEquiv.add(qc.xzPlus1());
+        }
+        return quadEquiv;
+    }
+
+    public Iterable<? extends Region> staleRegions() {
+        return null;
     }
 }

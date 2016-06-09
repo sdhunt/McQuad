@@ -4,11 +4,14 @@
 
 package com.meowster.rec;
 
+import com.meowster.util.StringUtils;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -45,6 +48,16 @@ public class TextFile {
     }
 
     /**
+     * Clears the current in-memory contents.
+     *
+     * @return self, for chaining
+     */
+    public TextFile clear() {
+        contents.clear();
+        return this;
+    }
+
+    /**
      * Adds the given string to the in-memory contents of the file.
      *
      * @param s the string to add
@@ -63,6 +76,20 @@ public class TextFile {
             Files.write(backingFile.toPath(), contents, UTF_8);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    /**
+     * Returns the non-comment lines from the backing file.
+     *
+     * @return non comment lines as list of strings
+     */
+    public List<String> nonCommentLines() {
+        try {
+            return StringUtils.getFileContentsAsList(backingFile, true);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return Collections.emptyList();
         }
     }
 }

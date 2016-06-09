@@ -7,6 +7,7 @@ package com.meowster.mcquad;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import static com.meowster.util.StringUtils.EOL;
@@ -57,32 +58,37 @@ public class McQuad {
             parsedArgs.printUsage();
             return 1;
         }
-        printOut("Regions to process: " + regionData.regions().size());
 
         // At this point we have created a region model for the world.
 
-        // We need to load region metadata information, so we know which
-        //  regions have been modified since last we generated the tiles.
+        // Load previously saved information about the regions...
         RegionCachedMetaData meta =
                 RegionCachedMetaData.load(outputUtils.metaDir());
-        printOut(meta);
-        // TODO: once we have this, need to pass it to tile renderer
 
-        // Now we need to project the regions into a Quad format.
+        // Update with the latest state of the regions...
+        meta.update(regionData);
 
+        // project regions into Quad-Space...
         QuadData quad = new QuadData(regionData);
         printOut(quad);
         print(EOL);
         printOut(quad.schematic());
+        boolean flushAll = meta.updateQuadShift(quad.calibration());
+        meta.persist();
+        printOut(meta);
 
+        Set<Coord> stale = flushAll ? null : quad.adjust(meta.stale());
+
+        // write Javascript parameters to configure zoomable map...
         new ParameterizedJs(outputUtils.rootDir(), quad.maxZoom() + ZOOM_PLUS);
 
-        TileRenderer tr = new TileRenderer(quad, outputUtils.tilesDir());
-        tr.render();
+        // Go ahead and render those tiles that need rendering...
+        new TileRenderer(quad, outputUtils.tilesDir()).render(stale);
+
+        // Are we missing any block definitions from the color file?
+        reportDefaultedBlocks();
 
         printOut(EOL + readableDuration(currentTimeMillis() - started));
-
-        reportDefaultedBlocks();
 
         done = true;
         printOut("All Done!");

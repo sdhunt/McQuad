@@ -4,9 +4,13 @@
 
 package com.meowster.util;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -17,21 +21,29 @@ import java.util.regex.Pattern;
  */
 public class StringUtils {
 
-    /** The platform dependent line separator (new line character). */
-    public static final String EOL = System.getProperty("line.separator");
+    /**
+     * The platform dependent line separator (new line character).
+     */
+    public static final String EOL = String.format("%n");
 
-    /** String representing UTF-8 encoding (e.g. String.getBytes(UTF8)) */
+    /**
+     * String representing UTF-8 encoding (e.g. String.getBytes(UTF8))
+     */
     public static final String UTF8 = "UTF-8";
 
-    /** Format token used for parameter replacement. */
     private static final String FORMAT_TOKEN = "{}";
-
-    /** String representation of null. */
     private static final String NULL_REP = "{null}";
-
-    /** Hex string prefix. */
     private static final String OX = "0x";
+    private static final String HASH = "#";
+    private static final String RE_RET = "\\r";
+    private static final String RE_NL = "\\n";
+    private static final String NUTHIN = "";
+    private static final String RE_BLANK_LINE = "^\\s*$";
 
+    private static final Pattern P_BLANK_LINE =
+            Pattern.compile(RE_BLANK_LINE);
+    private static final Pattern RE_MULTLINE =
+            Pattern.compile("^(.*)$", Pattern.MULTILINE);
 
     /**
      * A simple string formatter that replaces each occurrence of
@@ -44,7 +56,7 @@ public class StringUtils {
      * </pre>
      *
      * @param fmt the format string
-     * @param o arguments to be inserted into the output string
+     * @param o   arguments to be inserted into the output string
      * @return a formatted string
      */
     public static String format(String fmt, Object... o) {
@@ -71,11 +83,11 @@ public class StringUtils {
 
     /**
      * Prints a formatted set of items to the specified print stream.
-     * @see #format
      *
-     * @param s the print stream to write to
-     * @param fmt the string format
+     * @param s     the print stream to write to
+     * @param fmt   the string format
      * @param items the items
+     * @see #format
      */
     public static void printToStream(PrintStream s, String fmt, Object... items) {
         s.println(format(fmt, items));
@@ -84,10 +96,10 @@ public class StringUtils {
     /**
      * Prints a formatted set of items to STDOUT, using the
      * specified format string and items.
-     * @see #format
      *
-     * @param fmt the string format
+     * @param fmt   the string format
      * @param items the items
+     * @see #format
      */
     public static void printOut(String fmt, Object... items) {
         printToStream(System.out, fmt, items);
@@ -116,35 +128,20 @@ public class StringUtils {
     /**
      * Prints a formatted set of items to STDERR, using the
      * specified format string and items.
-     * @see #format
      *
-     * @param fmt the string format
+     * @param fmt   the string format
      * @param items the items
+     * @see #format
      */
     public static void printErr(String fmt, Object... items) {
         printToStream(System.err, fmt, items);
     }
 
     /**
-     * Prints a space delimited line of items to STDOUT.
-     *
-     * @param items the items
-     */
-//    public static void print(Object... items) {
-//        for (Object o: items) {
-//            System.out.print(o);
-//            System.out.print("  ");
-//        }
-//        System.out.println();
-//    }
-
-
-
-    /**
      * Read in the contents of a text file from the given path. If the
      * resource cannot be found, null is returned.
      *
-     * @param path path of resource containing the data
+     * @param path        path of resource containing the data
      * @param classLoader class-loader to be used for locating resource
      * @return the contents of the file as a string
      * @throws java.io.IOException if there is a problem reading the file.
@@ -170,9 +167,29 @@ public class StringUtils {
         return result;
     }
 
+    /**
+     * Returns the contents of the given file as a list of strings.
+     *
+     * @param f     the file
+     * @param strip if true, removes comment lines and blanks
+     * @return lines of the files as a list of strings
+     * @throws java.io.IOException if there is a problem reading the file.
+     */
+    public static List<String> getFileContentsAsList(File f, boolean strip)
+            throws IOException {
 
-    private static final Pattern RE_MULTLINE =
-            Pattern.compile("^(.*)$", Pattern.MULTILINE);
+        List<String> result = Files.readAllLines(f.toPath());
+        if (strip) {
+            List<String> filtered = new ArrayList<>();
+            for (String s : result) {
+                if (!s.startsWith(HASH) && !s.matches(RE_BLANK_LINE)) {
+                    filtered.add(s);
+                }
+            }
+            result = filtered;
+        }
+        return result;
+    }
 
     /**
      * Removes all lines that begin with the '#' character.
@@ -183,13 +200,33 @@ public class StringUtils {
     public static String stripCommentLines(String s) {
         StringBuilder sb = new StringBuilder();
         Matcher m = RE_MULTLINE.matcher(s);
-        while(m.find()) {
+        while (m.find()) {
             String line = m.group(1);
             if (!line.startsWith("#")) {
                 sb.append(line).append(EOL);
             }
         }
         return sb.toString();
+    }
+
+    /**
+     * Parses the given string as lines, stripping out comments and blanks.
+     *
+     * @param orig original string
+     * @return list of lines
+     */
+    public static List<String> stringAsLines(String orig) {
+        String s2 = stripCommentLines(orig);
+
+        List<String> results = new ArrayList<>();
+
+        String clean = s2.replaceAll(RE_RET, NUTHIN);
+        for (String s : clean.split(RE_NL)) {
+            if (P_BLANK_LINE.matcher(s).matches())
+                continue;
+            results.add(s);
+        }
+        return results;
     }
 
     /**

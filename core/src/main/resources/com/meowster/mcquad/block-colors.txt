@@ -717,6 +717,10 @@ default     0xffff00ff                  # (magenta)
 
 #0x00d0      0x00000000                  # grass path # TODO: color
 
+#0x00d8:0x0  0x00000000                  # bone block (u/d)  # TODO: color
+#0x00d8:0x4  0x00000000                  # bone block (e/w)  # TODO: color
+#0x00d8:0x8  0x00000000                  # bone block (n/s)  # TODO: color
+
 #0x01b3:0x0  0x00000000                  # beetroot (stage 0)    # TODO: color
 #0x01b3:0x1  0x00000000                  # beetroot (stage 1)    # TODO: color
 #0x01b3:0x2  0x00000000                  # beetroot (stage 2)    # TODO: color
