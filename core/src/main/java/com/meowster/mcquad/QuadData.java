@@ -173,7 +173,7 @@ class QuadData {
      * @param b b-coord
      * @return the corresponding region coordinates
      */
-    private Coord quadToRegion(int a, int b) {
+    Coord quadToRegion(int a, int b) {
         return new Coord(a + xcc / 2, b + zcc / 2);
     }
 
@@ -214,6 +214,15 @@ class QuadData {
      */
     Coord calibration() {
         return calibration;
+    }
+
+    /**
+     * Returns the count of regions along a side; (half the Quad dimension).
+     *
+     * @return regions along a side
+     */
+    int regionsPerSide() {
+        return quadDim / 2;
     }
 
     /**

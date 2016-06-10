@@ -79,11 +79,15 @@ public class McQuad {
 
         Set<Coord> stale = flushAll ? null : quad.adjust(meta.stale());
 
-        // write Javascript parameters to configure zoomable map...
-        new ParameterizedJs(outputUtils.rootDir(), quad.maxZoom() + ZOOM_PLUS);
-
         // Go ahead and render those tiles that need rendering...
         new TileRenderer(quad, outputUtils.tilesDir()).render(stale);
+
+        // Create today's heatmap
+        new HeatMapGenerator(quad.regionsPerSide(), quad.calibration(),
+                meta.regionTtlMap(), outputUtils.auxDir());
+
+        // write Javascript parameters to configure zoomable map...
+        new ParameterizedJs(outputUtils.rootDir(), quad.maxZoom() + ZOOM_PLUS);
 
         // Are we missing any block definitions from the color file?
         reportDefaultedBlocks();

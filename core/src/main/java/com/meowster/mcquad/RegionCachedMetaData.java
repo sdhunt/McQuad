@@ -9,6 +9,7 @@ import com.meowster.util.StringUtils;
 
 import java.io.File;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -168,5 +169,18 @@ class RegionCachedMetaData {
         boolean changed = !calibration.equals(quadShift);
         quadShift = calibration;
         return changed;
+    }
+
+    /**
+     * Returns a map of (region occupied) coordinates and their TTL value.
+     *
+     * @return region TTL map
+     */
+    Map<Coord, Integer> regionTtlMap() {
+        Map<Coord, Integer> map = new HashMap<>();
+        for (MetaRegion mr: metaMap.values()) {
+            map.put(mr.coord(), mr.ttl());
+        }
+        return map;
     }
 }

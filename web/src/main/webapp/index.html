@@ -12,6 +12,7 @@
 
     <link rel="stylesheet" href="mcquad.css">
 
+    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <script type="text/javascript" src="tp/polymaps-v2.5.1.min.js"></script>
     <script type="text/javascript" src="map-config.js"></script>
 </head>
@@ -24,7 +25,10 @@
             McQuad Map
     </div>
     <div id="mast-version" class="headdiv">
-            Version 1.1b
+            Version 1.2
+    </div>
+    <div id="mast-heatmap" class="headdiv right">
+        <img id="heatmap-btn" src="img/furnace64.png">
     </div>
 </div>
 <div id="map"></div>
@@ -41,6 +45,27 @@
                 .tileSize({x: 256, y: 256})
                 .add(po.image().url(po.url(tileUrl)))
                 .add(po.interact());
+
+    d3.select('#heatmap-btn').on('click', toggleHeatMap);
+
+    function toggleHeatMap() {
+        var div = d3.select('#heatmap');
+        if (div.empty()) {
+            createHeatMapDiv();
+        } else {
+            div.remove();
+        }
+    }
+
+    function createHeatMapDiv() {
+        var div = d3.select('body').append('div').attr('id', 'heatmap')
+                .classed('centered', true);
+        div.append('h2').text('Region Heat Map');
+        div.append('img').attr('src', 'aux/heatmap/heat-latest.png');
+
+        return div;
+    }
+
 </script>
 </body>
 </html>
