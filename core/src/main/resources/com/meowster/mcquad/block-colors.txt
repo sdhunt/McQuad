@@ -515,9 +515,7 @@ default     0xffff00ff                  # (magenta)
 
 0x0090      0xffffffff                  # mob head
 
-0x0091:0x0  0x9f403c3c                  # anvil
-0x0091:0x1  0x9f403c3c                  # slightly damaged anvil
-0x0091:0x2  0x9f403c3c                  # very damaged anvil
+0x0091      0x9f403c3c                  # anvil (:: orientation / damage)
 
 0x0092      0xfe6f5739                  # trapped chest
 
@@ -672,11 +670,11 @@ default     0xffff00ff                  # (magenta)
 0x00af:0xc  0x1dba180b                  # rose bush top half
 0x00af:0xd  0x1ddea5f7                  # peony top half
 
-# [176] 0x00b0      0x00000000                  # ?
+#0x00b1      0x00000000                  # Standing Banner # TODO: color
 
-# [177] 0x00b1      0x00000000                  # ?
+#0x00b1      0x00000000                  # Wall Banner # TODO: color
 
-# [178] 0x00b2      0x00000000                  # ?
+0x00b2      0xff82745e                  # Inverted Daylight Sensor
 
 0x00b3:0x0  0xffac5b22                  # red sandstone
 0x00b3:0x1  0xffac5b22                  # chiseled red sandstone
@@ -715,7 +713,7 @@ default     0xffff00ff                  # (magenta)
 #0x00c4      0x00000000                  # acacia door # TODO: color
 #0x00c5      0x00000000                  # dark oak door # TODO: color
 
-0x00d0      0xff6d582f                  # grass path
+0x00d0      0xffa28b4f                  # grass path
 
 0x00d8:0x0  0xffb3ae91                  # bone block (u/d)
 0x00d8:0x4  0xffe6e3d1                  # bone block (e/w)
