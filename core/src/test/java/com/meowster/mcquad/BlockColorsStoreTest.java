@@ -21,7 +21,7 @@ import static org.junit.Assert.assertNull;
  */
 public class BlockColorsStoreTest extends AbstractTest {
 
-    private static final int EXP_NUM_BLOCK_RECORDS = 459;
+    private static final int EXP_NUM_BLOCK_RECORDS = 478;
 
     private BlockColorsStore store;
 
