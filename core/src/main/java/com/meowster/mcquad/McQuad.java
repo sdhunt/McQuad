@@ -21,7 +21,9 @@ import static java.lang.System.currentTimeMillis;
  * @author Simon Hunt
  */
 public class McQuad {
-    private static final int ZOOM_PLUS = 2;
+
+    /* This version is displayed in the masthead of the web app */
+    private static final String MCQUAD_VERSION = "1.2.1";
 
     private final ParsedArgs parsedArgs;
     private final OutputUtils outputUtils;
@@ -77,17 +79,27 @@ public class McQuad {
         meta.persist();
         printOut(meta);
 
+        // Compute those regions that are stale, then...
         Set<Coord> stale = flushAll ? null : quad.adjust(meta.stale());
 
-        // Go ahead and render those tiles that need rendering...
-        new TileRenderer(quad, outputUtils.tilesDir()).render(stale);
+        // ...render those tiles that need rendering...
+        TileRenderer tr = new TileRenderer(quad, outputUtils.tilesDir())
+                .render(stale);
 
         // Create today's heatmap
-        new HeatMapGenerator(quad.regionsPerSide(), quad.calibration(),
+        HeatMapGenerator hmg =
+                new HeatMapGenerator(quad.regionsPerSide(), quad.calibration(),
                 meta.regionTtlMap(), outputUtils.auxDir());
 
-        // write Javascript parameters to configure zoomable map...
-        new ParameterizedJs(outputUtils.rootDir(), quad.maxZoom() + ZOOM_PLUS);
+        // write Javascript parameters to configure zoomable map web app...
+        new ParameterizedJs(outputUtils.rootDir())
+                .version(MCQUAD_VERSION)
+                .baseZoom(quad.baseZoom())
+                .heatMapSizePx(hmg.pixels())
+                .regionPixel(HeatMapGenerator.PIXELS_PER_REGION)
+                .write();
+
+        // TODO: write render report?
 
         // Are we missing any block definitions from the color file?
         reportDefaultedBlocks();

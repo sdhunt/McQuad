@@ -30,7 +30,8 @@ class HeatMapGenerator {
     private static final SimpleDateFormat FORMAT =
             new SimpleDateFormat("yyyy-MM-dd");
 
-    private static final int PIXELS_PER_REGION = 8;
+    static final int PIXELS_PER_REGION = 8;
+
     private static final Color BACKGROUND_COLOR = new Color(30, 30, 30);
     private static final Color[] LEVELS = {
             new Color(0x402e16),
@@ -109,5 +110,15 @@ class HeatMapGenerator {
         File heatmapDir = new File(auxDir, HEATMAP);
         PathUtils.createIfNeedBe(heatmapDir);
         return new File(heatmapDir, PREFIX + today + SUFFIX);
+    }
+
+    /**
+     * Returns the size of the heatmap image in pixels. Since the map is
+     * square we know it will be NxN pixels.
+     *
+     * @return number of pixels to a side
+     */
+    int pixels() {
+        return pixels;
     }
 }

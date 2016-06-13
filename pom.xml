@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ~ Copyright (c) 2014 Simon Hunt
+  ~ Copyright (c) 2014-2016 Simon Hunt
   ~
   ~ Licensed under the MIT License (MIT). You may obtain a copy of
   ~ the license at:
@@ -12,10 +12,15 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <properties>
+        <mcquad.version>1.2.1</mcquad.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
     <groupId>com.meowster</groupId>
     <artifactId>mcquad</artifactId>
     <packaging>pom</packaging>
-    <version>1.2.0</version>
+    <version>${mcquad.version}</version>
 
     <name>McQuad Project</name>
     <description>Minecraft Quadtile Projection</description>
@@ -34,10 +39,6 @@
             <url>http://opensource.org/licenses/MIT</url>
         </license>
     </licenses>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
 
     <build>
         <pluginManagement>

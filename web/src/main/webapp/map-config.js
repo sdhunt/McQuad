@@ -1,3 +1,3 @@
 McQuad = {
-  maxZoom: 6
+  // parameters will be injected here during map-snapshot run...
 };

@@ -49,7 +49,8 @@ html, body {
 }
 
 #map {
-    height: 90%;
+    /* NOTE: height dynamically overridden (via window resize) */
+    height: 80%;
     margin: 10px;
     border: 3px solid #644;
     background-color: #114;
@@ -62,9 +63,10 @@ html, body {
 }
 
 #heatmap {
+    /* NOTE: width and height dynamically overridden (via size of map image) */
     width: 400px;
     height: 432px;
-    background-color: #362A20;
+    background-color: #000000;
     border: 3px solid #524031;
 }
 
@@ -91,7 +93,4 @@ html, body {
 
 #heatmap img {
     position: relative;
-    top: 8px;
-    width: 400px;
-    height: 400px;
 }

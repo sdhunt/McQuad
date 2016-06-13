@@ -36,5 +36,5 @@ export MCMAPS_CONTEXT=/mcmaps
 ##
 
 # MCQUAD_VERSION should be set to correct version to pull out of maven repo
-export MCQUAD_VERSION=1.2.0
+export MCQUAD_VERSION=1.2.1
 

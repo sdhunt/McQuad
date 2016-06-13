@@ -51,7 +51,7 @@ class TileRenderer {
      *
      * @param stale coordinates of stale regions
      */
-    void render(Set<Coord> stale) {
+    TileRenderer render(Set<Coord> stale) {
         if (stale == null) {
             printOut("Calibration change detected -- regenerating all tiles!");
             PathUtils.deleteTree(tilesDir);
@@ -60,7 +60,7 @@ class TileRenderer {
 
         if (stale != null && stale.isEmpty()) {
             printOut("No stale regions -- nothing to do!!");
-            return;
+            return this;
         }
 
         QuadLevelBuilder builder = factory.createBuilder(quadData);
@@ -81,6 +81,7 @@ class TileRenderer {
             level = builder.getLevel();
             zoomedOutStale = builder.zoomedOutStale();
         }
+        return this;
     }
 
     /**

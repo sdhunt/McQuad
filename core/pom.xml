@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
+  ~ Copyright (c) 2014-2016 Simon Hunt
+  ~
+  ~ Licensed under the MIT License (MIT). You may obtain a copy of
+  ~ the license at:
+  ~
+  ~     http://opensource.org/licenses/MIT
   -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -9,7 +15,7 @@
     <parent>
         <groupId>com.meowster</groupId>
         <artifactId>mcquad</artifactId>
-        <version>1.2.0</version>
+        <version>${mcquad.version}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
