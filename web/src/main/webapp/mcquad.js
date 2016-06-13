@@ -44,6 +44,11 @@
         d3.select('#mast-version').text('Version ' + v);
     }
 
+    function resetZoom() {
+        zmap.zoom(1);
+        zmap.center({lat:0, lon:0});
+    }
+
     function toggleHeatMap() {
         var div = d3.select('#heatmap');
         if (div.empty()) {
@@ -74,24 +79,19 @@
             offset = (w - cfg.heatMap) / 2,
             div = d3.select('body')
                 .append('div')
-                .attr({
-                    id: 'heatmap',
-                    width: w,
-                    height: h
-                })
+                .attr('id', 'heatmap')
+                .style('width', px(w))
+                .style('height', px(h))
                 .classed('centered', true);
 
         div.append('h2')
+            .style('width', px(w))
             .text('Region Heat Map');
 
         div.append('img')
-            .attr({
-                src: 'aux/heatmap/heat-latest.png'
-            })
-            .style({
-                top: offset + 'px',
-                left: offset + 'px'
-            })
+            .attr('src', 'aux/heatmap/heat-latest.png')
+            .style('top', px(offset + 4))
+            .style('left', px(offset))
             .on('click', heatmapClick);
 
         return div;
@@ -100,6 +100,7 @@
     function initEventHandlers() {
         // show/hide the heat map
         d3.select('#heatmap-btn').on('click', toggleHeatMap);
+        d3.select('#reset-zoom-btn').on('click', resetZoom);
 
         // handle window resize events...
         d3.select(window).on('resize', handleResize);
