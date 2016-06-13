@@ -690,12 +690,18 @@ default     0xffff00ff                  # (magenta)
 0x00c4      0x60ad5d32                  # acacia door
 0x00c5      0x603e2912                  # dark oak door
 
+0x00cf:0x0  0x0901ab10                  # beetroot (stage 0)
+0x00cf:0x1  0x1701bb0f                  # beetroot (stage 1)
+0x00cf:0x2  0x3600be10                  # beetroot (stage 2)
+0x00cf:0x3  0x6f158002                  # beetroot (fully grown)
+
 0x00d0      0xffa28b4f                  # grass path
 
 0x00d8:0x0  0xffb3ae91                  # bone block (u/d)
 0x00d8:0x4  0xffe6e3d1                  # bone block (e/w)
 0x00d8:0x8  0xffe6e3d1                  # bone block (n/s)
 
+# not sure why beetroot is both 0xcf and 0x1b3 .. but that seems to be the case
 0x01b3:0x0  0x0901ab10                  # beetroot (stage 0)
 0x01b3:0x1  0x1701bb0f                  # beetroot (stage 1)
 0x01b3:0x2  0x3600be10                  # beetroot (stage 2)
