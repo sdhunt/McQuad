@@ -43,7 +43,7 @@ public class McQuad {
      * @return the system exit code
      */
     int process() {
-        printOut("McQuad!");
+        printOut("McQuad!\n");
 
         if (parsedArgs.showHelp())
             return 0;
@@ -53,7 +53,7 @@ public class McQuad {
         RegionData regionData;
         try {
             regionData = new RegionData().load(parsedArgs.regionDir);
-            printOut(regionData);
+            printOut("\n{}", regionData);
 
         } catch (Exception e) {
             printOut(e);

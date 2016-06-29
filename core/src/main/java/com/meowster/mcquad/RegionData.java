@@ -56,7 +56,7 @@ class RegionData {
          *  spurious regions.
          */
         if (!r.isMock() && r.chunkCount() < 2) {
-            printErr("Spurious region detected: {}", r);
+            printErr(" *** Spurious *** {}", r);
             return;
         }
 
