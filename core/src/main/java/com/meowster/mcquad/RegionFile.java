@@ -232,7 +232,7 @@ class RegionFile {
      * @return true if chunk data is here; false otherwise
      */
     int timeStampAt(int x, int z) {
-        return outOfBounds(x, z) ? 0 : chunkTimestamps[x + z * 32];
+        return outOfBounds(x, z) ? 0 : chunkTimestamps[x + z * NCHUNKS];
     }
 
     private boolean outOfBounds(int x, int z) {
@@ -240,7 +240,7 @@ class RegionFile {
     }
 
     private int getOffset(int x, int z) {
-        return offsets[x + z * 32];
+        return offsets[x + z * NCHUNKS];
     }
 
     private ByteArrayInputStream getDataStream(int length) throws IOException {
