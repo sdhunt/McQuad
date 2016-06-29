@@ -186,6 +186,54 @@ class RegionFile {
         }
     }
 
+    /**
+     * Returns the number of chunks available in this region.
+     *
+     * @return the chunk count
+     */
+    int chunkCount() {
+        int nChunks = 0;
+        for (int cz = 0; cz < NCHUNKS; cz++) {
+            for (int cx = 0; cx < NCHUNKS; cx++) {
+                if (chunkAvailableAt(cx, cz)) {
+                    nChunks++;
+                }
+            }
+        }
+        return nChunks;
+    }
+
+    /**
+     * Returns true if there is chunk data at the specified coordinates.
+     *
+     * @param x chunk x-coord
+     * @param z chunk z-coord
+     * @return true if chunk data is here; false otherwise
+     */
+    boolean chunkAvailableAt(int x, int z) {
+        if (outOfBounds(x, z))
+            return false;
+
+        int offset = getOffset(x, z);
+        if (offset == 0)
+            return false;
+
+        final int sectorNumber = offset >> 8;
+        final int numSectors = offset & 0xff;
+
+        return sectorNumber + numSectors <= nSectors;
+    }
+
+    /**
+     * Returns the chunk timestamp for the specified coordinates.
+     *
+     * @param x chunk x-coord
+     * @param z chunk z-coord
+     * @return true if chunk data is here; false otherwise
+     */
+    int timeStampAt(int x, int z) {
+        return outOfBounds(x, z) ? 0 : chunkTimestamps[x + z * 32];
+    }
 
     private boolean outOfBounds(int x, int z) {
         return x < 0 || x >= NCHUNKS || z < 0 || z >= NCHUNKS;

@@ -33,7 +33,7 @@ class Region {
      * @param f    the region file
      * @param mock file is a mock
      */
-    public Region(int x, int z, File f, boolean mock) {
+    Region(int x, int z, File f, boolean mock) {
         this.coord = new Coord(x, z);
         this.f = f;
         this.mock = mock;
@@ -49,6 +49,17 @@ class Region {
      */
     Region(int x, int z) {
         this(x, z, null, true);
+    }
+
+    /**
+     * Constructor for creating region file (not a mock).
+     *
+     * @param x    the x-coord
+     * @param z    the z-coord
+     * @param f    the region file
+     */
+    Region(int x, int z, File f) {
+        this(x, z, f, false);
     }
 
     @Override
@@ -77,6 +88,15 @@ class Region {
      */
     File regionFile() {
         return f;
+    }
+
+    /**
+     * Returns true if this is a mock (test) region.
+     *
+     * @return true if mock; false otherwise
+     */
+    boolean isMock() {
+        return mock;
     }
 
     /**
@@ -124,11 +144,19 @@ class Region {
     }
 
     /**
+     * Returns the number of chunks contained in this region.
+     *
+     * @return the number of chunks in the region
+     */
+    int chunkCount() {
+        return rf == null ? 0 : rf.chunkCount();
+    }
+
+    /**
      * Instructs the region to release any resources used to hold region data,
      * since we have generated the image and the data is no longer required.
      */
     void releaseResources() {
         rf = null;
     }
-
 }

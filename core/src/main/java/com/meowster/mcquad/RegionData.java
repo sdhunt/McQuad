@@ -48,6 +48,18 @@ class RegionData {
      * @param r the region to load
      */
     private void loadRegion(Region r) {
+        /*
+         * NOTE:
+         *  There is a bug in the Minecraft server (observed in 1.10.2) that
+         *  sometimes outputs region files containing a single chunk, with no
+         *  bearing to where players have explored. We need to filter out these
+         *  spurious regions.
+         */
+        if (!r.isMock() && r.chunkCount() < 2) {
+            printErr("Spurious region detected: {}", r);
+            return;
+        }
+
         bounds.add(r.coord());
         regionMap.put(r.coord(), r);
     }

@@ -23,7 +23,7 @@ import static java.lang.System.currentTimeMillis;
 public class McQuad {
 
     /* This version is displayed in the masthead of the web app */
-    private static final String MCQUAD_VERSION = "1.2.1";
+    private static final String MCQUAD_VERSION = "1.2.2";
 
     private final ParsedArgs parsedArgs;
     private final OutputUtils outputUtils;
