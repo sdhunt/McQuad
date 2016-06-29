@@ -31,6 +31,8 @@ class TileRenderer {
 
     private final List<LevelStats> stats = new ArrayList<>();
 
+    private long totalTilesRendered = 0L;
+
 
     /**
      * Creates a tile renderer for the specified quad data, creating tiles
@@ -66,7 +68,7 @@ class TileRenderer {
         QuadLevelBuilder builder = factory.createBuilder(quadData);
         builder.prepare(stale);
         builder.createDirectory();
-        builder.generateTiles();
+        totalTilesRendered += builder.generateTiles();
         builder.saveStats(stats);
         QuadLevel level = builder.getLevel();
         Set<Coord> zoomedOutStale = builder.zoomedOutStale();
@@ -76,7 +78,7 @@ class TileRenderer {
             builder = factory.createBuilder(level);
             builder.prepare(zoomedOutStale);
             builder.createDirectory();
-            builder.generateTiles();
+            totalTilesRendered += builder.generateTiles();
             builder.saveStats(stats);
             level = builder.getLevel();
             zoomedOutStale = builder.zoomedOutStale();
@@ -101,5 +103,14 @@ class TileRenderer {
     private StringBuilder reportHeader() {
         return new StringBuilder(EOL).append(HEADER).append(EOL)
                 .append(HEADER_LINE).append(EOL);
+    }
+
+    /**
+     * Returns the total number of tiles rendered by the renderer.
+     *
+     * @return number of tiles rendered
+     */
+    long totalTilesRendered() {
+        return totalTilesRendered;
     }
 }

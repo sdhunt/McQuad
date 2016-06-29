@@ -92,8 +92,8 @@ class BaseQuadLevelBuilder extends QuadLevelBuilder {
     }
 
     @Override
-    public void generateTiles() {
-        genTiles(false);
+    public long generateTiles() {
+        return genTiles(false);
     }
 
     /**
@@ -101,7 +101,7 @@ class BaseQuadLevelBuilder extends QuadLevelBuilder {
      *
      * @param suppressWrite if true, don't write image files to disk
      */
-    private void genTiles(boolean suppressWrite) {
+    private long genTiles(boolean suppressWrite) {
         /*
          NOTE:
          Since we will have the region data in memory, it makes sense
@@ -119,6 +119,8 @@ class BaseQuadLevelBuilder extends QuadLevelBuilder {
                                             |   |   |   |   |
                                             +---+---+---+---+
          */
+
+        long totalTilesGenerated = 0;
 
         levelZoomPlus0.startTracker();
         levelZoomPlus1.startTracker();
@@ -146,6 +148,8 @@ class BaseQuadLevelBuilder extends QuadLevelBuilder {
             tiles1 = tileZoomIn(tiles0, levelZoomPlus1, suppressWrite);
             tiles2 = tileZoomIn(tiles1, levelZoomPlus2, suppressWrite);
 
+            totalTilesGenerated += tiles0.size() + tiles1.size() + tiles2.size();
+
             printMark(regionCount);
 
             releaseTiles(tiles0);
@@ -161,6 +165,8 @@ class BaseQuadLevelBuilder extends QuadLevelBuilder {
         printOut(levelZoomPlus2.getStats().toString());
         printOut(levelZoomPlus1.getStats().toString());
         printOut(levelZoomPlus0.getStats().toString());
+
+        return totalTilesGenerated;
     }
 
     private boolean noChangeSinceLastTime(Region r) {

@@ -54,13 +54,14 @@ class ZoomQuadLevelBuilder extends QuadLevelBuilder {
     }
 
     @Override
-    public void generateTiles() {
-        genTiles(false);
+    public long generateTiles() {
+        return genTiles(false);
     }
 
-    private void genTiles(boolean suppressWrite) {
+    private long genTiles(boolean suppressWrite) {
         final int dim = sourceLevel.dim();
         List<QuadTile> tiles = new ArrayList<>();
+        long totalTilesGenerated = 0;
         QuadTile tile;
 
         q.startTracker();
@@ -94,14 +95,15 @@ class ZoomQuadLevelBuilder extends QuadLevelBuilder {
 
             printMark(a + 2);
 
+            totalTilesGenerated += tiles.size();
             releaseTiles(tiles);
-            tiles.clear();
         }
 
         print(EOL);
 
         q.stopTracker();
         printOut(q.getStats().toString());
+        return totalTilesGenerated;
     }
 
     private QuadTile gimmeATile(int a, int b) {

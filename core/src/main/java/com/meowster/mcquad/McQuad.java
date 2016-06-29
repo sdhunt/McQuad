@@ -74,7 +74,7 @@ public class McQuad {
         QuadData quad = new QuadData(regionData);
         printOut(quad);
         print(EOL);
-        printOut(quad.schematic());
+//        printOut(quad.schematic());
         boolean flushAll = meta.updateQuadShift(quad.calibration());
         meta.persist();
         printOut(meta);
@@ -83,8 +83,9 @@ public class McQuad {
         Set<Coord> stale = flushAll ? null : quad.adjust(meta.stale());
 
         // ...render those tiles that need rendering...
-        TileRenderer tr = new TileRenderer(quad, outputUtils.tilesDir())
-                .render(stale);
+        TileRenderer tr =
+                new TileRenderer(quad, outputUtils.tilesDir()).render(stale);
+        printOut("\nTOTAL Tiles Rendered: {}", tr.totalTilesRendered());
 
         // Create today's heatmap
         HeatMapGenerator hmg =

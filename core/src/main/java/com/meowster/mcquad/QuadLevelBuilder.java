@@ -64,8 +64,10 @@ abstract class QuadLevelBuilder {
     /**
      * This instructs the builder to create the image tiles, placing them
      * in the appropriate directory.
+     *
+     * @return the total number of tiles generated
      */
-    abstract void generateTiles();
+    abstract long generateTiles();
 
     /**
      * Returns the quad level that the builder built; to be used for creating
