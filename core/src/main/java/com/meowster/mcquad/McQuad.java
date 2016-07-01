@@ -50,9 +50,14 @@ public class McQuad {
 
         long started = currentTimeMillis();
 
+        McQuadConfig cfg = McQuadConfig.load(outputUtils.metaDir());
+        printOut(cfg);
+
         RegionData regionData;
         try {
-            regionData = new RegionData().load(parsedArgs.regionDir);
+            regionData = new RegionData()
+                    .hardBounds(cfg.regionBounds())
+                    .load(parsedArgs.regionDir);
             printOut("\n{}", regionData);
 
         } catch (Exception e) {

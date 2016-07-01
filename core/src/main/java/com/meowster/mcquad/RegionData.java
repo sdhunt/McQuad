@@ -32,6 +32,10 @@ class RegionData {
     private final Bounds bounds = new Bounds();
     private final Map<Coord, Region> regionMap = new HashMap<>();
 
+    private int hardBoundsMin = 0;
+    private int hardBoundsMax = 0;
+    private boolean useHardBounds = false;
+
     /**
      * Loads the region data by processing the specified set of regions.
      *
@@ -48,6 +52,11 @@ class RegionData {
      * @param r the region to load
      */
     private void loadRegion(Region r) {
+        if (useHardBounds && outOfBounds(r)) {
+            printErr(" *** Out-of-Bounds *** {}", r);
+            return;
+        }
+
         /*
          * NOTE:
          *  There is a bug in the Minecraft server (observed in 1.10.2) that
@@ -62,6 +71,12 @@ class RegionData {
 
         bounds.add(r.coord());
         regionMap.put(r.coord(), r);
+    }
+
+    private boolean outOfBounds(Region r) {
+        Coord c = r.coord();
+        return (c.x() < hardBoundsMin || c.x() > hardBoundsMax ||
+                c.z() < hardBoundsMin || c.z() > hardBoundsMax);
     }
 
     /**
@@ -169,5 +184,20 @@ class RegionData {
      */
     int size() {
         return regionMap.size();
+    }
+
+    /**
+     * Sets the hard bounds for the region data. This limits the possible
+     * coordinates of a region; any region files outside these bounds is
+     * ignored.
+     *
+     * @param hardBounds min and max bound values
+     * @return self, for chaining
+     */
+    RegionData hardBounds(int[] hardBounds) {
+        hardBoundsMin = hardBounds[0];
+        hardBoundsMax = hardBounds[1];
+        useHardBounds = true;
+        return this;
     }
 }

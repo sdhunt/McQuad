@@ -118,7 +118,7 @@ class RegionCachedMetaData {
      * @param metaDir base output directory
      * @return loaded meta data instance
      */
-    public static RegionCachedMetaData load(File metaDir) {
+    static RegionCachedMetaData load(File metaDir) {
         return new RegionCachedMetaData(new File(metaDir, REGION_CACHE));
     }
 
