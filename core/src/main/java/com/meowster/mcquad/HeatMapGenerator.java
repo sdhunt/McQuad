@@ -1,17 +1,15 @@
 /*
  * Copyright (c) 2014-2016 Meowster.com
  */
+
 package com.meowster.mcquad;
 
 import com.meowster.util.ImageUtils;
-import com.meowster.util.PathUtils;
 
 import java.awt.Color;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Map;
 
 import static com.meowster.util.StringUtils.EOL;
@@ -23,12 +21,7 @@ import static java.awt.image.BufferedImage.TYPE_INT_ARGB;
  */
 class HeatMapGenerator {
     private static final String HEATMAP = "heatmap";
-    private static final String PREFIX = "heat-";
-    private static final String LATEST = "latest";
-    private static final String SUFFIX = ".png";
-
-    private static final SimpleDateFormat FORMAT =
-            new SimpleDateFormat("yyyy-MM-dd");
+    private static final String PREFIX = "heat";
 
     static final int PIXELS_PER_REGION = 8;
 
@@ -68,20 +61,22 @@ class HeatMapGenerator {
      */
     HeatMapGenerator(int regionDim, Coord calibration,
                      Map<Coord, Integer> ttlMap, File auxDir) {
-        offset = calibration;
+        offset = calibration.div2();
 
-        printOut(EOL + "Generating heatmap...");
+        printOut(EOL + "Generating REGION heatmap...");
         createEmptyMap(regionDim);
         for (Map.Entry<Coord, Integer> entry : ttlMap.entrySet()) {
             renderCell(adjust(entry.getKey()), entry.getValue());
         }
 
-        ImageUtils.writeImageToDisk(image, genFilename(auxDir, true));
-        ImageUtils.writeImageToDisk(image, genFilename(auxDir, false));
+        AuxFiles aux = new AuxFiles(auxDir, HEATMAP, PREFIX);
+
+        ImageUtils.writeImageToDisk(image, aux.dated());
+        ImageUtils.writeImageToDisk(image, aux.latest());
     }
 
     private Coord adjust(Coord c) {
-        return new Coord(c.x() - offset.x() / 2, c.z() - offset.z() / 2);
+        return new Coord(c.x() - offset.x(), c.z() - offset.z());
     }
 
     private void renderCell(Coord coord, int ttl) {
@@ -103,13 +98,6 @@ class HeatMapGenerator {
         g2 = image.createGraphics();
         g2.setBackground(BACKGROUND_COLOR);
         g2.clearRect(0, 0, pixels, pixels);
-    }
-
-    private File genFilename(File auxDir, boolean datestamp) {
-        String today = datestamp ? FORMAT.format(new Date()) : LATEST;
-        File heatmapDir = new File(auxDir, HEATMAP);
-        PathUtils.createIfNeedBe(heatmapDir);
-        return new File(heatmapDir, PREFIX + today + SUFFIX);
     }
 
     /**

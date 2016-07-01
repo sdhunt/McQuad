@@ -203,14 +203,7 @@ class RegionFile {
         return nChunks;
     }
 
-    /**
-     * Returns true if there is chunk data at the specified coordinates.
-     *
-     * @param x chunk x-coord
-     * @param z chunk z-coord
-     * @return true if chunk data is here; false otherwise
-     */
-    boolean chunkAvailableAt(int x, int z) {
+    private boolean chunkAvailableAt(int x, int z) {
         if (outOfBounds(x, z))
             return false;
 
@@ -225,14 +218,13 @@ class RegionFile {
     }
 
     /**
-     * Returns the chunk timestamp for the specified coordinates.
+     * Returns a copy of the chunk timestamps array. Chunk {@code [X, Z]} is at
+     * index {@code [X + Z * 32]}, where X and Z offsets are {@code 0..31}.
      *
-     * @param x chunk x-coord
-     * @param z chunk z-coord
-     * @return true if chunk data is here; false otherwise
+     * @return copy of chunk timestamp array
      */
-    int timeStampAt(int x, int z) {
-        return outOfBounds(x, z) ? 0 : chunkTimestamps[x + z * NCHUNKS];
+    int[] getChunkTimestamps() {
+        return chunkTimestamps.clone();
     }
 
     private boolean outOfBounds(int x, int z) {
@@ -263,4 +255,5 @@ class RegionFile {
         System.err.println("Region: " + fileName.getName() + ": " + s);
         return null;
     }
+
 }

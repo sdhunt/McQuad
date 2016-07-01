@@ -23,7 +23,7 @@ import static java.lang.System.currentTimeMillis;
 public class McQuad {
 
     /* This version is displayed in the masthead of the web app */
-    private static final String MCQUAD_VERSION = "1.2.2";
+    private static final String MCQUAD_VERSION = "1.2.3";
 
     private final ParsedArgs parsedArgs;
     private final OutputUtils outputUtils;
@@ -53,10 +53,13 @@ public class McQuad {
         McQuadConfig cfg = McQuadConfig.load(outputUtils.metaDir());
         printOut(cfg);
 
+        ChunkHeatMap chump = new ChunkHeatMap();
+
         RegionData regionData;
         try {
             regionData = new RegionData()
                     .hardBounds(cfg.regionBounds())
+                    .chunkHeatMap(chump)
                     .load(parsedArgs.regionDir);
             printOut("\n{}", regionData);
 
@@ -92,10 +95,14 @@ public class McQuad {
                 new TileRenderer(quad, outputUtils.tilesDir()).render(stale);
         printOut("\nTOTAL Tiles Rendered: {}", tr.totalTilesRendered());
 
-        // Create today's heatmap
+        // Create today's heatmaps
         HeatMapGenerator hmg =
                 new HeatMapGenerator(quad.regionsPerSide(), quad.calibration(),
-                meta.regionTtlMap(), outputUtils.auxDir());
+                        meta.regionTtlMap(), outputUtils.auxDir());
+
+        chump.calibrate(quad.regionsPerSide(), quad.calibration())
+                .auxdir(outputUtils.auxDir())
+                .writeImages();
 
         // write Javascript parameters to configure zoomable map web app...
         new ParameterizedJs(outputUtils.rootDir())
@@ -104,8 +111,6 @@ public class McQuad {
                 .heatMapSizePx(hmg.pixels())
                 .regionPixel(HeatMapGenerator.PIXELS_PER_REGION)
                 .write();
-
-        // TODO: write render report?
 
         // Are we missing any block definitions from the color file?
         reportDefaultedBlocks();

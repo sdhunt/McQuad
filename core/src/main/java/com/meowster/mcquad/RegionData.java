@@ -36,6 +36,8 @@ class RegionData {
     private int hardBoundsMax = 0;
     private boolean useHardBounds = false;
 
+    private ChunkHeatMap heatMap;
+
     /**
      * Loads the region data by processing the specified set of regions.
      *
@@ -71,6 +73,9 @@ class RegionData {
 
         bounds.add(r.coord());
         regionMap.put(r.coord(), r);
+        if (heatMap != null) {
+            heatMap.store(r);
+        }
     }
 
     private boolean outOfBounds(Region r) {
@@ -198,6 +203,17 @@ class RegionData {
         hardBoundsMin = hardBounds[0];
         hardBoundsMax = hardBounds[1];
         useHardBounds = true;
+        return this;
+    }
+
+    /**
+     * Sets the heat map instance.
+     *
+     * @param heatMap heat map
+     * @return self, for chaining
+     */
+    RegionData chunkHeatMap(ChunkHeatMap heatMap) {
+        this.heatMap = heatMap;
         return this;
     }
 }

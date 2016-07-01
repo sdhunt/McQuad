@@ -18,6 +18,11 @@ class Region {
     private static final String DOT = ".";
     private static final String DOT_PNG = ".png";
 
+    /**
+     * Number of chunks along the side of a region.
+     */
+    public static final int NCHUNKS = 32;
+
     private final Coord coord;
     private final File f;
     private final boolean mock;
@@ -54,9 +59,9 @@ class Region {
     /**
      * Constructor for creating region file (not a mock).
      *
-     * @param x    the x-coord
-     * @param z    the z-coord
-     * @param f    the region file
+     * @param x the x-coord
+     * @param z the z-coord
+     * @param f the region file
      */
     Region(int x, int z, File f) {
         this(x, z, f, false);
@@ -144,6 +149,15 @@ class Region {
     }
 
     /**
+     * Returns an array of chunk timestamps for this region.
+     *
+     * @return array of chunk timestamps
+     */
+    int[] extractChunkTimestamps() {
+        return rf == null ? null : rf.getChunkTimestamps();
+    }
+
+    /**
      * Returns the number of chunks contained in this region.
      *
      * @return the number of chunks in the region
@@ -159,4 +173,5 @@ class Region {
     void releaseResources() {
         rf = null;
     }
+
 }
