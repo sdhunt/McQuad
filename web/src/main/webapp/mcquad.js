@@ -9,7 +9,9 @@
     'use strict';
 
     // closure variables
-    var zmap, $mast, $map, cfg;
+    var zmap, $mast, $map, cfg,
+        $heatmapTitle, $heatmapImage,
+        $mcx, $mcz;
 
 
     function styleValue(el, name) {
@@ -46,7 +48,8 @@
 
     function resetZoom() {
         zmap.zoom(1);
-        zmap.center({lat:0, lon:0});
+        zmap.center({lat: 0, lon: 0});
+        setXZ('--', '--');
     }
 
     function toggleHeatMap() {
@@ -73,6 +76,16 @@
         // zmap.center({lat:0, lon:0});
     }
 
+    function toggleHeatType() {
+        var reg = $heatmapTitle.text().startsWith("Region"),
+            title = reg ? "Chunk Heat Map" : "Region Heat Map",
+            img = reg ? 'aux/chunkmap/chunk-latest.png' : 'aux/heatmap/heat-latest.png';
+        
+        $heatmapTitle.text(title);
+        $heatmapImage.attr('src', img);
+        console.log("Switching to ", title);
+    }
+    
     function createHeatMapDiv() {
         var w = cfg.heatMapDiv,
             h = w + 32,
@@ -84,12 +97,15 @@
                 .style('height', px(h))
                 .classed('centered', true);
 
-        div.append('h2')
+        $heatmapTitle = div.append('h2')
             .style('width', px(w))
-            .text('Region Heat Map');
+            .text('Region Heat Map')
+            .on('click', toggleHeatType);
 
-        div.append('img')
+        $heatmapImage = div.append('img')
             .attr('src', 'aux/heatmap/heat-latest.png')
+            .attr('width', cfg.heatMap)
+            .attr('height', cfg.heatMap)
             .style('top', px(offset + 4))
             .style('left', px(offset))
             .on('click', heatmapClick);
@@ -97,6 +113,29 @@
         return div;
     }
 
+    var divisor = 0.015625;
+
+    function setXZ(x, z) {
+        function trim(a) {
+            var as = String(a);
+            var i = as.indexOf('.');
+            return i < 0 ? as : as.substring(0, i);
+        }
+        $mcx.text(trim(x));
+        $mcz.text(trim(z));
+    }
+
+    function updateMousePosition() {
+        var xy = zmap.mouse(d3.event),
+            ll = zmap.pointLocation(xy),
+            lc = zmap.locationCoordinate(ll),
+            zpow = Math.pow(2, 9-lc.zoom),
+            off = 256 / zpow,
+            mcx = ((lc.column - off) / divisor) * zpow,
+            mcz = ((lc.row - off) / divisor) * zpow;
+        setXZ(mcx, mcz);
+    }
+    
     function initEventHandlers() {
         // show/hide the heat map
         d3.select('#heatmap-btn').on('click', toggleHeatMap);
@@ -105,6 +144,8 @@
         // handle window resize events...
         d3.select(window).on('resize', handleResize);
         handleResize();
+        
+        $map.on('mousemove', updateMousePosition);
     }
 
     function initZoomableMap() {
@@ -127,6 +168,9 @@
     function init() {
         $mast = d3.select('#mast');
         $map = d3.select('#map');
+        
+        $mcx = d3.select('#mast-coords').select('i.mcx');
+        $mcz = d3.select('#mast-coords').select('i.mcz');
         cfg = McQuad.cfg;
 
         setVersion(cfg.version);

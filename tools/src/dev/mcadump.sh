@@ -1,6 +1,6 @@
 #!/bin/bash
 
-MCQUAD_VERSION=1.2.3
+MCQUAD_VERSION=1.2.4
 
 MAIN=com.meowster.mcquad.McaDump
 
